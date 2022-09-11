@@ -15,11 +15,9 @@ class Actions {
     if (res.error) {
       State.setSpinner(<ScreenSpinner state='error' aria-label='Ошибка' />);
     } else {
-      State.setSpinner(<ScreenSpinner state='done' aria-label='Успешно' onAnimationIteration={() => {
-        const route = res.data.member ? routes.HOME : routes.INTRO;
-        State.setRoute(route);
-        State.setSpinner(null);
-      }} />);
+      const route = res.data.member ? routes.HOME : routes.INTRO;
+      State.setRoute(route);
+      State.setSpinner(null);
     }
   }
 

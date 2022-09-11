@@ -1,0 +1,39 @@
+.intro {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #34303D;
+}
+.intro-header {
+  font-size: 26px;
+  margin: 10px 0;
+}
+.intro-logo {
+  height: 200px;
+  width: 100%;
+  background-image: url('../images/intro.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.intro-descr {
+  font-size: 18px;
+  margin: 8px 0;
+}
+.intro-notif {
+  font-size: 12px;
+  color: #6f6b78;
+  line-height: 15px;
+}
+.intro-button {
+  margin: 20px 0 5px 0;
+}
+.intro-continue {
+  font-size: 12px;
+  text-decoration: underline;
+  color: #00438f;
+  cursor: pointer;
+}
