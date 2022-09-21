@@ -2,7 +2,9 @@ enum routes {
   LOADING = 'loading',
   INTRO = 'intro',
   HOME = 'home',
-  PERSIK = 'persik'
+  RATING = 'rating',
+  PROFILE = 'profile',
+  ADMIN = 'admin'
 }
 
 export {

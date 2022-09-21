@@ -1,19 +1,23 @@
-import { Panel, PanelHeader, PanelHeaderBack } from '@vkontakte/vkui';
+import {
+	Panel,
+	PanelHeader,
+	PanelHeaderBack
+} from '@vkontakte/vkui';
 import State from '../store/State';
 import { routes } from '../types/enums';
 
-const Persik = ({ id }: any) => {
-	console.log('Persik');
+const Rating = ({ id }: IpanelProps) => {
+	console.log('Rating');
 	
 	return (
 		<Panel id={id}>
 			<PanelHeader
 				before={<PanelHeaderBack onClick={() => State.setRoute(routes.HOME)} />}
 			>
-				Persik
+				Недельный рейтинг
 			</PanelHeader>
 		</Panel>
 	);
 }
 
-export default Persik;
+export default Rating;

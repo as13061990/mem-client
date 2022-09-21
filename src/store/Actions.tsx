@@ -7,16 +7,18 @@ import axios from 'axios';
 
 class Actions {
   
-  public async checkUser(): Promise<void> {
+  public async getData(): Promise<void> {
     const user = await bridge.send('VKWebAppGetUserInfo');
 		User.setUser(user);
-    const res = await this.sendRequest('checkUser', {});
+    const res = await this.sendRequest('getData', {});
 
     if (res.error) {
       State.setSpinner(<ScreenSpinner state='error' aria-label='Ошибка' />);
     } else {
-      const route = res.data.member ? routes.HOME : routes.INTRO;
-      State.setRoute(route);
+      User.setNickname(res.data.user.name);
+      User.setUseNickname(res.data.user.nickname);
+      State.setRoute(res.data.user.member ? routes.HOME : routes.INTRO);
+      State.setAdmin(res.data.admin);
       State.setSpinner(null);
     }
   }
