@@ -13,17 +13,28 @@ class Actions {
     const res = await this.sendRequest('getData', {});
 
     if (res.error) {
-      State.setSpinner(<ScreenSpinner state='error' aria-label='Ошибка' />);
+      State.setPopout(<ScreenSpinner state='error' aria-label='Ошибка' />);
     } else {
       User.setNickname(res.data.user.name);
       User.setUseNickname(res.data.user.nickname);
       State.setRoute(res.data.user.member ? routes.HOME : routes.INTRO);
       State.setAdmin(res.data.admin);
-      State.setSpinner(null);
+      State.setPopout(null);
     }
   }
 
-  public async sendRequest(route: string, data: object): Promise<IrequestRespons> {
+  public setName(name: string, checked: boolean): void {
+    if (name !== User.getNickname() || checked !== User.getUseNickname()) {
+      User.setNickname(name);
+      User.setUseNickname(checked);
+      this.sendRequest('setName', {
+        name: name,
+        nickname: checked
+      });
+    }
+  }
+
+  private async sendRequest(route: string, data: object): Promise<IrequestRespons> {
     const body = {
       ...data,
       id: User.getUser().id,

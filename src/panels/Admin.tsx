@@ -5,6 +5,7 @@ import {
 } from '@vkontakte/vkui';
 import State from '../store/State';
 import { routes } from '../types/enums';
+import Footer from '../components/Footer';
 
 const Admin = ({ id }: IpanelProps) => {
 	console.log('Admin');
@@ -16,6 +17,7 @@ const Admin = ({ id }: IpanelProps) => {
 			>
 				Модерация
 			</PanelHeader>
+			<Footer />
 		</Panel>
 	);
 }

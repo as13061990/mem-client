@@ -15,7 +15,6 @@ import { Observer } from 'mobx-react-lite';
 import Actions from './store/Actions';
 import Intro from './panels/Intro';
 import Profile from './panels/Profile';
-import Footer from './components/Footer';
 import Admin from './panels/Admin';
 
 const App = (): JSX.Element => {
@@ -25,20 +24,21 @@ const App = (): JSX.Element => {
 			<AdaptivityProvider>
 				<AppRoot>
 					<Observer render={() => (
-						<SplitLayout popout={State.getSpinner()}>
-							<SplitCol>
-								<View activePanel={State.getRoute()} onTransition={() => { /* когда заканчивается  */ }}>
-									<Loading id={routes.LOADING} />
-									<Intro id={routes.INTRO} />
-									<Home id={routes.HOME} />
-									<Rating id={routes.RATING} />
-									<Profile id={routes.PROFILE} />
-									<Admin id={routes.ADMIN} />
-								</View>
-							</SplitCol>
-						</SplitLayout>
+						<>
+							<SplitLayout popout={State.getPopout()}>
+								<SplitCol>
+									<View activePanel={State.getRoute()} onTransition={() => { /* когда заканчивается  */ }}>
+										<Loading id={routes.LOADING} />
+										<Intro id={routes.INTRO} />
+										<Home id={routes.HOME} />
+										<Rating id={routes.RATING} />
+										<Profile id={routes.PROFILE} />
+										<Admin id={routes.ADMIN} />
+									</View>
+								</SplitCol>
+							</SplitLayout>
+						</>
 					)} />
-					<Footer />
 				</AppRoot>
 			</AdaptivityProvider>
 		</ConfigProvider>

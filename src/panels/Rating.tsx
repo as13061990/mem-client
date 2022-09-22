@@ -5,6 +5,7 @@ import {
 } from '@vkontakte/vkui';
 import State from '../store/State';
 import { routes } from '../types/enums';
+import Footer from '../components/Footer';
 
 const Rating = ({ id }: IpanelProps) => {
 	console.log('Rating');
@@ -16,6 +17,7 @@ const Rating = ({ id }: IpanelProps) => {
 			>
 				Недельный рейтинг
 			</PanelHeader>
+			<Footer />
 		</Panel>
 	);
 }

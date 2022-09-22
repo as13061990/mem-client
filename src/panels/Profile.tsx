@@ -2,18 +2,14 @@ import {
 	Panel,
 	PanelHeader,
   PanelHeaderBack,
-	Group,
-	Avatar,
-	RichCell,
-	Button
 } from '@vkontakte/vkui';
+import Nickname from '../components/Nickname';
 import State from '../store/State';
-import User from '../store/User';
 import { routes } from '../types/enums';
+import Footer from '../components/Footer';
 
 const Profile = ({ id }: IpanelProps) => {
 	console.log('Profile');
-	const user = User.getUser();
 	
 	return (
 		<Panel id={id}>
@@ -22,15 +18,8 @@ const Profile = ({ id }: IpanelProps) => {
 			>
 				Профиль
 			</PanelHeader>
-			<Group>
-        <RichCell
-          disabled
-          before={<Avatar size={72} src={user.photo_200} />}
-          actions={<Button>Сменить никнейм</Button>}
-        >
-          {User.getUseNickname() ? User.getNickname() : user.first_name}
-        </RichCell>
-      </Group>
+			<Nickname />
+			<Footer />
 		</Panel>
 	);
 }

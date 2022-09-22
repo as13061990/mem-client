@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { ScreenSpinner } from '@vkontakte/vkui';
+import { ScreenSpinner, Alert } from '@vkontakte/vkui';
 import { routes } from '../types/enums';
 
 class State {
@@ -9,8 +9,8 @@ class State {
 
   private _route: routes = routes.LOADING;
   private _tab: routes = routes.HOME;
-  private _spinner: JSX.Element = <ScreenSpinner state='loading' />;
   private _admin: boolean = false;
+  private _popout: JSX.Element = <ScreenSpinner state='loading' />;
 
   public setRoute(route: routes): void {
     if (route === routes.HOME || route === routes.RATING || route === routes.PROFILE || route === routes.ADMIN) {
@@ -27,20 +27,20 @@ class State {
     return this._tab;
   }
 
-  public setSpinner(spinner: JSX.Element): void {
-    this._spinner = spinner;
-  }
-
-  public getSpinner(): JSX.Element {
-    return this._spinner;
-  }
-
   public setAdmin(admin: boolean): void {
     this._admin = admin;
   }
 
   public isAdmin(): boolean {
     return this._admin;
+  }
+
+  public setPopout(spinner: JSX.Element): void {
+    this._popout = spinner;
+  }
+
+  public getPopout(): JSX.Element {
+    return this._popout;
   }
 }
 
