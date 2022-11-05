@@ -5,7 +5,7 @@ import {
 } from '@vkontakte/vkui';
 import State from '../store/State';
 import { routes } from '../types/enums';
-import Footer from '../components/Footer';
+import Tabbar from '../components/Tabbar';
 
 const Rating = ({ id }: IpanelProps) => {
 	console.log('Rating');
@@ -14,10 +14,8 @@ const Rating = ({ id }: IpanelProps) => {
 		<Panel id={id}>
 			<PanelHeader
 				before={<PanelHeaderBack onClick={() => State.setRoute(routes.HOME)} />}
-			>
-				Недельный рейтинг
-			</PanelHeader>
-			<Footer />
+			>Рейтинг</PanelHeader>
+			<Tabbar />
 		</Panel>
 	);
 }

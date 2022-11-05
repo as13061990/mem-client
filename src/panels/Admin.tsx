@@ -5,7 +5,7 @@ import {
 } from '@vkontakte/vkui';
 import State from '../store/State';
 import { routes } from '../types/enums';
-import Footer from '../components/Footer';
+import Tabbar from '../components/Tabbar';
 
 const Admin = ({ id }: IpanelProps) => {
 	console.log('Admin');
@@ -14,10 +14,8 @@ const Admin = ({ id }: IpanelProps) => {
 		<Panel id={id}>
 			<PanelHeader
 				before={<PanelHeaderBack onClick={() => State.setRoute(routes.HOME)} />}
-			>
-				Модерация
-			</PanelHeader>
-			<Footer />
+			>Модерация</PanelHeader>
+			<Tabbar />
 		</Panel>
 	);
 }

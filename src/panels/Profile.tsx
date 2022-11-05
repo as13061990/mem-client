@@ -6,7 +6,8 @@ import {
 import Nickname from '../components/Nickname';
 import State from '../store/State';
 import { routes } from '../types/enums';
-import Footer from '../components/Footer';
+import Tabbar from '../components/Tabbar';
+import Subscribe from '../components/Subscribe';
 
 const Profile = ({ id }: IpanelProps) => {
 	console.log('Profile');
@@ -15,11 +16,10 @@ const Profile = ({ id }: IpanelProps) => {
 		<Panel id={id}>
 			<PanelHeader
 				before={<PanelHeaderBack onClick={() => State.setRoute(routes.HOME)} />}
-			>
-				Профиль
-			</PanelHeader>
+			>Профиль</PanelHeader>
 			<Nickname />
-			<Footer />
+			<Subscribe />
+			<Tabbar />
 		</Panel>
 	);
 }
