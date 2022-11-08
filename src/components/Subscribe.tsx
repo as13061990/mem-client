@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import bridge from '@vkontakte/vk-bridge';
 import {
   Group,
   Header,
@@ -10,20 +10,54 @@ import {
   Icon28Users3Outline
 } from '@vkontakte/icons';
 import User from '../store/User';
+import { observer } from 'mobx-react-lite';
 
-const Subscribe = () => {
-  const [notif, setNotif] = useState(User.isNotif());
-  const [subscribe, setSubscribe] = useState(User.isSubscribe());
-
-	return (
-    <Group
-      header={<Header mode='secondary'>Будь ВКонтакте</Header>}
-      description='Подпишись на уведомления и вступи в группу, чтобы не пропустить новые мемы. Получи возможность публиковать свои мемы 3 раза в день'
-      separator='show'>
-      <Cell before={<Icon28Notifications />} after={<Checkbox checked={notif}></Checkbox>}>Уведомления</Cell>
-      <Cell before={<Icon28Users3Outline />} after={<Checkbox checked={subscribe}></Checkbox>}>Группа</Cell>
-    </Group>
-	);
+const notify = (): void => {
+  if (User.isNotify()) {
+    bridge.send('VKWebAppDenyNotifications', {}).then((data) => {
+      if (data.result) {
+        User.setNotify(false);
+      }
+    });
+  } else {
+    bridge.send('VKWebAppAllowNotifications', {}).then((data) => {
+      if (data.result) {
+        User.setNotify(true);
+      }
+    });
+  }
 }
 
-export default Subscribe;
+const subscribe = (): void => {
+  if (User.isSubscribe()) {
+    bridge.send('VKWebAppLeaveGroup', { group_id: Number(process.env.REACT_APP_GROUP) }).then(data => {
+      if (data.result) {
+        User.setSubscribe(false);
+      }
+    });
+  } else {
+    bridge.send('VKWebAppJoinGroup', { group_id: Number(process.env.REACT_APP_GROUP) }).then(data => {
+      if (data.result) {
+        User.setSubscribe(true);
+      }
+    });
+  }
+}
+
+export default observer(() => {
+	return (
+    <Group
+      header={<Header mode='secondary'>Будь ВКонтакте</Header>} description='Подпишись на уведомления и вступи в группу, чтобы не пропустить новые мемы. Получи возможность публиковать свои мемы 3 раза в день'>
+      <Cell
+        onClick={() => notify()}
+        before={<Icon28Notifications />}
+        after={<Checkbox disabled checked={User.isNotify()}></Checkbox>}
+      >Уведомления</Cell>
+      <Cell
+        onClick={() => subscribe()}
+        before={<Icon28Users3Outline />}
+        after={<Checkbox disabled checked={User.isSubscribe()}></Checkbox>}
+      >Группа</Cell>
+    </Group>
+	);
+});

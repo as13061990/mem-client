@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { ScreenSpinner, Alert } from '@vkontakte/vkui';
+import { ScreenSpinner } from '@vkontakte/vkui';
 import { routes } from '../types/enums';
 
 class State {

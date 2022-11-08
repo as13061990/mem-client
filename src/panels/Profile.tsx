@@ -9,19 +9,17 @@ import { routes } from '../types/enums';
 import Tabbar from '../components/Tabbar';
 import Subscribe from '../components/Subscribe';
 
-const Profile = ({ id }: IpanelProps) => {
-	console.log('Profile');
+export default ({ id }: IpanelProps) => {
 	
 	return (
 		<Panel id={id}>
 			<PanelHeader
 				before={<PanelHeaderBack onClick={() => State.setRoute(routes.HOME)} />}
 			>Профиль</PanelHeader>
-			<Nickname />
 			<Subscribe />
+
+			<Nickname />
 			<Tabbar />
 		</Panel>
 	);
 }
-
-export default Profile;

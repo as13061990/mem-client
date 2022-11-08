@@ -13,7 +13,7 @@ import {
 import State from '../store/State';
 import { routes } from '../types/enums';
 
-const Footer = () => (
+export default () => (
   <FixedLayout vertical='bottom'>
     <Separator style={{ margin: '12px 0' }} />
     <Tabbar style={{ position: 'static', margin: '10px 0' }} shadow={false}>
@@ -46,5 +46,3 @@ const Footer = () => (
     </Tabbar>
   </FixedLayout>
 );
-
-export default Footer;

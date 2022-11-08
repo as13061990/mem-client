@@ -17,9 +17,13 @@ class Actions {
     } else {
       User.setNickname(res.data.user.name);
       User.setUseNickname(res.data.user.nickname);
+      User.setNotify(res.data.user.notify);
+      User.setSubscribe(res.data.user.subscribe);
+      User.setMemes(res.data.user.memes);
       State.setRoute(res.data.user.member ? routes.HOME : routes.INTRO);
       State.setAdmin(res.data.admin);
       State.setPopout(null);
+      this.subscribes();
     }
   }
 
@@ -32,6 +36,19 @@ class Actions {
         nickname: checked
       });
     }
+  }
+
+  private subscribes(): void {
+    bridge.subscribe(e => {
+			switch (e.detail.type) {
+				case 'VKWebAppDenyNotificationsResult':
+          User.setNotify(false);
+				  break;
+        case 'VKWebAppAllowNotificationsResult':
+          User.setNotify(true);
+          break;
+			}
+		});
   }
 
   private async sendRequest(route: string, data: object): Promise<IrequestRespons> {

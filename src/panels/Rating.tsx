@@ -7,8 +7,7 @@ import State from '../store/State';
 import { routes } from '../types/enums';
 import Tabbar from '../components/Tabbar';
 
-const Rating = ({ id }: IpanelProps) => {
-	console.log('Rating');
+export default ({ id }: IpanelProps) => {
 	
 	return (
 		<Panel id={id}>
@@ -19,5 +18,3 @@ const Rating = ({ id }: IpanelProps) => {
 		</Panel>
 	);
 }
-
-export default Rating;

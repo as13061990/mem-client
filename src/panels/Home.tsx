@@ -4,8 +4,7 @@ import {
 } from '@vkontakte/vkui';
 import Tabbar from '../components/Tabbar';
 
-const Home = ({ id }: IpanelProps): JSX.Element => {
-	console.log('Home');
+export default ({ id }: IpanelProps): JSX.Element => {
 
 	return (
 		<Panel id={id}>
@@ -14,5 +13,3 @@ const Home = ({ id }: IpanelProps): JSX.Element => {
 		</Panel>
 	)
 }
-
-export default Home;

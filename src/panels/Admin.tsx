@@ -7,8 +7,7 @@ import State from '../store/State';
 import { routes } from '../types/enums';
 import Tabbar from '../components/Tabbar';
 
-const Admin = ({ id }: IpanelProps) => {
-	console.log('Admin');
+export default ({ id }: IpanelProps) => {
 	
 	return (
 		<Panel id={id}>
@@ -19,5 +18,3 @@ const Admin = ({ id }: IpanelProps) => {
 		</Panel>
 	);
 }
-
-export default Admin;

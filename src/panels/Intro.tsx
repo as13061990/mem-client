@@ -4,7 +4,7 @@ import '../css/intro.css';
 import State from '../store/State';
 import { routes } from '../types/enums';
 
-const Intro = ({ id }: IpanelProps) => {
+export default ({ id }: IpanelProps) => {
 	return (
 		<Panel id={id}>
 			<div className='intro'>
@@ -26,5 +26,3 @@ const Intro = ({ id }: IpanelProps) => {
 		</Panel>
 	);
 }
-
-export default Intro;

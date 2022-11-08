@@ -36,11 +36,10 @@ const save = (name: string, checked: boolean, setChange: React.Dispatch<React.Se
   }
 }
 
-const Nickname = observer(() => {
+export default observer(() => {
   const [checked, setChecked] = useState(User.getUseNickname());
   const [name, setNickname] = useState(User.getNickname());
   const [change, setChange] = useState(false);
-
 	const user = User.getUser();
   return (
     <Group header={<Header mode='secondary'>Твой никнейм</Header>}>
@@ -70,5 +69,3 @@ const Nickname = observer(() => {
     </Group>
   );
 });
-
-export default Nickname;
