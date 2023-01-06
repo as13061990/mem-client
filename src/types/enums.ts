@@ -6,7 +6,15 @@ enum routes {
   PROFILE = 'profile',
   ADMIN = 'admin'
 }
-
+enum upload {
+  INPUT,
+  BUTTONS,
+  LOADING,
+  FINISH,
+  ERROR,
+  AD
+}
 export {
-  routes
+  routes,
+  upload
 }

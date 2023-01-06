@@ -6,3 +6,9 @@ div, p, span, h1, h2, h3, h4, img {
 	user-select: none;
 	outline: none;
 }
+.vkuiFixedLayout,
+.FixedLayout,
+.vkuiFixedLayout--bottom,
+.FixedLayout--bottom {
+	background-color: #FFFFFF;
+}
