@@ -36,7 +36,7 @@ const save = (name: string, checked: boolean, setChange: React.Dispatch<React.Se
   }
 }
 
-export default observer(() => {
+export default observer((): JSX.Element => {
   const [checked, setChecked] = useState(User.getUseNickname());
   const [name, setNickname] = useState(User.getNickname());
   const [change, setChange] = useState(false);

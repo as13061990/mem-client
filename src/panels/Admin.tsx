@@ -1,19 +1,26 @@
 import {
 	Panel,
 	PanelHeader,
-	PanelHeaderBack
+	PanelHeaderBack,
+	FixedLayout
 } from '@vkontakte/vkui';
 import State from '../store/State';
-import { routes } from '../types/enums';
+import { memes, routes } from '../types/enums';
 import Tabbar from '../components/Tabbar';
+import Memes from '../components/Memes';
 
-export default ({ id }: IpanelProps) => {
+export default ({id}: IpanelProps) => {
 	
 	return (
 		<Panel id={id}>
-			<PanelHeader
-				before={<PanelHeaderBack onClick={() => State.setRoute(routes.HOME)} />}
-			>Модерация</PanelHeader>
+			<FixedLayout vertical='top'>
+				<PanelHeader
+					before={<PanelHeaderBack onClick={() => State.setRoute(routes.HOME)} />}
+				>Модерация</PanelHeader>
+			</FixedLayout>
+
+			<Memes type={memes.MODERATION} />
+
 			<Tabbar />
 		</Panel>
 	);

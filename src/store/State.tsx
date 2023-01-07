@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { ScreenSpinner } from '@vkontakte/vkui';
-import { routes, upload } from '../types/enums';
+import { load, routes, upload } from '../types/enums';
 
 class State {
   constructor() {
@@ -15,6 +15,9 @@ class State {
   private _uploadState: upload = upload.INPUT;
   private _timer: number;
   private _reward: boolean = false;
+  private _memes: string;
+  private _memesIteration: number = 0;
+  private _loadingMemes: load = load.LAZY;
 
   public setRoute(route: routes): void {
     if (route === routes.HOME || route === routes.RATING || route === routes.PROFILE || route === routes.ADMIN) {
@@ -83,6 +86,40 @@ class State {
 
   public getReward(): boolean {
     return this._reward;
+  }
+
+  public getMemes(): Imeme[] {
+    try {
+      return JSON.parse(this._memes);
+    } catch (e) {
+      return [];
+    }
+  }
+
+  public setMemes(memes: Imeme[]): void {
+    this._memes = JSON.stringify(memes);
+  }
+
+  public addMemes(memes: Imeme[]): void {
+    const oldArray = JSON.parse(this._memes);
+    const newArray = oldArray.concat(memes);
+    this._memes = JSON.stringify(newArray);
+  }
+
+  public getLoadMemes(): load {
+    return this._loadingMemes;
+  }
+
+  public setLoadMemes(load: load): void {
+    this._loadingMemes = load;
+  }
+
+  public setMemesIteration(i: number): void {
+    this._memesIteration = i;
+  }
+
+  public getMemesIteration(): number {
+    return this._memesIteration;
   }
 }
 

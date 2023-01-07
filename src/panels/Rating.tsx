@@ -1,19 +1,22 @@
 import {
 	Panel,
 	PanelHeader,
-	PanelHeaderBack
+	PanelHeaderBack,
+	FixedLayout
 } from '@vkontakte/vkui';
 import State from '../store/State';
 import { routes } from '../types/enums';
 import Tabbar from '../components/Tabbar';
 
-export default ({ id }: IpanelProps) => {
+export default ({id}: IpanelProps) => {
 	
 	return (
 		<Panel id={id}>
-			<PanelHeader
-				before={<PanelHeaderBack onClick={() => State.setRoute(routes.HOME)} />}
-			>Рейтинг</PanelHeader>
+			<FixedLayout vertical='top'>
+				<PanelHeader
+					before={<PanelHeaderBack onClick={() => State.setRoute(routes.HOME)} />}
+				>Рейтинг</PanelHeader>
+			</FixedLayout>
 			<Tabbar />
 		</Panel>
 	);

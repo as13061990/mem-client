@@ -12,7 +12,7 @@ import {
 import State from '../store/State';
 import { routes } from '../types/enums';
 
-export default () => (
+export default (): JSX.Element => (
   <>
     <div style={{ height: '100px' }} />
     <FixedLayout vertical='bottom'>

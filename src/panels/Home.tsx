@@ -1,14 +1,17 @@
 import {
 	Panel,
-	PanelHeader
+	PanelHeader,
+	FixedLayout
 } from '@vkontakte/vkui';
 import Tabbar from '../components/Tabbar';
 
-export default ({ id }: IpanelProps): JSX.Element => {
+export default ({id}: IpanelProps): JSX.Element => {
 
 	return (
 		<Panel id={id}>
-			<PanelHeader>Категории мемов</PanelHeader>
+			<FixedLayout vertical='top'>
+				<PanelHeader>Категории мемов</PanelHeader>
+			</FixedLayout>
 			<Tabbar />
 		</Panel>
 	)

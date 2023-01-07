@@ -11,7 +11,7 @@ import Tabbar from '../components/Tabbar';
 import Subscribe from '../components/Subscribe';
 import Upload from '../components/Upload';
 
-export default ({ id }: IpanelProps) => {
+export default ({id}: IpanelProps) => {
 	
 	return (
 		<Panel id={id}>
