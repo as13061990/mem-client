@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { ScreenSpinner } from '@vkontakte/vkui';
-import { load, routes, upload } from '../types/enums';
+import { load, memes, routes, upload } from '../types/enums';
 
 class State {
   constructor() {
@@ -18,6 +18,7 @@ class State {
   private _memes: string;
   private _memesIteration: number = 0;
   private _loadingMemes: load = load.LAZY;
+  private _memesType: memes;
 
   public setRoute(route: routes): void {
     if (route === routes.HOME || route === routes.RATING || route === routes.PROFILE || route === routes.ADMIN) {
@@ -97,13 +98,28 @@ class State {
   }
 
   public setMemes(memes: Imeme[]): void {
+    memes = this._boolOpinions(memes);
     this._memes = JSON.stringify(memes);
   }
 
   public addMemes(memes: Imeme[]): void {
+    memes = this._boolOpinions(memes);
     const oldArray = JSON.parse(this._memes);
     const newArray = oldArray.concat(memes);
     this._memes = JSON.stringify(newArray);
+  }
+
+  public memeOpinion(id: number): void {
+    const memes: Imeme[] = JSON.parse(this._memes);
+    const meme = memes.find(data => data.id === id);
+    meme.opinion = !meme.opinion;
+    meme.opinion ? meme.likes++ : meme.likes--;
+    this._memes = JSON.stringify(memes);
+  }
+
+  private _boolOpinions(memes: Imeme[]): Imeme[] {
+    for (const meme of memes) meme.opinion = Boolean(meme.opinion);
+    return memes;
   }
 
   public getLoadMemes(): load {
@@ -120,6 +136,14 @@ class State {
 
   public getMemesIteration(): number {
     return this._memesIteration;
+  }
+
+  public setMemesType(type: memes): void {
+    this._memesType = type;
+  }
+
+  public getMemesType(): memes {
+    return this._memesType;
   }
 }
 

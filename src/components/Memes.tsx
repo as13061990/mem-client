@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { Spinner } from '@vkontakte/vkui';
 import Actions from '../store/Actions';
-import { load, memes } from '../types/enums';
+import { load } from '../types/enums';
 import { observer } from 'mobx-react-lite';
 import State from '../store/State';
 import '../css/memes.css';
 import Meme from './Meme';
 
-const lazyLoad = (type: memes): void => {
+const lazyLoad = (): void => {
   const more = document.querySelector('#more-memes');
 
   if (more) {
@@ -29,18 +29,18 @@ const lazyLoad = (type: memes): void => {
       targetPosition.top < windowPosition.bottom &&
       targetPosition.right > windowPosition.left &&
       targetPosition.left < windowPosition.right) {
-      loadMemes(type);
+      loadMemes();
     }
   }
 }
 
-const loadMemes = (type: memes): void => {
+const loadMemes = (): void => {
   if (State.getLoadMemes() !== load.LAZY) return;
   State.setLoadMemes(load.LOADING);
 
   Actions.sendRequest('loadMemes', {
     i: State.getMemesIteration(),
-    type: type
+    type: State.getMemesType()
   }).then(res => {
     State.setMemesIteration(State.getMemesIteration() + 1);
     const loading = res.data.more ? load.LAZY : load.END;
@@ -49,17 +49,17 @@ const loadMemes = (type: memes): void => {
   });
 }
 
-export default observer(({type}: {type: memes}): JSX.Element => {
+export default observer((): JSX.Element => {
   useEffect(() => {
     State.setMemesIteration(0);
     State.setMemes([]);
     State.setLoadMemes(load.LAZY);
-    window.addEventListener('scroll', (): void => lazyLoad(type));
-    loadMemes(type);
+    window.addEventListener('scroll', (): void => lazyLoad());
+    loadMemes();
   }, []);
   
   const lazy = State.getLoadMemes() === load.LAZY ? <div id='more-memes'></div> :
-    State.getLoadMemes() === load.LOADING ? <div style={{ display: 'flex', justifyContent: 'center' }}><Spinner size='regular' /></div> :
+    State.getLoadMemes() === load.LOADING ? <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}><Spinner size='regular' /></div> :
     null;
 
   const memes = State.getMemes().map(data => {

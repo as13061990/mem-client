@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
 	Panel,
 	PanelHeader,
@@ -10,9 +11,13 @@ import { routes } from '../types/enums';
 import Tabbar from '../components/Tabbar';
 import Subscribe from '../components/Subscribe';
 import Upload from '../components/Upload';
+import Session from '../store/Session';
 
 export default ({id}: IpanelProps) => {
-	
+	useEffect(() => {
+		Session.clearMemesNotif()
+  }, []);
+
 	return (
 		<Panel id={id}>
 			<FixedLayout vertical='top'>

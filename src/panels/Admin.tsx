@@ -10,7 +10,8 @@ import Tabbar from '../components/Tabbar';
 import Memes from '../components/Memes';
 
 export default ({id}: IpanelProps) => {
-	
+	State.setMemesType(memes.MODERATION);
+
 	return (
 		<Panel id={id}>
 			<FixedLayout vertical='top'>
@@ -18,9 +19,7 @@ export default ({id}: IpanelProps) => {
 					before={<PanelHeaderBack onClick={() => State.setRoute(routes.HOME)} />}
 				>Модерация</PanelHeader>
 			</FixedLayout>
-
-			<Memes type={memes.MODERATION} />
-
+			<Memes />
 			<Tabbar />
 		</Panel>
 	);

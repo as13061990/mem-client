@@ -1,7 +1,8 @@
 import {
 	Tabbar,
   TabbarItem,
-  FixedLayout
+  FixedLayout,
+  Counter
 } from '@vkontakte/vkui';
 import {
 	Icon28Smiles2Outline,
@@ -11,8 +12,11 @@ import {
 } from '@vkontakte/icons';
 import State from '../store/State';
 import { routes } from '../types/enums';
+import User from '../store/User';
+import { observer } from 'mobx-react-lite';
+import Session from '../store/Session';
 
-export default (): JSX.Element => (
+export default observer((): JSX.Element => (
   <>
     <div style={{ height: '100px' }} />
     <FixedLayout vertical='bottom'>
@@ -32,6 +36,7 @@ export default (): JSX.Element => (
         <TabbarItem
           style={{ cursor: 'pointer' }}
           selected={ State.getTab() === routes.PROFILE}
+          indicator={Session.getMemesNotif() && User.getMemes() > 0 && <Counter size='s' mode='prominent'>{User.getMemes()}</Counter>}
           onClick={() => State.setRoute(routes.PROFILE)}
           text='Профиль'
         ><Icon28UserCircleOutline /></TabbarItem>
@@ -46,4 +51,4 @@ export default (): JSX.Element => (
       </Tabbar>
     </FixedLayout>
   </>
-);
+));
