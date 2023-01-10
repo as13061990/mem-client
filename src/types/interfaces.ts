@@ -8,7 +8,7 @@ interface IrequestRespons {
 }
 interface Imeme {
   likes: number; // количество "лайков"
-  attachment: string; // аттачмент для стены
+  attachments: string; // аттачмент для стены
   id: number; // id мема
   time: number; // время публикации/загрузки
   url: string; // локально-серверный урл картинки
