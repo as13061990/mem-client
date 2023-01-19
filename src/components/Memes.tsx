@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Spinner } from '@vkontakte/vkui';
 import Actions from '../store/Actions';
-import { load } from '../types/enums';
+import { load, memes, routes } from '../types/enums';
 import { observer } from 'mobx-react-lite';
 import State from '../store/State';
 import '../css/memes.css';
@@ -37,11 +37,12 @@ const lazyLoad = (): void => {
 const loadMemes = (): void => {
   if (State.getLoadMemes() !== load.LAZY) return;
   State.setLoadMemes(load.LOADING);
-
+  const type = State.getRoute() !== routes.ADMIN ? State.getCategory() : 0;
   Actions.sendRequest('loadMemes', {
     i: State.getMemesIteration(),
-    type: State.getMemesType()
+    type: type
   }).then(res => {
+    if (State.getRoute() !== routes.ADMIN && type !== State.getCategory()) return;
     State.setMemesIteration(State.getMemesIteration() + 1);
     const loading = res.data.more ? load.LAZY : load.END;
     State.addMemes(res.data.memes);
@@ -50,13 +51,13 @@ const loadMemes = (): void => {
 }
 
 export default observer((): JSX.Element => {
-  useEffect(() => {
+  useEffect((): void => {
     State.setMemesIteration(0);
     State.setMemes([]);
     State.setLoadMemes(load.LAZY);
     window.addEventListener('scroll', (): void => lazyLoad());
     loadMemes();
-  }, []);
+  }, [State.getCategory(), State.getModeration()]);
   
   const lazy = State.getLoadMemes() === load.LAZY ? <div id='more-memes'></div> :
     State.getLoadMemes() === load.LOADING ? <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}><Spinner size='regular' /></div> :

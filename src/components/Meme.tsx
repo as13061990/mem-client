@@ -38,9 +38,7 @@ const moderation = async (meme: number, decision: boolean): Promise<void> => {
 
     await Actions.sendRequest('updateAttachments', { post_id: wall.response.post_id, meme: meme });
   }
-  State.setMemes([]);
-  State.setMemesIteration(0);
-  State.setLoadMemes(load.LAZY);
+  State.markModeration();
 }
 
 const sendOpinion = (meme: Imeme): void => {
@@ -82,11 +80,14 @@ export default ({data}: {data: Imeme}): JSX.Element => {
   img.src = url;
   img.onload = (): void => {
     const el = document.querySelector('#meme' + data.id) as HTMLElement;
-    const width = el.clientWidth;
-    const height = width / img.width * img.height;
-    el.style.height = height + 'px';
-    el.style.backgroundImage = 'url(' + url + ')';
-    setSpinner(null);
+    
+    if (el) {
+      const width = el.clientWidth;
+      const height = width / img.width * img.height;
+      el.style.height = height + 'px';
+      el.style.backgroundImage = 'url(' + url + ')';
+      setSpinner(null);
+    }
   }
   const like = data.opinion ? <Icon28LikeFillRed /> : <Icon28LikeOutline />;
   const ref: React.MutableRefObject<HTMLDivElement> = useRef();
@@ -94,15 +95,16 @@ export default ({data}: {data: Imeme}): JSX.Element => {
   return (
     <Card mode='shadow' className='meme-card'>
       <div id={'meme' + data.id} className='meme' onClick={() => console.log(data.id)}>{spinner}</div>
-      <div className='meme-buttons'>
+      {data.status === 1 && <div className='meme-buttons'>
         <div className='like' onClick={() => sendOpinion(data)}>{like}<Text weight='2' className='buttons-text'>{data.likes}</Text></div>
         <div className='comments'><Icon28CommentOutline /><Text weight='2' className='buttons-text'>{data.comments}</Text></div>
         <div className='share' onClick={() => State.setPopout(share(ref, data))}><Icon28ShareOutline getRootRef={ref} /><Text weight='2' className='buttons-text'>{data.share}</Text></div>
-      </div>
+      </div>}
       {data.status === 0 && <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
         <Button size='l' onClick={() => moderation(data.id, true)} stretched>Принять</Button>
         <Button size='l' onClick={() => moderation(data.id, false)} stretched mode='secondary'>Отклонить</Button>
       </div>}
+      {data.status === 2 && <div className='rejection'>Отклонён</div>}
     </Card>
   );
 }

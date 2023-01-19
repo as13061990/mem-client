@@ -18,7 +18,8 @@ class State {
   private _memes: string;
   private _memesIteration: number = 0;
   private _loadingMemes: load = load.LAZY;
-  private _memesType: memes;
+  private _category: memes = memes.TIME;
+  private _moderation: number = 1;
 
   public setRoute(route: routes): void {
     if (route === routes.HOME || route === routes.RATING || route === routes.PROFILE || route === routes.ADMIN) {
@@ -145,12 +146,20 @@ class State {
     return this._memesIteration;
   }
 
-  public setMemesType(type: memes): void {
-    this._memesType = type;
+  public setCategory(type: memes): void {
+    this._category = type;
   }
 
-  public getMemesType(): memes {
-    return this._memesType;
+  public getCategory(): memes {
+    return this._category;
+  }
+
+  public markModeration(): void {
+    this._moderation++;
+  }
+
+  public getModeration(): number {
+    return this._moderation;
   }
 }
 

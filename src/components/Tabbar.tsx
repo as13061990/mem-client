@@ -11,7 +11,7 @@ import {
   Icon28CrownOutline
 } from '@vkontakte/icons';
 import State from '../store/State';
-import { routes } from '../types/enums';
+import { memes, routes } from '../types/enums';
 import User from '../store/User';
 import { observer } from 'mobx-react-lite';
 import Session from '../store/Session';

@@ -4,22 +4,20 @@ import {
 	FixedLayout
 } from '@vkontakte/vkui';
 import Tabbar from '../components/Tabbar';
-import { memes } from '../types/enums';
 import Memes from '../components/Memes';
-import State from '../store/State';
+import { observer } from 'mobx-react-lite';
+import CategoriesMenu from '../components/CategoriesMenu';
 
-export default ({id}: IpanelProps): JSX.Element => {
-	State.setMemesType(memes.TIME);
-
+export default observer(({id}: IpanelProps): JSX.Element => {
 	return (
 		<Panel id={id}>
 			<FixedLayout vertical='top'>
 				<PanelHeader>Категории мемов</PanelHeader>
+				<CategoriesMenu />
 			</FixedLayout>
-
+			<div style={{width: '100%', height: 40}}></div>
 			<Memes />
-
 			<Tabbar />
 		</Panel>
-	)
-}
+	);
+});
