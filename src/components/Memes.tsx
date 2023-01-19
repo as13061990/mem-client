@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Spinner } from '@vkontakte/vkui';
 import Actions from '../store/Actions';
-import { load, memes, routes } from '../types/enums';
+import { load, routes } from '../types/enums';
 import { observer } from 'mobx-react-lite';
 import State from '../store/State';
 import '../css/memes.css';
