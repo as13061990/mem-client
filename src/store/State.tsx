@@ -74,7 +74,7 @@ class State {
       runInAction(() => {
         this._timer--;
         this._timer <= 0 && window.location.reload();
-      })
+      });
     }, 1000);
   }
 
