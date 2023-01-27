@@ -70,7 +70,7 @@ export default observer((): JSX.Element => {
   });
 
   return (
-    <div style={{paddingTop: 50}}>
+    <div style={{paddingTop: 70}}>
       {memes}
       {lazy}
     </div>

@@ -7,15 +7,17 @@ interface IrequestRespons {
   data: any;
 }
 interface Imeme {
-  likes: number; // количество "лайков"
-  attachments: string; // аттачмент для стены
   id: number; // id мема
-  time: number; // время публикации/загрузки
   url: string; // локально-серверный урл картинки
-  user_id: number; // id опубликовавшего пользователя
-  vk_url: string; // ссылка на картинку с ВК сервера
+  likes: number; // количество "лайков"
   comments: number; // количество комментариев
   share: number; // количество "поделиться"
+  time: number; // время публикации/загрузки
+  vk_url: string; // ссылка на картинку с ВК сервера
   opinion: boolean; // лайк юзера
   status: number; // статус
+  user_id: number; // id опубликовавшего пользователя
+  attachments: string; // аттачмент для стены
+  avatar: string; // аватар пользователя
+  name: string; // имя пользователя 
 }

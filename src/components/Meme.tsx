@@ -5,7 +5,9 @@ import {
   ActionSheet,
   ActionSheetItem,
   Button,
-  Spinner
+  Spinner,
+  SimpleCell,
+  Avatar
 } from '@vkontakte/vkui';
 import {
   Icon28LikeOutline,
@@ -92,18 +94,25 @@ export default ({data}: {data: Imeme}): JSX.Element => {
   const ref: React.MutableRefObject<HTMLDivElement> = useRef();
   
   return (
-    <Card mode='shadow' className='meme-card'>
-      <div id={'meme' + data.id} className='meme' onClick={() => console.log(data.id)}>{spinner}</div>
-      {data.status === 1 && <div className='meme-buttons'>
-        <div className='like' onClick={() => sendOpinion(data)}>{like}<Text weight='2' className='buttons-text'>{data.likes}</Text></div>
-        <div className='comments'><Icon28CommentOutline /><Text weight='2' className='buttons-text'>{data.comments}</Text></div>
-        <div className='share' onClick={() => State.setPopout(share(ref, data))}><Icon28ShareOutline getRootRef={ref} /><Text weight='2' className='buttons-text'>{data.share}</Text></div>
-      </div>}
-      {data.status === 0 && <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-        <Button size='l' onClick={() => moderation(data.id, true)} stretched>Принять</Button>
-        <Button size='l' onClick={() => moderation(data.id, false)} stretched mode='secondary'>Отклонить</Button>
-      </div>}
-      {data.status === 2 && <div className='rejection'>Отклонён</div>}
-    </Card>
+    <>
+      <SimpleCell
+        onClick={() => console.log(data.user_id)}
+        description={data.time}
+        before={<Avatar src={data.avatar}/>}
+      >{data.name}</SimpleCell>
+      <Card mode='shadow' className='meme-card'>
+        <div id={'meme' + data.id} className='meme' onClick={() => console.log(data.id)}>{spinner}</div>
+        {data.status === 1 && <div className='meme-buttons'>
+          <div className='like' onClick={() => sendOpinion(data)}>{like}<Text weight='2' className='buttons-text'>{data.likes}</Text></div>
+          <div className='comments'><Icon28CommentOutline /><Text weight='2' className='buttons-text'>{data.comments}</Text></div>
+          <div className='share' onClick={() => State.setPopout(share(ref, data))}><Icon28ShareOutline getRootRef={ref} /><Text weight='2' className='buttons-text'>{data.share}</Text></div>
+        </div>}
+        {data.status === 0 && <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+          <Button size='l' onClick={() => moderation(data.id, true)} stretched>Принять</Button>
+          <Button size='l' onClick={() => moderation(data.id, false)} stretched mode='secondary'>Отклонить</Button>
+        </div>}
+        {data.status === 2 && <div className='rejection'>Отклонён</div>}
+      </Card>
+    </>
   );
 }
