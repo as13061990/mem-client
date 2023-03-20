@@ -3,7 +3,6 @@ import {
   Avatar,
   Text,
   Separator,
-  Spacing,
 } from '@vkontakte/vkui';
 import '../css/rating.css';
 import { observer } from 'mobx-react-lite';

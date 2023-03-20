@@ -16,13 +16,13 @@ export const CategoriesRating = observer((): JSX.Element => {
           onClick={() => State.setRatingCategory(ratings.TOP_ALL)}
           selected={State.getRatingCategory() === ratings.TOP_ALL}
         >
-          Топ за все время
+          ТОП участников
         </TabsItem>
         <TabsItem
           onClick={() => State.setRatingCategory(ratings.TOP_WEEK)}
           selected={State.getRatingCategory() === ratings.TOP_WEEK}
         >
-          Топ недели
+          ТОП недели
         </TabsItem>
       </HorizontalScroll>
     </Tabs>

@@ -4,3 +4,10 @@
   justify-content: center;
   gap: 10px
 }
+
+.rating-info-block {
+  display: flex;
+  padding: 0 25px; 
+  height: 70px;
+  text-align: center; 
+}

@@ -1,12 +1,8 @@
-import { useState } from 'react';
 import {
   Panel,
   PanelHeader,
   PanelHeaderBack,
   FixedLayout,
-  List,
-  Cell,
-  Avatar
 } from '@vkontakte/vkui';
 import State from '../store/State';
 import { routes } from '../types/enums';
@@ -15,8 +11,10 @@ import { Icon28CupOutline } from '@vkontakte/icons';
 import '../css/rating.css';
 import { CategoriesRating } from '../components/CategoriesRating';
 import { RatingList } from '../components/RatingList';
+import { observer } from 'mobx-react-lite';
+import { RatingInfoBlock } from '../components/RatingInfoBlock';
 
-export const Rating = ({ id }: IpanelProps) => {
+export const Rating = observer(({ id }: IpanelProps) => {
 
   return (
     <Panel id={id}>
@@ -31,9 +29,10 @@ export const Rating = ({ id }: IpanelProps) => {
         </PanelHeader>
         <CategoriesRating />
       </FixedLayout>
-      <div style={{ width: '100%', height: '125px' }}></div>
-      <RatingList/>
+      <div style={{ width: '100%', height: '120px' }}></div>
+      <RatingInfoBlock/>
+      <RatingList />
       <Tabbar />
     </Panel>
   );
-}
+})

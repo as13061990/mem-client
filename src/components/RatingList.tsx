@@ -1,8 +1,5 @@
 import {
   List,
-  Cell,
-  Avatar,
-  Text,
 } from '@vkontakte/vkui';
 import '../css/rating.css';
 import User from '../store/User';
