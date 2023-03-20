@@ -7,7 +7,7 @@ import {
   Button,
   Spinner,
   SimpleCell,
-  Avatar
+  Avatar,
 } from '@vkontakte/vkui';
 import {
   Icon28LikeOutline,
@@ -21,6 +21,7 @@ import Actions from '../store/Actions';
 import State from '../store/State';
 import { useRef, useState } from 'react';
 
+
 const moderation = async (meme: number, decision: boolean): Promise<void> => {
   const moderation = await Actions.sendRequest('moderation', {
     decision: decision,
@@ -28,14 +29,16 @@ const moderation = async (meme: number, decision: boolean): Promise<void> => {
   }).then(res => res);
 
   if (decision) {
-    const wall = await bridge.send('VKWebAppCallAPIMethod', { method: 'wall.post', params: {
-      owner_id: -Number(process.env.REACT_APP_GROUP),
-      v: '5.131',
-      from_group: 1,
-      attachments: moderation.data.attachments,
-      close_comments: 0,
-      access_token: moderation.data.access_token,
-    }}).then(res => res);
+    const wall = await bridge.send('VKWebAppCallAPIMethod', {
+      method: 'wall.post', params: {
+        owner_id: -Number(process.env.REACT_APP_GROUP),
+        v: '5.131',
+        from_group: 1,
+        attachments: moderation.data.attachments,
+        close_comments: 0,
+        access_token: moderation.data.access_token,
+      }
+    }).then(res => res);
 
     await Actions.sendRequest('updateAttachments', { post_id: wall.response.post_id, meme: meme });
   }
@@ -43,7 +46,7 @@ const moderation = async (meme: number, decision: boolean): Promise<void> => {
 }
 
 const sendOpinion = (meme: Imeme): void => {
-  Actions.sendRequest('like', {meme: meme.id, opinion: !meme.opinion});
+  Actions.sendRequest('like', { meme: meme.id, opinion: !meme.opinion });
   State.memeOpinion(meme.id);
 }
 
@@ -73,7 +76,7 @@ const toWall = (data: Imeme): void => {
   });
 }
 
-export default  ({data}: {data: Imeme}): JSX.Element => {
+export const Meme = ({ data, activeCommentsToggle }: { data: Imeme, activeCommentsToggle: () => void }): JSX.Element => {
   const [spinner, setSpinner] = useState(<Spinner size='regular' />);
 
   const url = data.url !== '' ? process.env.REACT_APP_API + '/uploads/' + data.url : data.vk_url;
@@ -81,7 +84,7 @@ export default  ({data}: {data: Imeme}): JSX.Element => {
   img.src = url;
   img.onload = (): void => {
     const el = document.querySelector('#meme' + data.id) as HTMLElement;
-    
+
     if (el) {
       const width = el.clientWidth;
       const height = width / img.width * img.height;
@@ -92,22 +95,43 @@ export default  ({data}: {data: Imeme}): JSX.Element => {
   }
   const like = data.opinion ? <Icon28LikeFillRed /> : <Icon28LikeOutline />;
   const ref: React.MutableRefObject<HTMLDivElement> = useRef();
-  
+
   return (
     <>
       <SimpleCell
         onClick={() => console.log(data.user_id)}
         description={data.time}
-        before={<Avatar src={data.avatar}/>}
-      >{data.name}</SimpleCell>
+        before={<Avatar src={data.avatar} />}
+      >
+        {data.name}
+      </SimpleCell>
       <Card mode='shadow' className='meme-card'>
-        <div id={'meme' + data.id} className='meme' onClick={() => console.log(data.id)}>{spinner}</div>
+        <div id={'meme' + data.id} className='meme' onClick={() => console.log(data.id)}>
+          {spinner}
+        </div>
+
         {data.status === 1 && <div className='meme-buttons'>
-          <div className='like' onClick={() => sendOpinion(data)}>{like}<Text weight='2' className='buttons-text'>{data.likes}</Text></div>
-          <div className='comments'><Icon28CommentOutline /><Text weight='2' className='buttons-text'>{data.comments}</Text></div>
-          <div className='share' onClick={() => State.setPopout(share(ref, data))}><Icon28ShareOutline getRootRef={ref} /><Text weight='2' className='buttons-text'>{data.share}</Text></div>
+          <div className='like' onClick={() => sendOpinion(data)}>
+            {like}
+            <Text weight='2' className='buttons-text'>
+              {data.likes}
+            </Text>
+          </div>
+          <div className='comments' onClick={activeCommentsToggle}>
+            <Icon28CommentOutline />
+            <Text weight='2' className='buttons-text'>
+              {data.comments}
+            </Text>
+          </div>
+          <div className='share' onClick={() => State.setPopout(share(ref, data))}>
+            <Icon28ShareOutline getRootRef={ref} />
+            <Text weight='2' className='buttons-text'>
+              {data.share}
+            </Text>
+          </div>
         </div>}
-        {data.status === 0 && <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+
+        {data.status === 0 && <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Button size='l' onClick={() => moderation(data.id, true)} stretched>Принять</Button>
           <Button size='l' onClick={() => moderation(data.id, false)} stretched mode='secondary'>Отклонить</Button>
         </div>}

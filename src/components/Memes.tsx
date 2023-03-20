@@ -5,7 +5,9 @@ import { load, routes } from '../types/enums';
 import { observer } from 'mobx-react-lite';
 import State from '../store/State';
 import '../css/memes.css';
-import Meme from './Meme';
+import { Meme } from './Meme';
+import { Comments } from './Comments';
+import { useState, useCallback } from 'react';
 
 const lazyLoad = (): void => {
   const more = document.querySelector('#more-memes');
@@ -51,6 +53,7 @@ const loadMemes = (): void => {
 }
 
 export default observer((): JSX.Element => {
+  const [activeComments, setActiveComments] = useState(false)
   useEffect((): void => {
     State.setMemesIteration(0);
     State.setMemes([]);
@@ -58,20 +61,25 @@ export default observer((): JSX.Element => {
     window.addEventListener('scroll', (): void => lazyLoad());
     loadMemes();
   }, [State.getCategory(), State.getModeration()]);
-  
+
   const lazy = State.getLoadMemes() === load.LAZY ? <div id='more-memes'></div> :
     State.getLoadMemes() === load.LOADING ? <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}><Spinner size='regular' /></div> :
-    null;
+      null;
+
+  const activeCommentsToggle = useCallback(() => {
+    setActiveComments(prev => !prev)
+  }, [])
 
   const memes = State.getMemes().map(data => {
     return (
-      <Meme key={data.id} data={data} />
+      <Meme key={data.id} data={data} activeCommentsToggle={activeCommentsToggle} />
     );
   });
 
   return (
-    <div style={{paddingTop: 70}}>
+    <div style={{ paddingTop: 70 }}>
       {memes}
+      <Comments active={activeComments} activeCommentsToggle={activeCommentsToggle} />
       {lazy}
     </div>
   );

@@ -170,6 +170,7 @@ class State {
   public getRatingCategory(): ratings {
     return this._ratingCategory;
   }
+  
 }
 
 export default new State();
