@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { ScreenSpinner } from '@vkontakte/vkui';
-import { load, memes, routes, upload } from '../types/enums';
+import { load, memes, ratings, routes, upload } from '../types/enums';
 
 class State {
   constructor() {
@@ -19,6 +19,7 @@ class State {
   private _memesIteration: number = 0;
   private _loadingMemes: load = load.LAZY;
   private _category: memes = memes.TIME;
+  private _ratingCategory: ratings = ratings.TOP_WEEK;
   private _moderation: number = 1;
 
   public setRoute(route: routes): void {
@@ -160,6 +161,14 @@ class State {
 
   public getModeration(): number {
     return this._moderation;
+  }
+
+  public setRatingCategory(type: ratings): void {
+    this._ratingCategory = type;
+  }
+
+  public getRatingCategory(): ratings {
+    return this._ratingCategory;
   }
 }
 

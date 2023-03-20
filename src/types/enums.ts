@@ -22,6 +22,10 @@ enum memes {
   FAVORITE = 5,
   MY = 6
 }
+enum ratings {
+  TOP_ALL = 1,
+  TOP_WEEK = 2,
+}
 enum load {
   LAZY,
   LOADING,
@@ -32,5 +36,6 @@ export {
   routes,
   upload,
   memes,
+  ratings,
   load
 }

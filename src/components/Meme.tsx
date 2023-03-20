@@ -73,7 +73,7 @@ const toWall = (data: Imeme): void => {
   });
 }
 
-export default ({data}: {data: Imeme}): JSX.Element => {
+export default  ({data}: {data: Imeme}): JSX.Element => {
   const [spinner, setSpinner] = useState(<Spinner size='regular' />);
 
   const url = data.url !== '' ? process.env.REACT_APP_API + '/uploads/' + data.url : data.vk_url;
