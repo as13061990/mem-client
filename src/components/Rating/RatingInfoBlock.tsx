@@ -2,10 +2,10 @@ import {
   Text,
   Link,
 } from '@vkontakte/vkui';
-import State from '../store/State';
-import { ratings } from '../types/enums';
+import State from '../../store/State';
+import { ratings } from '../../types/enums';
 import { observer } from 'mobx-react-lite';
-import '../css/rating.css';
+import '../../css/rating.css';
 
 export const RatingInfoBlock = observer(() => {
 

@@ -4,7 +4,7 @@ import {
   Text,
   Separator,
 } from '@vkontakte/vkui';
-import '../css/rating.css';
+import '../../css/rating.css';
 import { observer } from 'mobx-react-lite';
 import { UserInfo } from '@vkontakte/vk-bridge';
 

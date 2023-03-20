@@ -1,10 +1,10 @@
 import {
   List,
 } from '@vkontakte/vkui';
-import '../css/rating.css';
-import User from '../store/User';
-import State from '../store/State';
-import { ratings } from '../types/enums';
+import '../../css/rating.css';
+import User from '../../store/User';
+import State from '../../store/State';
+import { ratings } from '../../types/enums';
 import { observer } from 'mobx-react-lite';
 import { RatingListItem } from './RatingListItem';
 

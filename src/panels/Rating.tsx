@@ -9,10 +9,10 @@ import { routes } from '../types/enums';
 import Tabbar from '../components/Tabbar';
 import { Icon28CupOutline } from '@vkontakte/icons';
 import '../css/rating.css';
-import { CategoriesRating } from '../components/CategoriesRating';
-import { RatingList } from '../components/RatingList';
+import { CategoriesRating } from '../components/Rating/CategoriesRating';
+import { RatingList } from '../components/Rating/RatingList';
 import { observer } from 'mobx-react-lite';
-import { RatingInfoBlock } from '../components/RatingInfoBlock';
+import { RatingInfoBlock } from '../components/Rating/RatingInfoBlock';
 
 export const Rating = observer(({ id }: IpanelProps) => {
 
