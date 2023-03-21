@@ -21,3 +21,17 @@ interface Imeme {
   avatar: string; // аватар пользователя
   name: string; // имя пользователя 
 }
+
+interface IratingUser {
+  avatar: string; // аватар пользователя
+  id: number; // айди пользоваля
+  name: string; // имя или никнейм пользователя
+  place: number; // место пользователя в рейтинге
+  points: number; // количество очков пользователя в рейтинге
+  self: boolean // это я?
+}
+
+interface IratingUsers {
+  all: IratingUser[]
+  week: IratingUser[]
+}

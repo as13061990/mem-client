@@ -7,7 +7,9 @@ import { ratings } from '../../types/enums';
 import { observer } from 'mobx-react-lite';
 import '../../css/rating.css';
 
+
 export const RatingInfoBlock = observer(() => {
+
 
   return (
       <div className='rating-info-block'>

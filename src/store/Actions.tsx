@@ -63,6 +63,12 @@ class Actions {
     }
     return await axios.post(process.env.REACT_APP_API + '/' + route, body).then(res => res.data);
   }
+
+  public async getDataRatingUsers(): Promise<void> {
+    const response = await this.sendRequest('getRatings', {})
+    console.log(response)
+    State.setRatingUsers(response.data)
+  }
 }
 
 export default new Actions();

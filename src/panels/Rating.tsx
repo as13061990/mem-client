@@ -13,8 +13,13 @@ import { CategoriesRating } from '../components/Rating/CategoriesRating';
 import { RatingList } from '../components/Rating/RatingList';
 import { observer } from 'mobx-react-lite';
 import { RatingInfoBlock } from '../components/Rating/RatingInfoBlock';
+import { useEffect } from "react";
+import Actions from '../store/Actions';
 
 export const Rating = observer(({ id }: IpanelProps) => {
+  useEffect(()=>{
+    Actions.getDataRatingUsers()
+  }, [])
 
   return (
     <Panel id={id}>
