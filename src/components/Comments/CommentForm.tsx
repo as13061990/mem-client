@@ -1,6 +1,8 @@
 import { FormItem, IconButton, Input } from "@vkontakte/vkui"
 import { useState } from "react";
 import '../../css/comments.css';
+import Actions from "../../store/Actions";
+import State from "../../store/State";
 
 export const CommentForm = () => {
   const [comment, setComment] = useState('');
@@ -10,6 +12,10 @@ export const CommentForm = () => {
     setComment(value)
   };
 
+  const onClick = () => {
+    Actions.sendComment({message: comment, meme: State.getMemeOpen()})
+    setComment('')
+  }
 
   return (<>
 
@@ -21,7 +27,7 @@ export const CommentForm = () => {
           onChange={onChange}
           value={comment}
         />
-        <IconButton>
+        <IconButton onClick={onClick}>
           <div className="comments-block-form-btn "/>
         </IconButton>
       </div>
