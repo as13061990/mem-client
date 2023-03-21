@@ -1,16 +1,16 @@
 import { Icon20AddCircle } from "@vkontakte/icons";
-import { Button, FormItem, PanelHeader, Textarea } from "@vkontakte/vkui"
-import { useState, useEffect } from "react";
+import { Button, PanelHeader } from "@vkontakte/vkui"
+import { useEffect } from "react";
 import '../../css/comments.css';
 import { Comment } from "./Comment";
+import { CommentForm } from "./CommentForm";
 
-export const CommentsBlock = ({ active, activeCommentsToggle }) => {
-  const [comment, setComment] = useState('');
+interface IcommentsBlock {
+  active: boolean;
+  activeCommentsToggle: () => void;
+}
 
-  const onChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
-    const { value } = e.currentTarget;
-    setComment(value)
-  };
+export const CommentsBlock = ({ active, activeCommentsToggle }: IcommentsBlock) => {
 
   const onClickContent = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation()
@@ -37,17 +37,7 @@ export const CommentsBlock = ({ active, activeCommentsToggle }) => {
       >
         <PanelHeader>Комментарии</PanelHeader>
 
-        <FormItem>
-          <div className="comments-block-form">
-            <Textarea
-              className="comments-block-textarea"
-              placeholder="Написать комментарий"
-              onChange={onChange}
-              value={comment}
-            />
-            <Button size='l'>Отправить</Button>
-          </div>
-        </FormItem>
+        <CommentForm />
 
         <Comment />
         <Comment />

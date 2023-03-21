@@ -10,20 +10,21 @@ import { observer } from 'mobx-react-lite';
 type IRatingListItem = Omit<IratingUser, 'id'>
 
 export const RatingListItem = observer(({ avatar, name, points, place, self }: IRatingListItem): JSX.Element => {
+  const weight = self ? '1' : '3'
   return (
     <>
       <Cell
         before={
           <>
-            <Text weight='1' style={{ width: '35px' }}>
+            <Text weight={weight} style={{ width: '35px' }}>
               {place}.
             </Text>
             <Avatar src={avatar} />
           </>
         }
-        after={<Text weight='1'>{points}</Text>}
+        after={<Text weight={weight}>{points}</Text>}
       >
-        <Text weight={self ? '1' : '3'}>
+        <Text weight={weight}>
           {name}
         </Text>
       </Cell>

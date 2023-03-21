@@ -25,7 +25,7 @@
   align-items: center;
   margin: 0 10px;
 }
-.like, .share {
+.like, .share .comments{
   cursor: pointer;
 }
 .buttons-text {

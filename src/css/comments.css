@@ -21,7 +21,16 @@
 
 .comments-block-form {
   display: flex;
-  gap: 30px;
+  gap: 16px;
+}
+
+.comments-block-form-btn {
+  height: 48px;
+  width: 50px;
+  background-image: url('../images/send-comment-btn.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }
 
 .comments-block-textarea {
@@ -37,7 +46,7 @@
 .comments-block-comment-info {
   display: flex;
   gap: 10px;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
 }
 
