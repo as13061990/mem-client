@@ -1,8 +1,10 @@
-import { Avatar, Button, Card, Cell, FormItem, Input, PanelHeader, RichCell, Spacing, Text, Textarea } from "@vkontakte/vkui"
-import { useState } from "react";
-import User from "../store/User";
+import { Icon20AddCircle } from "@vkontakte/icons";
+import { Button, FormItem, PanelHeader, Textarea } from "@vkontakte/vkui"
+import { useState, useEffect } from "react";
+import '../../css/comments.css';
+import { Comment } from "./Comment";
 
-export const Comments = ({ active, activeCommentsToggle }) => {
+export const CommentsBlock = ({ active, activeCommentsToggle }) => {
   const [comment, setComment] = useState('');
 
   const onChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
@@ -14,7 +16,15 @@ export const Comments = ({ active, activeCommentsToggle }) => {
     e.stopPropagation()
   }
 
-  const [yyyy, mm, dd, hh, mi] = new Date().toISOString().split(/[/:\-T]/)
+  useEffect(() => {
+    if (active) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'scroll'
+    }
+
+  }, [active])
+
   return (<>
     <div
       className={"comments-overlay"}
@@ -26,10 +36,11 @@ export const Comments = ({ active, activeCommentsToggle }) => {
         onClick={(e) => { onClickContent(e) }}
       >
         <PanelHeader>Комментарии</PanelHeader>
+
         <FormItem>
-          <div style={{ display: 'flex', gap: '30px' }}>
+          <div className="comments-block-form">
             <Textarea
-              style={{ flexGrow: 1 }}
+              className="comments-block-textarea"
               placeholder="Написать комментарий"
               onChange={onChange}
               value={comment}
@@ -38,14 +49,22 @@ export const Comments = ({ active, activeCommentsToggle }) => {
           </div>
         </FormItem>
 
-        <RichCell
-          text='asdasd asd asda sda s asda sdas das dasd asd asd asda sd asd asdasd asdas dasd asd asd'
-          before={<Avatar src={User.getUser().photo_100} />}
+        <Comment />
+        <Comment />
+        <Comment />
+        <Comment />
+        <Comment />
+        <Comment />
+
+        <Button
+          size="l"
+          appearance="accent"
+          mode="tertiary"
+          before={<Icon20AddCircle />}
+          stretched
         >
-          <Text weight='2'>
-            {`${User.getNickname()} ${dd}/${mm}/${yyyy} ${hh}:${mi}`}
-          </Text>
-        </RichCell>
+          Показать ещё комментарии
+        </Button>
       </div >
     </div >
   </>
