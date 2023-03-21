@@ -1,25 +1,27 @@
-import { Icon20AddCircle } from "@vkontakte/icons";
-import { Button, PanelHeader } from "@vkontakte/vkui"
+import { PanelHeader } from "@vkontakte/vkui"
+import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import '../../css/comments.css';
+import Actions from "../../store/Actions";
+import State from "../../store/State";
 import { Comment } from "./Comment";
 import { CommentForm } from "./CommentForm";
 
-interface IcommentsBlock {
-  active: boolean;
-  activeCommentsToggle: () => void;
-}
-
-export const CommentsBlock = ({ active, activeCommentsToggle }: IcommentsBlock) => {
+export const CommentsBlock = observer(() => {
 
   const onClickContent = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation()
   }
 
+  const active = State.getMemeOpen() > 0
+  
+
   useEffect(() => {
     if (active) {
+      Actions.getDataComments(State.getMemeOpen())
       document.body.style.overflow = 'hidden'
     } else {
+      State.setComments([])
       document.body.style.overflow = 'scroll'
     }
 
@@ -29,7 +31,7 @@ export const CommentsBlock = ({ active, activeCommentsToggle }: IcommentsBlock) 
     <div
       className={"comments-overlay"}
       style={{ backgroundColor: active ? 'rgb(0,0,0,0.5)' : 'rgb(0,0,0,0)', visibility: active ? 'visible' : 'hidden' }}
-      onClick={activeCommentsToggle}>
+      onClick={()=>{State.setMemeOpen(-1)}}>
       <div
         className="comments-block"
         style={{ transform: active ? 'translateY(0)' : 'translateY(60vh)' }}
@@ -39,24 +41,20 @@ export const CommentsBlock = ({ active, activeCommentsToggle }: IcommentsBlock) 
 
         <CommentForm />
 
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
+        {State.getComments().map((comment: Icomment, i:number)=>{
+          return (
+          <Comment
+            key={i}
+            avatar={comment.avatar}
+            message={comment.message}
+            name={comment.name}
+            time={comment.time}
+          />
+          )
+        })}
 
-        <Button
-          size="l"
-          appearance="accent"
-          mode="tertiary"
-          before={<Icon20AddCircle />}
-          stretched
-        >
-          Показать ещё комментарии
-        </Button>
       </div >
     </div >
   </>
   )
-}
+})

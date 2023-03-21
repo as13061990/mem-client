@@ -44,12 +44,18 @@
 }
 
 .comments-block-comment-info {
+  width: 100%;
   display: flex;
   gap: 10px;
   align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
+}
+.comments-block-comment-info-time {
+  color: rgb(173, 173, 173);
 }
 
 .comments-block-comment-info-text {
+  color: rgb(83, 83, 83);
   flex-basis: 100%;
 }

@@ -28,10 +28,22 @@ interface IratingUser {
   name: string; // имя или никнейм пользователя
   place: number; // место пользователя в рейтинге
   points: number; // количество очков пользователя в рейтинге
-  self: boolean // это я?
+  self: boolean; // это я?
 }
 
 interface IratingUsers {
-  all: IratingUser[]
-  week: IratingUser[]
+  all: IratingUser[]; // весь рейтинг
+  week: IratingUser[];  // недельный рейтинг
+}
+
+interface Icomment {
+  avatar: string; // аватар пользователя
+  message: string; // текст комментария
+  name:string; // имя автора комментария
+  time: string; // время отправки комментария
+}
+
+interface IcommentSend {
+  meme: number,
+  message: string
 }

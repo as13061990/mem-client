@@ -6,10 +6,10 @@ import { routes } from '../types/enums';
 import axios from 'axios';
 
 class Actions {
-  
+
   public async getData(): Promise<void> {
     const user = await bridge.send('VKWebAppGetUserInfo');
-		User.setUser(user);
+    User.setUser(user);
     const reward = await bridge.send('VKWebAppCheckNativeAds', { ad_format: EAdsFormats.REWARD }).then(data => data.result);
     const res = await this.sendRequest('getData', {});
 
@@ -44,15 +44,15 @@ class Actions {
 
   private subscribes(): void {
     bridge.subscribe(e => {
-			switch (e.detail.type) {
-				case 'VKWebAppDenyNotificationsResult':
+      switch (e.detail.type) {
+        case 'VKWebAppDenyNotificationsResult':
           User.setNotify(false);
-				  break;
+          break;
         case 'VKWebAppAllowNotificationsResult':
           User.setNotify(true);
           break;
-			}
-		});
+      }
+    });
   }
 
   public async sendRequest(route: string, data: object): Promise<IrequestRespons> {
@@ -66,8 +66,30 @@ class Actions {
 
   public async getDataRatingUsers(): Promise<void> {
     const response = await this.sendRequest('getRatings', {})
-    console.log(response)
     State.setRatingUsers(response.data)
+  }
+
+  public async getDataComments(memeId: number): Promise<void> {
+    const response = await this.sendRequest('getCommemts', { meme: memeId })
+    State.setComments(response.data)
+  }
+
+  public async sendComment(comment: IcommentSend): Promise<void> {
+    await this.sendRequest('sendComment', comment)
+    function padTo2Digits(num) {
+      return num.toString().padStart(2, '0');
+    }
+    const date = new Date()
+    const time = [date.getFullYear(), padTo2Digits(date.getMonth() + 1),padTo2Digits(date.getDate()),].join('.') 
+    + ' ' + [ padTo2Digits(date.getHours()), padTo2Digits(date.getMinutes())].join(':')
+
+
+    State.addOneComment({
+      name: User.getUser().first_name,
+      message: comment.message,
+      avatar: User.getUser().photo_100,
+      time: time
+    })
   }
 }
 

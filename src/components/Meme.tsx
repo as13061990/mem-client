@@ -76,7 +76,7 @@ const toWall = (data: Imeme): void => {
   });
 }
 
-export const Meme = ({ data, activeCommentsToggle }: { data: Imeme, activeCommentsToggle: () => void }): JSX.Element => {
+export const Meme = ({ data }: { data: Imeme}): JSX.Element => {
   const [spinner, setSpinner] = useState(<Spinner size='regular' />);
 
   const url = data.url !== '' ? process.env.REACT_APP_API + '/uploads/' + data.url : data.vk_url;
@@ -117,7 +117,7 @@ export const Meme = ({ data, activeCommentsToggle }: { data: Imeme, activeCommen
               {data.likes}
             </Text>
           </div>
-          <div className='comments' onClick={activeCommentsToggle}>
+          <div className='comments' onClick={() => { State.setMemeOpen(data.id) }}>
             <Icon28CommentOutline />
             <Text weight='2' className='buttons-text'>
               {data.comments}

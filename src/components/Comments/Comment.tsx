@@ -1,24 +1,26 @@
-import { Avatar, Div, Subhead, Text } from "@vkontakte/vkui"
-import User from "../../store/User"
+import { Avatar, Div, Separator, Spacing, Subhead, Text } from "@vkontakte/vkui"
 
-export const Comment = () => {
-  const [yyyy, mm, dd, hh, mi] = new Date().toISOString().split(/[/:\-T]/)
+
+export const Comment = ({ avatar, name, message, time }: Icomment) => {
+
   return (<>
-
-        <Div>
-          <div className="comments-block-comment">
-            <Avatar src={User.getUser().photo_100} />
-            <div className="comments-block-comment-info" >
-              <Text weight='2'>
-                {`${User.getNickname()}`}
-              </Text>
-              <Subhead weight='3'>{`${dd}/${mm}/${yyyy} ${hh}:${mi}`}</Subhead>
-              <Text weight='3' className="comments-block-comment-info-text">
-                asdasd asd asd asd asd asd asdas das das dasd as asdasd asd asd asd asd asd asdas das das dasd as asdasd asd asd asd asd asd asdas das das dasd as asdasd asd asd asd asd asd asdas das das dasd as
-              </Text>
-            </div>
-          </div>
-        </Div>
+    
+    <Div>
+      <div className="comments-block-comment">
+        <Avatar src={avatar} />
+        <div className="comments-block-comment-info" >
+          <Text weight='2'>
+            {name}
+          </Text>
+          <Subhead className="comments-block-comment-info-time" weight='3'>{time}</Subhead>
+          <Text weight='3' className="comments-block-comment-info-text">
+            {message}
+          </Text>
+        </div>
+      </div>
+    </Div>
+    <Spacing size={10} />
+    <Separator />
   </>
   )
 }

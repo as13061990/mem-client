@@ -67,20 +67,16 @@ export default observer((): JSX.Element => {
     State.getLoadMemes() === load.LOADING ? <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}><Spinner size='regular' /></div> :
       null;
 
-  const activeCommentsToggle = useCallback(() => {
-    setActiveComments(prev => !prev)
-  }, [])
-
   const memes = State.getMemes().map(data => {
     return (
-      <Meme key={data.id} data={data} activeCommentsToggle={activeCommentsToggle} />
+      <Meme key={data.id} data={data} />
     );
   });
 
   return (
     <div style={{ paddingTop: 70}}>
       {memes}
-      <CommentsBlock active={activeComments} activeCommentsToggle={activeCommentsToggle} />
+      <CommentsBlock />
       {lazy}
     </div>
   );
