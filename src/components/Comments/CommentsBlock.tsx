@@ -1,4 +1,4 @@
-import { FixedLayout, PanelHeader } from "@vkontakte/vkui"
+import { FixedLayout, PanelHeader, Separator, Spacing } from "@vkontakte/vkui"
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import '../../css/comments.css';
@@ -40,11 +40,11 @@ export const CommentsBlock = observer(() => {
 
         <FixedLayout>
           <PanelHeader>Комментарии</PanelHeader>
+          <CommentForm />
+          <Spacing size={4}/>
         </FixedLayout>
 
-        <div style={{overflowY: 'auto', height: '60vh'}}>
-          
-        <CommentForm />
+        <div style={{overflowY: 'auto', height: '60vh', paddingTop: '120px'}}>
 
         {State.getComments().map((comment: Icomment, i: number) => {
           return (

@@ -1,4 +1,4 @@
-import { Avatar, Button, Div, Link, Separator, Spacing, Subhead, Text } from "@vkontakte/vkui"
+import { Avatar, Div, Link, Separator, Spacing, Subhead, Text } from "@vkontakte/vkui"
 import { useState } from "react";
 
 export const Comment = ({ avatar, name, message, time }: Icomment) => {
@@ -26,7 +26,7 @@ export const Comment = ({ avatar, name, message, time }: Icomment) => {
               isExpanded ? message : `${message.slice(0, 120)}...`
               : message}
             {textLength > 120 && !isExpanded ?
-              <Link style={{marginLeft: '5px'}} onClick={toggleText}>
+              <Link onClick={toggleText}>
                 Читать
               </Link> : null
             }

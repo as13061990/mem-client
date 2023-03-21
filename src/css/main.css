@@ -12,3 +12,7 @@ div, p, span, h1, h2, h3, h4, img {
 .FixedLayout--bottom {
 	background-color: #FFFFFF;
 }
+body {
+	width: calc( 100% );
+	max-width: calc( 100vw - 1em );
+}

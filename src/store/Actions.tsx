@@ -87,8 +87,8 @@ class Actions {
       name: User.getUser().first_name,
       message: comment.message,
       avatar: User.getUser().photo_100,
-      time: time
-    })
+      time: time,
+    }, comment.meme)
   }
 }
 

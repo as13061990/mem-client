@@ -53,7 +53,6 @@ const loadMemes = (): void => {
 }
 
 export default observer((): JSX.Element => {
-  const [activeComments, setActiveComments] = useState(false)
 
   useEffect((): void => {
     State.setMemesIteration(0);
@@ -74,7 +73,7 @@ export default observer((): JSX.Element => {
   });
 
   return (
-    <div style={{ paddingTop: 70}}>
+    <div style={{ paddingTop: 70 }}>
       {memes}
       <CommentsBlock />
       {lazy}
