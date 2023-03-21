@@ -13,8 +13,10 @@ export const CommentForm = () => {
   };
 
   const onClick = () => {
-    Actions.sendComment({message: comment, meme: State.getMemeOpen()})
-    setComment('')
+    if (comment) {
+      Actions.sendComment({ message: comment, meme: State.getMemeOpen() })
+      setComment('')
+    }
   }
 
   return (<>
@@ -27,8 +29,8 @@ export const CommentForm = () => {
           onChange={onChange}
           value={comment}
         />
-        <IconButton onClick={onClick}>
-          <div className="comments-block-form-btn "/>
+        <IconButton disabled={!comment} onClick={onClick}>
+          <div className="comments-block-form-btn " />
         </IconButton>
       </div>
     </FormItem>

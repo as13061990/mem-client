@@ -1,4 +1,4 @@
-import { PanelHeader } from "@vkontakte/vkui"
+import { FixedLayout, PanelHeader } from "@vkontakte/vkui"
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import '../../css/comments.css';
@@ -14,7 +14,7 @@ export const CommentsBlock = observer(() => {
   }
 
   const active = State.getMemeOpen() > 0
-  
+
 
   useEffect(() => {
     if (active) {
@@ -31,28 +31,33 @@ export const CommentsBlock = observer(() => {
     <div
       className={"comments-overlay"}
       style={{ backgroundColor: active ? 'rgb(0,0,0,0.5)' : 'rgb(0,0,0,0)', visibility: active ? 'visible' : 'hidden' }}
-      onClick={()=>{State.setMemeOpen(-1)}}>
+      onClick={() => { State.setMemeOpen(-1) }}>
       <div
         className="comments-block"
         style={{ transform: active ? 'translateY(0)' : 'translateY(60vh)' }}
         onClick={(e) => { onClickContent(e) }}
       >
-        <PanelHeader>Комментарии</PanelHeader>
 
+        <FixedLayout>
+          <PanelHeader>Комментарии</PanelHeader>
+        </FixedLayout>
+
+        <div style={{overflowY: 'auto', height: '60vh'}}>
+          
         <CommentForm />
 
-        {State.getComments().map((comment: Icomment, i:number)=>{
+        {State.getComments().map((comment: Icomment, i: number) => {
           return (
-          <Comment
-            key={i}
-            avatar={comment.avatar}
-            message={comment.message}
-            name={comment.name}
-            time={comment.time}
-          />
+            <Comment
+              key={i}
+              avatar={comment.avatar}
+              message={comment.message}
+              name={comment.name}
+              time={comment.time}
+            />
           )
         })}
-
+        </div>
       </div >
     </div >
   </>
