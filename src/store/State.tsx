@@ -19,8 +19,8 @@ class State {
   private _memesIteration: number = 0;
   private _loadingMemes: load = load.LAZY;
   private _category: memes = memes.TIME;
-  private _memeOpen: number
-  private _comments: Icomment[] = []
+  private _memeOpen: number;
+  private _comments: Icomment[] = [];
   private _ratingUsers: IratingUsers = {all: [], week: []}
   private _ratingCategory: ratings = ratings.TOP_ALL;
   private _moderation: number = 1;
@@ -201,11 +201,11 @@ class State {
   public setMemeOpen(memeId: number): void {
     this._memeOpen = memeId;
   }
-
+  
   public getMemeOpen(): number {
     return this._memeOpen;
   }
-  
+
 }
 
 export default new State();

@@ -5,6 +5,8 @@ import { ScreenSpinner } from '@vkontakte/vkui';
 import { routes } from '../types/enums';
 import axios from 'axios';
 
+const OFFER_SUBSCRIBE_DELAY: number = 30000
+
 class Actions {
 
   public async getData(): Promise<void> {
@@ -28,6 +30,7 @@ class Actions {
       State.setAdmin(res.data.admin);
       State.setPopout(null);
       this.subscribes();
+      this.notifyToSubscribe(res.data.subscribeOffer, res.data.user.subscribe)
     }
   }
 
@@ -90,6 +93,19 @@ class Actions {
       time: time,
     }, comment.meme)
   }
+
+  public async notifyToSubscribe(subscribeOffer: boolean, userSubscribe: boolean): Promise<void> {
+    if (subscribeOffer && !userSubscribe) {
+      setTimeout(() => {
+        bridge.send('VKWebAppJoinGroup', { group_id: Number(process.env.REACT_APP_GROUP) }).then(data => {
+          if (data.result) {
+            User.setSubscribe(true);
+          }
+        });
+      }, OFFER_SUBSCRIBE_DELAY)
+    }
+  }
+
 }
 
 export default new Actions();

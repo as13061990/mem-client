@@ -17,9 +17,11 @@ import Intro from './panels/Intro';
 import Profile from './panels/Profile';
 import Admin from './panels/Admin';
 
+
 const App = (): JSX.Element => {
   Actions.getData();
-  State.setAdmin(false)
+
+
   return (
     <ConfigProvider>
       <AdaptivityProvider>
