@@ -16,7 +16,7 @@ import { RatingInfoBlock } from '../components/Rating/RatingInfoBlock';
 import { useEffect } from "react";
 import Actions from '../store/Actions';
 
-export const Rating = observer(({ id }: IpanelProps) => {
+export const Rating = observer(({ id, goToPage }: IpanelProps) => {
   useEffect(()=>{
     Actions.getDataRatingUsers()
   }, [])
@@ -25,7 +25,7 @@ export const Rating = observer(({ id }: IpanelProps) => {
     <Panel id={id}>
       <FixedLayout vertical='top'>
         <PanelHeader
-          before={<PanelHeaderBack onClick={() => State.goBackRoute()} />}
+          before={<PanelHeaderBack onClick={() => window.history.back()} />}
         >
           <div className='rating-header-text'>
             <Icon28CupOutline />
@@ -37,7 +37,7 @@ export const Rating = observer(({ id }: IpanelProps) => {
       <div style={{ width: '100%', height: '120px' }}></div>
       <RatingInfoBlock/>
       <RatingList />
-      <Tabbar />
+      <Tabbar goToPage={goToPage} />
     </Panel>
   );
 })

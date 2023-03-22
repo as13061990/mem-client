@@ -14,7 +14,7 @@ import Subscribe from '../components/Subscribe';
 import Upload from '../components/Upload';
 import Session from '../store/Session';
 
-export const Profile = ({ id }: IpanelProps) => {
+export const Profile = ({ id,goToPage }: IpanelProps) => {
 	useEffect(() => {
 		Session.clearMemesNotif()
 	}, []);
@@ -23,13 +23,13 @@ export const Profile = ({ id }: IpanelProps) => {
 		<Panel id={id}>
 			<FixedLayout vertical='top'>
 				<PanelHeader
-					before={<PanelHeaderBack onClick={() => State.goBackRoute()} />}
+					before={<PanelHeaderBack onClick={() => window.history.back()} />}
 				>Профиль</PanelHeader>
 			</FixedLayout>
 			<Upload />
 			<Subscribe />
 			<Nickname />
-			<Tabbar />
+			<Tabbar goToPage={goToPage} />
 		</Panel>
 	);
 }

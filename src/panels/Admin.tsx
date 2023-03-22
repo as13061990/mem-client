@@ -9,16 +9,16 @@ import { routes } from '../types/enums';
 import Tabbar from '../components/Tabbar';
 import Memes from '../components/Memes';
 
-export default ({id}: IpanelProps) => {
+export default ({id,goToPage}: IpanelProps) => {
 	return (
 		<Panel id={id}>
 			<FixedLayout vertical='top'>
 				<PanelHeader
-					before={<PanelHeaderBack onClick={() => State.goBackRoute()} />}
+					before={<PanelHeaderBack onClick={() => window.history.back()} />}
 				>Модерация</PanelHeader>
 			</FixedLayout>
 			<Memes />
-			<Tabbar />
+			<Tabbar goToPage={goToPage}/>
 		</Panel>
 	);
 }

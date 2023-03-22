@@ -1,5 +1,6 @@
 interface IpanelProps {
   id: string;
+  goToPage: (route: string) => void
 }
 interface IrequestRespons {
   error: boolean;

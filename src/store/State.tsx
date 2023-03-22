@@ -36,7 +36,11 @@ class State {
 
   public goBackRoute():void {
     this.popOneHistory()
-    this._route = (this.getHistory()[this.getHistory().length - 1])
+    const newRoute = this.getHistory()[this.getHistory().length - 1]
+    this._route = newRoute
+    if (newRoute === routes.HOME || newRoute === routes.RATING || newRoute === routes.PROFILE || newRoute === routes.ADMIN) {
+      this._tab = newRoute;
+    }
   }
 
   public getRoute(): routes {
