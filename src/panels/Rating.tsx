@@ -15,10 +15,8 @@ import { observer } from 'mobx-react-lite';
 import { RatingInfoBlock } from '../components/Rating/RatingInfoBlock';
 import { useEffect } from "react";
 import Actions from '../store/Actions';
-import { useRouter } from "@happysanta/router";
 
 export const Rating = observer(({ id }: IpanelProps) => {
-  const router = useRouter()
   useEffect(()=>{
     Actions.getDataRatingUsers()
   }, [])
@@ -27,7 +25,7 @@ export const Rating = observer(({ id }: IpanelProps) => {
     <Panel id={id}>
       <FixedLayout vertical='top'>
         <PanelHeader
-          before={<PanelHeaderBack onClick={() => {State.setRoute(routes.HOME); router.popPage()}} />}
+          before={<PanelHeaderBack onClick={() => State.setRoute(routes.HOME)} />}
         >
           <div className='rating-header-text'>
             <Icon28CupOutline />

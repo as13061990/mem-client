@@ -6,14 +6,6 @@ enum routes {
   PROFILE = 'profile',
   ADMIN = 'admin'
 }
-enum pages {
-  LOADING = '/loading',
-  INTRO = '/intro',
-  HOME = '/',
-  RATING = '/rating',
-  PROFILE = '/profile',
-  ADMIN = '/admin'
-}
 enum upload {
   INPUT,
   BUTTONS,
@@ -42,7 +34,6 @@ enum load {
 
 export {
   routes,
-  pages,
   upload,
   memes,
   ratings,
