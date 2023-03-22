@@ -7,7 +7,6 @@ import State from '../store/State';
 import '../css/memes.css';
 import { Meme } from './Meme';
 import { CommentsBlock } from './Comments/CommentsBlock';
-import { useState, useCallback } from 'react';
 
 const lazyLoad = (): void => {
   const more = document.querySelector('#more-memes');

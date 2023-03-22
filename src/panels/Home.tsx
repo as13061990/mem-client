@@ -7,7 +7,6 @@ import Tabbar from '../components/Tabbar';
 import Memes from '../components/Memes';
 import { observer } from 'mobx-react-lite';
 import CategoriesMenu from '../components/CategoriesMenu';
-import User from '../store/User';
 
 export default observer(({id}: IpanelProps): JSX.Element => {
 	return (

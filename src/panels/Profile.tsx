@@ -17,16 +17,7 @@ import Session from '../store/Session';
 export const Profile = ({ id }: IpanelProps) => {
 	useEffect(() => {
 		Session.clearMemesNotif()
-		console.log('asd')
-		//@ts-ignore
-		bridge.send('VKWebAppShowBannerAd', {}).then((data) => {
-			console.log(data);
-		}).catch(()=>{console.log('err')})
 	}, []);
-	//@ts-ignore
-	bridge.send('VKWebAppGetAds', {}).then((data) => {
-		console.log(data);
-	}).catch(()=>{console.log('err')})
 
 	return (
 		<Panel id={id}>

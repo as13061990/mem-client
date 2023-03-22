@@ -21,6 +21,7 @@ class State {
   private _category: memes = memes.TIME;
   private _memeOpen: number;
   private _comments: Icomment[] = [];
+  private _history: routes[] = []
   private _ratingUsers: IratingUsers = {all: [], week: []}
   private _ratingCategory: ratings = ratings.TOP_ALL;
   private _moderation: number = 1;
@@ -29,6 +30,7 @@ class State {
     if (route === routes.HOME || route === routes.RATING || route === routes.PROFILE || route === routes.ADMIN) {
       this._tab = route;
     }
+    this.pushOneHistory(route)
     this._route = route;
   }
 
@@ -204,6 +206,17 @@ class State {
   
   public getMemeOpen(): number {
     return this._memeOpen;
+  }
+
+  public getHistory(): routes[] {
+    return this._history
+  }
+  
+  public pushOneHistory(history: routes): void {
+    this._history.push(history)
+  }
+  public popOneHistory(): void {
+    this._history.pop()
   }
 
 }
