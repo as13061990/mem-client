@@ -25,7 +25,7 @@ export const Rating = observer(({ id }: IpanelProps) => {
     <Panel id={id}>
       <FixedLayout vertical='top'>
         <PanelHeader
-          before={<PanelHeaderBack onClick={() => State.setRoute(routes.HOME)} />}
+          before={<PanelHeaderBack onClick={() => State.goBackRoute()} />}
         >
           <div className='rating-header-text'>
             <Icon28CupOutline />

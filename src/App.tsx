@@ -25,16 +25,6 @@ const App = (): JSX.Element => {
     Actions.getData();
   },[])
 
-  const goBack = () => {
-    const history = State.getHistory()
-    if (history.length === 1) {
-      bridge.send("VKWebAppClose", { "status": "success" });
-    } else if (history.length > 1) {
-      State.popOneHistory()
-    }
-  }
-  
-
   return (
     <ConfigProvider isWebView>
       <AdaptivityProvider>
@@ -43,7 +33,7 @@ const App = (): JSX.Element => {
             <>
               <SplitLayout popout={State.getPopout()}>
                 <SplitCol>
-                  <View activePanel={State.getRoute()} history={State.getHistory()} onSwipeBack={goBack}>
+                  <View activePanel={State.getRoute()} history={State.getHistory()} onSwipeBack={Actions.goBack}>
                     <Loading id={routes.LOADING} />
                     <Intro id={routes.INTRO} />
                     <Home id={routes.HOME} />

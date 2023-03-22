@@ -119,6 +119,15 @@ class Actions {
     }
   }
 
+  public goBack(): void {
+    const history = State.getHistory()
+    if (history.length === 1) {
+      bridge.send("VKWebAppClose", { "status": "success" });
+    } else if (history.length > 1) {
+      State.goBackRoute()
+    }
+  }
+
 }
 
 export default new Actions();

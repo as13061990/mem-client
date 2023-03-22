@@ -12,7 +12,7 @@ export default observer(({id}: IpanelProps): JSX.Element => {
 	return (
 		<Panel id={id}>
 			<FixedLayout vertical='top'>
-				<PanelHeader>Категории мемов</PanelHeader>
+				<PanelHeader>Категории мемов v1.0.0</PanelHeader>
 				<CategoriesMenu />
 			</FixedLayout>
 			<div style={{width: '100%', height: 40}}></div>

@@ -34,6 +34,11 @@ class State {
     this._route = route;
   }
 
+  public goBackRoute():void {
+    this.popOneHistory()
+    this._route = (this.getHistory()[this.getHistory().length - 1])
+  }
+
   public getRoute(): routes {
     return this._route;
   }

@@ -18,7 +18,7 @@ import Session from '../store/Session';
 
 export default observer((): JSX.Element => (
   <>
-    <div style={{ height: '100px' }} />
+    <div style={{paddingBottom: '50px'}} />
     <FixedLayout vertical='bottom'>
       <Tabbar style={{ position: 'static', margin: '10px 0' }} shadow={false}>
         <TabbarItem

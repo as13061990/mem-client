@@ -14,7 +14,7 @@ export default ({id}: IpanelProps) => {
 		<Panel id={id}>
 			<FixedLayout vertical='top'>
 				<PanelHeader
-					before={<PanelHeaderBack onClick={() => State.setRoute(routes.HOME)} />}
+					before={<PanelHeaderBack onClick={() => State.goBackRoute()} />}
 				>Модерация</PanelHeader>
 			</FixedLayout>
 			<Memes />
