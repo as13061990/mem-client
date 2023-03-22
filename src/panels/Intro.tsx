@@ -2,9 +2,12 @@ import { Panel, Button } from '@vkontakte/vkui';
 import bridge from '@vkontakte/vk-bridge';
 import '../css/intro.css';
 import State from '../store/State';
-import { routes } from '../types/enums';
+import { pages, routes } from '../types/enums';
+import { useRouter } from "@happysanta/router";
 
 export default ({id}: IpanelProps) => {
+	const router = useRouter()
+
 	return (
 		<Panel id={id}>
 			<div className='intro'>
@@ -17,6 +20,7 @@ export default ({id}: IpanelProps) => {
 						bridge.send('VKWebAppAllowNotifications', {}).then(res => {
 							if (res.result) {
 								State.setRoute(routes.HOME);
+								router.pushPage(pages.HOME)
 							}
 						});
 					}}>Огонь, я в деле!</Button>

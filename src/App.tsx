@@ -16,11 +16,16 @@ import Actions from './store/Actions';
 import Intro from './panels/Intro';
 import { Profile } from './panels/Profile';
 import Admin from './panels/Admin';
-
+import { useLocation } from "@happysanta/router";
+import { VIEW_MAIN } from '.';
+import { useEffect } from "react";
 
 const App = (): JSX.Element => {
-  Actions.getData();
+  useEffect(()=>{
+    Actions.getData();
+  }, [])
 
+  const location = useLocation()
 
   return (
     <ConfigProvider>
@@ -30,7 +35,11 @@ const App = (): JSX.Element => {
             <>
               <SplitLayout popout={State.getPopout()}>
                 <SplitCol>
-                  <View activePanel={State.getRoute()} onTransition={() => { /* когда заканчивается  */ }}>
+                  <View
+                    id={VIEW_MAIN}
+                    activePanel={location.getViewActivePanel(VIEW_MAIN)}
+                    onTransition={() => { /* когда заканчивается  */ }}
+                  >
                     <Loading id={routes.LOADING} />
                     <Intro id={routes.INTRO} />
                     <Home id={routes.HOME} />
