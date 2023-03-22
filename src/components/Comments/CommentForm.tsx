@@ -4,12 +4,19 @@ import '../../css/comments.css';
 import Actions from "../../store/Actions";
 import State from "../../store/State";
 
+const reg = /<script(.*?)>(.*?)<\/script>/mg
+
 export const CommentForm = () => {
   const [comment, setComment] = useState('');
 
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
-    setComment(value)
+    const isValid = reg.test(value)
+    if ( isValid ) { 
+      setComment('') 
+    } else {
+      setComment(value)
+    }
   };
 
   const onClick = () => {

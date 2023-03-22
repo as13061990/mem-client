@@ -14,7 +14,7 @@ import { routes } from './types/enums';
 import { Observer } from 'mobx-react-lite';
 import Actions from './store/Actions';
 import Intro from './panels/Intro';
-import Profile from './panels/Profile';
+import { Profile } from './panels/Profile';
 import Admin from './panels/Admin';
 
 

@@ -6,6 +6,7 @@ import { routes } from '../types/enums';
 import axios from 'axios';
 
 const OFFER_SUBSCRIBE_DELAY: number = 30000
+const INTERSTITIAL_AD_DELAY: number = 60000
 
 class Actions {
 
@@ -18,6 +19,7 @@ class Actions {
     if (res.error) {
       State.setPopout(<ScreenSpinner state='error' aria-label='Ошибка' />);
     } else {
+      console.log(res.data)
       User.setNickname(res.data.user.name);
       User.setUseNickname(res.data.user.nickname);
       User.setNotify(res.data.user.notify);
@@ -31,6 +33,7 @@ class Actions {
       State.setPopout(null);
       this.subscribes();
       this.notifyToSubscribe(res.data.subscribeOffer, res.data.user.subscribe)
+      this.showInterstitialAd(res.data.interstitial)
     }
   }
 
@@ -93,7 +96,7 @@ class Actions {
       time: time,
     }, comment.meme)
   }
-
+  
   public async notifyToSubscribe(subscribeOffer: boolean, userSubscribe: boolean): Promise<void> {
     if (subscribeOffer && !userSubscribe) {
       setTimeout(() => {
@@ -103,6 +106,16 @@ class Actions {
           }
         });
       }, OFFER_SUBSCRIBE_DELAY)
+    }
+  }
+
+  public async showInterstitialAd(interstitial: boolean): Promise<void> {
+    if (interstitial) {
+      setTimeout(() => {
+        bridge.send('VKWebAppShowNativeAds', { ad_format: EAdsFormats.INTERSTITIAL }).catch(error => {
+          console.log(error);
+        });
+      }, INTERSTITIAL_AD_DELAY)
     }
   }
 

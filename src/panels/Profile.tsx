@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
+import bridge from '@vkontakte/vk-bridge';
 import {
 	Panel,
 	PanelHeader,
-  PanelHeaderBack,
+	PanelHeaderBack,
 	FixedLayout
 } from '@vkontakte/vkui';
 import Nickname from '../components/Nickname';
@@ -13,10 +14,19 @@ import Subscribe from '../components/Subscribe';
 import Upload from '../components/Upload';
 import Session from '../store/Session';
 
-export default ({id}: IpanelProps) => {
+export const Profile = ({ id }: IpanelProps) => {
 	useEffect(() => {
 		Session.clearMemesNotif()
-  }, []);
+		console.log('asd')
+		//@ts-ignore
+		bridge.send('VKWebAppShowBannerAd', {}).then((data) => {
+			console.log(data);
+		}).catch(()=>{console.log('err')})
+	}, []);
+	//@ts-ignore
+	bridge.send('VKWebAppGetAds', {}).then((data) => {
+		console.log(data);
+	}).catch(()=>{console.log('err')})
 
 	return (
 		<Panel id={id}>
@@ -24,7 +34,7 @@ export default ({id}: IpanelProps) => {
 				<PanelHeader
 					before={<PanelHeaderBack onClick={() => State.setRoute(routes.HOME)} />}
 				>Профиль</PanelHeader>
-      </FixedLayout>
+			</FixedLayout>
 			<Upload />
 			<Subscribe />
 			<Nickname />

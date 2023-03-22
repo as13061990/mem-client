@@ -1,4 +1,4 @@
-import { FixedLayout, PanelHeader, Separator, Spacing } from "@vkontakte/vkui"
+import { FixedLayout, PanelHeader, PopoutWrapper, Separator, Spacing } from "@vkontakte/vkui"
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import '../../css/comments.css';
