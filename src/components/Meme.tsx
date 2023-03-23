@@ -98,7 +98,6 @@ export const Meme = ({ data }: { data: Imeme}): JSX.Element => {
   return (
     <>
       <SimpleCell
-        onClick={() => console.log(data.user_id)}
         description={data.time}
         before={<Avatar src={data.avatar} />}
       >

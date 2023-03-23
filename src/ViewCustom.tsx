@@ -22,17 +22,13 @@ export const ViewCustom = observer(() => {
 
   const handleSwipeBackStart = useCallback(() => {
     State.setSwipe(true)
-    console.log('SwipeBackStart')
   }, []);
 
   const handleSwipeBack = useCallback(() => {
     if (!State.getSwipe()) return
-    console.log('onSwipeBack');
     State.goBack();
     State.setSwipe(false)
   }, []);
-
-  console.log(State.getHistory())
 
   return (
     <View

@@ -15,7 +15,7 @@ const App = (): JSX.Element => {
 
   useEffect(() => {
     Actions.getData();
-    window.addEventListener('popstate', () => {State.goBack(); console.log('popstate')});
+    window.addEventListener('popstate', () => {State.goBack();});
     return () => {
       window.removeEventListener('popstate', () => State.goBack());
     }

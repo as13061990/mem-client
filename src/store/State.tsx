@@ -30,7 +30,6 @@ class State {
 
 
   public goBack():void  {
-    console.log('swipe')
     if ( this._history.length === 1) {  
       bridge.send("VKWebAppClose", { "status": "success" }); 
     } else if (this._history.length > 1) { 
