@@ -24,6 +24,9 @@ export const CommentsBlock = observer(() => {
       State.setComments([])
       document.body.style.overflowY = 'scroll'
     }
+    return () => {
+      document.body.style.overflowY = 'hidden'
+    }
 
   }, [active])
 

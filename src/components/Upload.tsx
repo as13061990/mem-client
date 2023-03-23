@@ -6,10 +6,10 @@ import {
   FormItem,
   File,
   Text,
-  Spinner
+  Spinner,
 } from '@vkontakte/vkui';
 import {
-	Icon24Camera,
+  Icon24Camera,
   Icon16Add,
   Icon24VideoAdvertisement
 } from '@vkontakte/icons';
@@ -32,7 +32,7 @@ const buttons = (): JSX.Element => {
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Text weight='2' style={{ marginBottom: 16 }}>{file.name.length > 25 ? file.name.substring(0, 25) + '...' :  file.name}</Text>
+        <Text weight='2' style={{ marginBottom: 16 }}>{file.name.length > 25 ? file.name.substring(0, 25) + '...' : file.name}</Text>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <Button size='m' style={{ marginRight: 4 }} onClick={() => sendMem()}>Запостить</Button>
@@ -45,15 +45,23 @@ const buttons = (): JSX.Element => {
 const inputFile = (): JSX.Element => {
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
         <Text weight='2'>Осталось жетонов: {User.getMemes()}</Text>
-        {State.getReward() && <Button mode='secondary' style={{ marginLeft: 4 }} before={<Icon16Add/>} onClick={() => showRewarded()}></Button>}
+        {State.getReward() && <Button mode='secondary' style={{ marginLeft: '4px' }} before={<Icon16Add />} onClick={() => showRewarded()}></Button>}
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <File style={{ marginTop: 10 }} before={<Icon24Camera role='presentation' />} size='l' accept='image/png, image/jpeg' onChange={handleSelectedFile}>
+      <div style={{textAlign: 'center', marginTop: '10px', marginBottom: '25px'}}>
+        <File
+          before={<Icon24Camera role='presentation' />}
+          size='l'
+          accept='image/png, image/jpeg'
+          onChange={handleSelectedFile}
+          align='center'
+        >
           Открыть галерею
         </File>
       </div>
+
+
     </>
   );
 }
@@ -106,7 +114,7 @@ const ad = (): JSX.Element => {
           <Text weight='3' style={{ textAlign: 'center' }}>Вы можете получить жетон за рекламу</Text>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Button size='m' style={{ marginTop: 10 }} before={<Icon24VideoAdvertisement/>} onClick={() => showRewarded()}>Смотреть рекламу</Button>
+          <Button size='m' style={{ marginTop: 10 }} before={<Icon24VideoAdvertisement />} onClick={() => showRewarded()}>Смотреть рекламу</Button>
         </div>
       </>}
     </>
@@ -137,7 +145,7 @@ const showRewarded = (): void => {
   bridge.send('VKWebAppShowNativeAds', { ad_format: EAdsFormats.REWARD }).then(data => {
     if (data.result) {
       const hash = md5(User.getNickname() + '_' + User.getUser().id + '_' + User.getMemes());
-      Actions.sendRequest('rewardedMeme', {hash}).then(res => {
+      Actions.sendRequest('rewardedMeme', { hash }).then(res => {
         !res.error && User.setMemes(User.getMemes() + 1);
       });
     }
@@ -150,13 +158,13 @@ export default observer((): JSX.Element => {
   const state = State.getUploadState();
   const jsx = state === upload.BUTTONS ? buttons() :
     state === upload.LOADING ? loading() :
-    state === upload.FINISH ? finish() :
-    state === upload.ERROR ? error() :
-    state === upload.INPUT && User.getMemes() === 0 ? ad() :
-    inputFile();
-	return (
+      state === upload.FINISH ? finish() :
+        state === upload.ERROR ? error() :
+          state === upload.INPUT && User.getMemes() === 0 ? ad() :
+            inputFile();
+  return (
     <Group header={<Header mode='secondary'>Загрузить свой мем</Header>}>
-      <FormItem top='Загрузите свой мем'>{jsx}</FormItem>
+      <FormItem top='Загрузите свой мем' style={{overflow: 'hidden'}}>{jsx}</FormItem>
     </Group>
-	);
+  );
 });
