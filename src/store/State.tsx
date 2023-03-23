@@ -1,13 +1,13 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { ScreenSpinner } from '@vkontakte/vkui';
 import { load, memes, ratings, routes, upload } from '../types/enums';
+import bridge from '@vkontakte/vk-bridge';
 
 class State {
   constructor() {
     makeAutoObservable(this);
   }
 
-  private _route: routes = routes.LOADING;
   private _tab: routes = routes.HOME;
   private _admin: boolean = false;
   private _popout: JSX.Element = <ScreenSpinner state='loading' />;
@@ -21,31 +21,33 @@ class State {
   private _category: memes = memes.TIME;
   private _memeOpen: number;
   private _comments: Icomment[] = [];
-  private _history: routes[] = []
+  private _history: routes[] = [routes.HOME]
+  private _activePanel: routes = routes.LOADING
   private _ratingUsers: IratingUsers = {all: [], week: []}
   private _ratingCategory: ratings = ratings.TOP_ALL;
   private _moderation: number = 1;
 
-  public setRoute(route: routes): void {
-    if (route === routes.HOME || route === routes.RATING || route === routes.PROFILE || route === routes.ADMIN) {
-      this._tab = route;
-    }
-    this.pushOneHistory(route)
-    this._route = route;
-  }
-
-  public goBackRoute():void {
-    this.popOneHistory()
-    const newRoute = this.getHistory()[this.getHistory().length - 1]
-    this._route = newRoute
-    if (newRoute === routes.HOME || newRoute === routes.RATING || newRoute === routes.PROFILE || newRoute === routes.ADMIN) {
-      this._tab = newRoute;
+  public goBack = () => {
+    if ( this._history.length === 1) {  
+      bridge.send("VKWebAppClose", { "status": "success" }); 
+    } else if (this._history.length > 1) { 
+      this._history.pop() 
+      const newPanel: routes = this._history[this._history.length - 1] 
+      this._activePanel = newPanel
+      if (newPanel === routes.HOME || newPanel === routes.RATING || newPanel === routes.PROFILE || newPanel === routes.ADMIN) {
+        this._tab = newPanel;
+      }
     }
   }
 
-  public getRoute(): routes {
-    return this._route;
-  }
+  public goToPage = (panel: routes) => {
+    window.history.pushState({ panel: panel }, panel); 
+    if (panel === routes.HOME || panel === routes.RATING || panel === routes.PROFILE || panel === routes.ADMIN) {
+      this._tab = panel;
+    }
+    this._activePanel = panel; 
+    this._history.push(panel);
+  };
 
   public getTab(): routes {
     return this._tab;
@@ -218,15 +220,17 @@ class State {
   }
 
   public getHistory(): routes[] {
-    return this._history
+    return this._history;
   }
-  
-  public pushOneHistory(history: routes): void {
-    this._history.push(history)
+
+  public setActivePanel(route: routes) {
+    this._activePanel = route;
   }
-  public popOneHistory(): void {
-    this._history.pop()
+
+  public getActivePanel(): routes {
+    return this._activePanel;
   }
+
 
 }
 

@@ -4,7 +4,7 @@ import '../css/intro.css';
 import State from '../store/State';
 import { routes } from '../types/enums';
 
-export default ({id, goToPage}: IpanelProps) => {
+export default ({id}: IpanelProps) => {
 	return (
 		<Panel id={id}>
 			<div className='intro'>
@@ -16,12 +16,12 @@ export default ({id, goToPage}: IpanelProps) => {
 					<Button size='m' onClick={() => {
 						bridge.send('VKWebAppAllowNotifications', {}).then(res => {
 							if (res.result) {
-								State.setRoute(routes.HOME);
+								State.setActivePanel(routes.HOME)
 							}
 						});
 					}}>Огонь, я в деле!</Button>
 				</div>
-				<div className='intro-continue' onClick={() => goToPage(routes.HOME)}>Продолжить</div>
+				<div className='intro-continue' onClick={() => State.setActivePanel(routes.HOME)}>Продолжить</div>
 			</div>
 		</Panel>
 	);

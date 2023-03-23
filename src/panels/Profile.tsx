@@ -14,7 +14,7 @@ import Subscribe from '../components/Subscribe';
 import Upload from '../components/Upload';
 import Session from '../store/Session';
 
-export const Profile = ({ id,goToPage }: IpanelProps) => {
+export const Profile = ({ id }: IpanelProps) => {
 	useEffect(() => {
 		Session.clearMemesNotif()
 	}, []);
@@ -29,7 +29,7 @@ export const Profile = ({ id,goToPage }: IpanelProps) => {
 			<Upload />
 			<Subscribe />
 			<Nickname />
-			<Tabbar goToPage={goToPage} />
+			<Tabbar />
 		</Panel>
 	);
 }

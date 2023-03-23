@@ -16,7 +16,7 @@ import { RatingInfoBlock } from '../components/Rating/RatingInfoBlock';
 import { useEffect } from "react";
 import Actions from '../store/Actions';
 
-export const Rating = observer(({ id, goToPage }: IpanelProps) => {
+export const Rating = observer(({ id }: IpanelProps) => {
   useEffect(()=>{
     Actions.getDataRatingUsers()
   }, [])
@@ -37,7 +37,7 @@ export const Rating = observer(({ id, goToPage }: IpanelProps) => {
       <div style={{ width: '100%', height: '120px' }}></div>
       <RatingInfoBlock/>
       <RatingList />
-      <Tabbar goToPage={goToPage} />
+      <Tabbar />
     </Panel>
   );
 })

@@ -9,7 +9,7 @@ import { routes } from '../types/enums';
 import Tabbar from '../components/Tabbar';
 import Memes from '../components/Memes';
 
-export default ({id,goToPage}: IpanelProps) => {
+export default ({id}: IpanelProps) => {
 	return (
 		<Panel id={id}>
 			<FixedLayout vertical='top'>
@@ -18,7 +18,7 @@ export default ({id,goToPage}: IpanelProps) => {
 				>Модерация</PanelHeader>
 			</FixedLayout>
 			<Memes />
-			<Tabbar goToPage={goToPage}/>
+			<Tabbar/>
 		</Panel>
 	);
 }

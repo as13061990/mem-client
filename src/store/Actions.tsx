@@ -28,7 +28,7 @@ class Actions {
       const rewarded = reward && res.data.rewarded;
       State.setReward(rewarded);
       State.setTimer(res.data.time);
-      State.setRoute(res.data.user.member ? routes.HOME : routes.INTRO);
+      State.setActivePanel(res.data.user.member ? routes.HOME : routes.INTRO);
       State.setAdmin(res.data.admin);
       State.setPopout(null);
       this.subscribes();
@@ -116,15 +116,6 @@ class Actions {
           console.log(error);
         });
       }, INTERSTITIAL_AD_DELAY)
-    }
-  }
-
-  public goBack(): void {
-    const history = State.getHistory()
-    if (history.length === 1) {
-      bridge.send("VKWebAppClose", { "status": "success" });
-    } else if (history.length > 1) {
-      State.goBackRoute()
     }
   }
 

@@ -38,12 +38,12 @@ const lazyLoad = (): void => {
 const loadMemes = (): void => {
   if (State.getLoadMemes() !== load.LAZY) return;
   State.setLoadMemes(load.LOADING);
-  const type = State.getRoute() !== routes.ADMIN ? State.getCategory() : 0;
+  const type = State.getActivePanel() !== routes.ADMIN ? State.getCategory() : 0;
   Actions.sendRequest('loadMemes', {
     i: State.getMemesIteration(),
     type: type
   }).then(res => {
-    if (State.getRoute() !== routes.ADMIN && type !== State.getCategory()) return;
+    if (State.getActivePanel() !== routes.ADMIN && type !== State.getCategory()) return;
     State.setMemesIteration(State.getMemesIteration() + 1);
     const loading = res.data.more ? load.LAZY : load.END;
     State.addMemes(res.data.memes);
