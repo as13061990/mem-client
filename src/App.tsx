@@ -50,7 +50,7 @@ const App = (): JSX.Element => {
         <AppRoot>
           <Observer render={() => (
             <>
-              <SplitLayout popout={State.getPopout()}>
+              <SplitLayout>
                 <SplitCol>
                   <View
                     activePanel={activePanel} // Активная панель равная стейту.
