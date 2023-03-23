@@ -4,8 +4,6 @@ import {
 	PanelHeaderBack,
 	FixedLayout
 } from '@vkontakte/vkui';
-import State from '../store/State';
-import { routes } from '../types/enums';
 import Tabbar from '../components/Tabbar';
 import Memes from '../components/Memes';
 

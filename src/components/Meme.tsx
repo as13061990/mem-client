@@ -21,7 +21,6 @@ import Actions from '../store/Actions';
 import State from '../store/State';
 import { useRef, useState } from 'react';
 
-
 const moderation = async (meme: number, decision: boolean): Promise<void> => {
   const moderation = await Actions.sendRequest('moderation', {
     decision: decision,

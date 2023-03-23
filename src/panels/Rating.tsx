@@ -4,8 +4,6 @@ import {
   PanelHeaderBack,
   FixedLayout,
 } from '@vkontakte/vkui';
-import State from '../store/State';
-import { routes } from '../types/enums';
 import Tabbar from '../components/Tabbar';
 import { Icon28CupOutline } from '@vkontakte/icons';
 import '../css/rating.css';
@@ -33,8 +31,7 @@ export const Rating = observer(({ id }: IpanelProps) => {
           </div>
         </PanelHeader>
         <CategoriesRating />
-      </FixedLayout>
-      <div style={{ width: '100%', height: '120px' }}></div>
+      </FixedLayout>%
       <RatingInfoBlock/>
       <RatingList />
       <Tabbar />

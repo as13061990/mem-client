@@ -27,10 +27,11 @@ class State {
   private _ratingCategory: ratings = ratings.TOP_ALL;
   private _moderation: number = 1;
 
-  public goBack = () => {
-    if ( this._history.length === 1) {  
+  public goBack():void  {
+    console.log('swipe')
+    if ( this._history.length === 0) {  
       bridge.send("VKWebAppClose", { "status": "success" }); 
-    } else if (this._history.length > 1) { 
+    } else if (this._history.length > 0) { 
       this._history.pop() 
       const newPanel: routes = this._history[this._history.length - 1] 
       this._activePanel = newPanel

@@ -52,7 +52,6 @@ const loadMemes = (): void => {
 }
 
 export default observer((): JSX.Element => {
-
   useEffect((): void => {
     State.setMemesIteration(0);
     State.setMemes([]);
