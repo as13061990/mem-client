@@ -9,14 +9,14 @@ import { Icon28CupOutline } from '@vkontakte/icons';
 import '../css/rating.css';
 import { CategoriesRating } from '../components/Rating/CategoriesRating';
 import { RatingList } from '../components/Rating/RatingList';
-import { observer } from 'mobx-react-lite';
 import { RatingInfoBlock } from '../components/Rating/RatingInfoBlock';
 import { useEffect } from "react";
 import Actions from '../store/Actions';
 
-export const Rating = observer(({ id }: IpanelProps) => {
+export const Rating = ({ id }: IpanelProps) => {
   useEffect(()=>{
     Actions.getDataRatingUsers()
+    console.log('das')
   }, [])
 
   return (
@@ -37,4 +37,4 @@ export const Rating = observer(({ id }: IpanelProps) => {
       <Tabbar />
     </Panel>
   );
-})
+}

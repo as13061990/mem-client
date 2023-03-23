@@ -5,14 +5,13 @@ import {
 } from '@vkontakte/vkui';
 import Tabbar from '../components/Tabbar';
 import Memes from '../components/Memes';
-import { observer } from 'mobx-react-lite';
 import CategoriesMenu from '../components/CategoriesMenu';
 
-export default observer(({id}: IpanelProps): JSX.Element => {
+export const Home = ({id}: IpanelProps): JSX.Element => {
 	return (
 		<Panel id={id}>
 			<FixedLayout vertical='top'>
-				<PanelHeader>v1.0.10 Категории мемов</PanelHeader>
+				<PanelHeader>v1.0.12 Категории мемов</PanelHeader>
 				<CategoriesMenu />
 			</FixedLayout>
 			<div style={{width: '100%', height: 40}}></div>
@@ -20,4 +19,4 @@ export default observer(({id}: IpanelProps): JSX.Element => {
 			<Tabbar/>
 		</Panel>
 	);
-});
+};
