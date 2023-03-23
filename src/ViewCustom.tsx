@@ -10,24 +10,28 @@ import { Profile } from "./panels/Profile";
 import { Rating } from "./panels/Rating";
 import State from "./store/State";
 import { routes } from "./types/enums";
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import bridge from '@vkontakte/vk-bridge';
 
 export const ViewCustom = observer(() => {
   const isFirst = State.getHistory().length === 1;
+  const [swipe, setSwipe] = useState(false)
 
   useEffect(() => {
     bridge.send('VKWebAppSetSwipeSettings', { history: isFirst });
   }, [isFirst])
 
   const handleSwipeBackStart = useCallback(() => {
+    setSwipe(true)
     console.log('SwipeBackStart')
   }, []);
 
   const handleSwipeBack = useCallback(() => {
+    if (!swipe) return
     console.log('onSwipeBack');
     State.goBack();
-  }, []);
+    setSwipe(false)
+  }, [swipe]);
 
   console.log(State.getHistory())
 
