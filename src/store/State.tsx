@@ -31,9 +31,9 @@ class State {
 
   public goBack():void  {
     console.log('swipe')
-    if ( this._history.length === 0) {  
+    if ( this._history.length === 1) {  
       bridge.send("VKWebAppClose", { "status": "success" }); 
-    } else if (this._history.length > 0) { 
+    } else if (this._history.length > 1) { 
       this._history.pop() 
       const newPanel: routes = this._history[this._history.length - 1] 
       this._activePanel = newPanel
