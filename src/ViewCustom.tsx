@@ -15,23 +15,22 @@ import bridge from '@vkontakte/vk-bridge';
 
 export const ViewCustom = observer(() => {
   const isFirst = State.getHistory().length === 1;
-  const [swipe, setSwipe] = useState(false)
 
   useEffect(() => {
     bridge.send('VKWebAppSetSwipeSettings', { history: isFirst });
   }, [isFirst])
 
   const handleSwipeBackStart = useCallback(() => {
-    setSwipe(true)
+    State.setSwipe(true)
     console.log('SwipeBackStart')
   }, []);
 
   const handleSwipeBack = useCallback(() => {
-    if (!swipe) return
+    if (!State.getSwipe()) return
     console.log('onSwipeBack');
     State.goBack();
-    setSwipe(false)
-  }, [swipe]);
+    State.setSwipe(false)
+  }, []);
 
   console.log(State.getHistory())
 

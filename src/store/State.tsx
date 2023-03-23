@@ -26,6 +26,8 @@ class State {
   private _ratingUsers: IratingUsers = {all: [], week: []}
   private _ratingCategory: ratings = ratings.TOP_ALL;
   private _moderation: number = 1;
+  private _swipe: boolean = false;
+
 
   public goBack():void  {
     console.log('swipe')
@@ -230,6 +232,14 @@ class State {
 
   public getActivePanel(): routes {
     return this._activePanel;
+  }
+
+  public setSwipe(swipe: boolean) {
+    this._swipe = swipe;
+  }
+
+  public getSwipe(): boolean {
+    return this._swipe;
   }
 
 

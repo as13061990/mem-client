@@ -16,7 +16,6 @@ import Actions from '../store/Actions';
 export const Rating = ({ id }: IpanelProps) => {
   useEffect(()=>{
     Actions.getDataRatingUsers()
-    console.log('das')
   }, [])
 
   return (
