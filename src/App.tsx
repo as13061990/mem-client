@@ -3,7 +3,8 @@ import {
   AppRoot,
   ConfigProvider,
   SplitLayout,
-  SplitCol
+  SplitCol,
+  usePlatform
 } from '@vkontakte/vkui';
 import State from './store/State';
 import { Observer } from 'mobx-react-lite';
@@ -12,7 +13,7 @@ import { useEffect } from 'react'
 import { ViewCustom } from './ViewCustom';
 
 const App = (): JSX.Element => {
-
+  const platformText = usePlatform()
   useEffect(() => {
     Actions.getData();
     window.addEventListener('popstate', () => {State.goBack();});
@@ -22,7 +23,7 @@ const App = (): JSX.Element => {
   }, [])
 
   return (
-    <ConfigProvider isWebView={true}>
+    <ConfigProvider isWebView={true} platform={platformText}>
       <AdaptivityProvider>
         <AppRoot>
           <Observer render={() => (

@@ -39,8 +39,6 @@ const loadMemes = (): void => {
   if (State.getLoadMemes() !== load.LAZY) return;
   State.setLoadMemes(load.LOADING);
   const type = State.getActivePanel() !== routes.ADMIN ? State.getCategory() : 0;
-  console.log('loadMemes', type);
-  console.log('category', State.getCategory())
   Actions.sendRequest('loadMemes', {
     i: State.getMemesIteration(),
     type: type
@@ -62,7 +60,7 @@ export default observer((): JSX.Element => {
     window.addEventListener('scroll', (): void => lazyLoad());
     loadMemes();
   }, [State.getCategory(), State.getModeration()]);
-  
+
   const lazy = State.getLoadMemes() === load.LAZY ? <div id='more-memes'></div> :
     State.getLoadMemes() === load.LOADING ? <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}><Spinner size='regular' /></div> :
       null;

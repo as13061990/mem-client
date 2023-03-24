@@ -30,7 +30,8 @@ export const Rating = ({ id }: IpanelProps) => {
           </div>
         </PanelHeader>
         <CategoriesRating />
-      </FixedLayout>%
+      </FixedLayout>
+      <div className='header-space'/>
       <RatingInfoBlock/>
       <RatingList />
       <Tabbar />

@@ -15,6 +15,7 @@ export default ({id}: IpanelProps) => {
 					before={<PanelHeaderBack onClick={() => window.history.back()} />}
 				>Модерация</PanelHeader>
 			</FixedLayout>
+			<div className='header-space'/>
 			<Memes />
 			<Tabbar/>
 		</Panel>

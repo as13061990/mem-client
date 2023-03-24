@@ -46,8 +46,9 @@ export const CommentsBlock = observer(() => {
           <CommentForm />
           <Spacing size={4}/>
         </FixedLayout>
+        <div style={{width: '100%', marginTop: '120px'}}></div>
 
-        <div style={{overflowY: 'auto', height: '60vh', paddingTop: '120px'}}>
+        <div style={{overflowY: 'auto', height: '74%', marginBottom: '120px', marginTop: '120px'}}>
 
         {State.getComments().map((comment: Icomment, i: number) => {
           return (
@@ -60,6 +61,7 @@ export const CommentsBlock = observer(() => {
             />
           )
         })}
+
         </div>
       </div >
     </div >

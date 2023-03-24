@@ -27,6 +27,7 @@ class State {
   private _ratingCategory: ratings = ratings.TOP_ALL;
   private _moderation: number = 1;
   private _swipe: boolean = false;
+  private _stories: boolean = false
 
 
   public goBack():void  {
@@ -239,6 +240,14 @@ class State {
 
   public getSwipe(): boolean {
     return this._swipe;
+  }
+
+  public setStories(stories: boolean) {
+    this._stories = stories; 
+  }
+
+  public getStories(): boolean {
+    return this._stories;
   }
 
 
