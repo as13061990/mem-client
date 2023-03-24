@@ -112,7 +112,7 @@ export const Meme = ({ data }: { data: Imeme}): JSX.Element => {
         {data.name}
       </SimpleCell>
       <Card mode='shadow' className='meme-card'>
-        <div id={'meme' + data.id} className='meme' onClick={() => console.log(data.id)}>
+        <div id={'meme' + data.id} className='meme'>
           {spinner}
         </div>
 
