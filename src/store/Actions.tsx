@@ -19,7 +19,6 @@ class Actions {
     if (res.error) {
       State.setPopout(<ScreenSpinner state='error' aria-label='Ошибка' />);
     } else {
-      console.log(res.data)
       User.setNickname(res.data.user.name);
       User.setUseNickname(res.data.user.nickname);
       User.setNotify(res.data.user.notify);

@@ -12,8 +12,3 @@ div, p, span, h1, h2, h3, h4, img {
 .FixedLayout--bottom {
 	background-color: #FFFFFF;
 }
-.header-space {
-	width: 100%;
-	height: calc(1px + env(safe-area-inset-top));
-	background: red 
-}

@@ -164,7 +164,7 @@ export default observer((): JSX.Element => {
             inputFile();
   return (
     <Group header={<Header mode='secondary'>Загрузить свой мем</Header>}>
-      <FormItem top='Загрузите свой мем' style={{overflow: 'hidden'}}>{jsx}</FormItem>
+      <FormItem style={{overflow: 'hidden'}}>{jsx}</FormItem>
     </Group>
   );
 });

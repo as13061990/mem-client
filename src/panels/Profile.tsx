@@ -24,7 +24,7 @@ export const Profile = ({ id }: IpanelProps) => {
 					before={<PanelHeaderBack onClick={() => window.history.back()} />}
 				>Профиль</PanelHeader>
 			</FixedLayout>
-			<div className='header-space'/>
+			<div style={{width: '100%', height: '40px'}}></div>
 			<Upload />
 			<Subscribe />
 			<Nickname />

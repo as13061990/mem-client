@@ -16,6 +16,7 @@ export default ({id}: IpanelProps) => {
 				>Модерация</PanelHeader>
 			</FixedLayout>
 			<div className='header-space'/>
+			<div style={{width: '100%', height: '60px'}}></div>
 			<Memes />
 			<Tabbar/>
 		</Panel>

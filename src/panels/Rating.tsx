@@ -31,6 +31,7 @@ export const Rating = ({ id }: IpanelProps) => {
         </PanelHeader>
         <CategoriesRating />
       </FixedLayout>
+      <div style={{width: '100%', height: '100px'}}></div>
       <div className='header-space'/>
       <RatingInfoBlock/>
       <RatingList />
