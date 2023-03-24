@@ -95,6 +95,14 @@ export const Meme = ({ data }: { data: Imeme}): JSX.Element => {
   const like = data.opinion ? <Icon28LikeFillRed /> : <Icon28LikeOutline />;
   const ref: React.MutableRefObject<HTMLDivElement> = useRef();
 
+  const onShareClick = (ref: React.MutableRefObject<HTMLDivElement>, data: Imeme) => {
+    if (State.getStories()) {
+      State.setPopout(share(ref, data))
+    } else {
+      toWall(data)
+    }
+  }
+
   return (
     <>
       <SimpleCell
@@ -121,7 +129,7 @@ export const Meme = ({ data }: { data: Imeme}): JSX.Element => {
               {data.comments}
             </Text>
           </div>
-          <div className='share' onClick={() => State.setPopout(share(ref, data))}>
+          <div className='share' onClick={() => onShareClick(ref, data)}>
             <Icon28ShareOutline getRootRef={ref} />
             <Text weight='2' className='buttons-text'>
               {data.share}
