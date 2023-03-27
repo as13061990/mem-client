@@ -24,7 +24,7 @@ import State from '../store/State';
 import { useRef, useState } from 'react';
 import { Icon28MoreHorizontal } from '@vkontakte/icons';
 import User from '../store/User';
-import { modals } from '../types/enums';
+import { modals, routes } from '../types/enums';
 
 const moderation = async (meme: number, decision: boolean): Promise<void> => {
   const moderation = await Actions.sendRequest('moderation', {
@@ -97,9 +97,9 @@ const more = (ref: React.MutableRefObject<HTMLDivElement>, data: Imeme): JSX.Ele
       {data.user_id === User.getUser().id ?
         <ActionSheetItem autoclose mode="destructive" onClick={() => { State.setPopout(deleteAlert(data)) }}>
           Удалить запись
-        </ActionSheetItem> 
+        </ActionSheetItem>
         :
-        <ActionSheetItem autoclose onClick={() => { State.setActiveModal(modals.REPORT); State.setReportMeme(data)}}>
+        <ActionSheetItem autoclose onClick={() => { State.setActiveModal(modals.REPORT); State.setReportMeme(data) }}>
           Пожаловаться
         </ActionSheetItem>
       }
@@ -121,22 +121,9 @@ const toWall = (data: Imeme): void => {
 }
 
 export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
-  const [spinner, setSpinner] = useState(<Spinner size='regular' />);
 
   const url = data.url !== '' ? process.env.REACT_APP_API + '/uploads/' + data.url : data.vk_url;
-  const img = new Image();
-  img.src = url;
-  img.onload = (): void => {
-    const el = document.querySelector('#meme' + data.id) as HTMLElement;
 
-    if (el) {
-      const width = el.clientWidth;
-      const height = width / img.width * img.height;
-      el.style.height = height + 'px';
-      el.style.backgroundImage = 'url(' + url + ')';
-      setSpinner(null);
-    }
-  }
   const like = data.opinion ? <Icon28LikeFillRed /> : <Icon28LikeOutline />;
   const refShare: React.MutableRefObject<HTMLDivElement> = useRef();
   const refMore: React.MutableRefObject<HTMLDivElement> = useRef();
@@ -167,8 +154,8 @@ export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
         {data.name}
       </SimpleCell>
       <Card mode='shadow' className='meme-card'>
-        <div id={'meme' + data.id} className='meme'>
-          {spinner}
+        <div id={'meme' + data.id} className='meme' onClick={() => { State.setActiveMeme(url); State.setActiveModal(modals.MEME)}}>
+          {url ? <img src={url} alt='meme' className='meme-img' /> : <Spinner size='regular' />}
         </div>
 
         {data.status === 1 && <div className='meme-buttons'>
@@ -192,11 +179,14 @@ export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
           </div>
         </div>}
 
-        {data.status === 0 && <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Button size='l' onClick={() => moderation(data.id, true)} stretched>Принять</Button>
-          <Button size='l' onClick={() => moderation(data.id, false)} stretched mode='secondary'>Отклонить</Button>
-        </div>}
+        {data.status === 0 && State.getActivePanel() === routes.ADMIN ?
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Button size='l' onClick={() => moderation(data.id, true)} stretched>Принять</Button>
+            <Button size='l' onClick={() => moderation(data.id, false)} stretched mode='secondary'>Отклонить</Button>
+          </div>
+          : null}
         {data.status === 2 && <div className='rejection'>Отклонён</div>}
+        {data.status === 0 && State.getActivePanel() !== routes.ADMIN ? <div className='rejection in-moderation'>На модерации</div> : null}
       </Card>
     </>
   );
