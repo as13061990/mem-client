@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Spinner } from '@vkontakte/vkui';
+import { Spinner, Text } from '@vkontakte/vkui';
 import Actions from '../store/Actions';
 import { load, routes } from '../types/enums';
 import { observer } from 'mobx-react-lite';
@@ -63,7 +63,7 @@ export default observer((): JSX.Element => {
 
   const lazy = State.getLoadMemes() === load.LAZY ? <div id='more-memes'></div> :
     State.getLoadMemes() === load.LOADING ? <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}><Spinner size='regular' /></div> :
-      null;
+      <Text weight='2' style={{textAlign: 'center'}}>Мемов нет, но вы держитесь</Text>;
 
   const memes = State.getMemes().map(data => {
     return (
