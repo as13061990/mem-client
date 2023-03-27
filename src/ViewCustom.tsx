@@ -10,7 +10,7 @@ import { Profile } from "./panels/Profile";
 import { Rating } from "./panels/Rating";
 import State from "./store/State";
 import { routes } from "./types/enums";
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect } from 'react'
 import bridge from '@vkontakte/vk-bridge';
 
 export const ViewCustom = observer(() => {
@@ -37,12 +37,14 @@ export const ViewCustom = observer(() => {
       onSwipeBackStart={handleSwipeBackStart}
       onSwipeBack={handleSwipeBack} // При свайпе выполняется данная функция.
     >
-      <Loading id={routes.LOADING} />
-      <Intro id={routes.INTRO} />
-      <Home id={routes.HOME} />
-      <Rating id={routes.RATING} />
-      <Profile id={routes.PROFILE} />
-      <Admin id={routes.ADMIN} />
+
+        <Loading id={routes.LOADING} />
+        <Intro id={routes.INTRO} />
+        <Home id={routes.HOME} />
+        <Rating id={routes.RATING} />
+        <Profile id={routes.PROFILE} />
+        <Admin id={routes.ADMIN} />
+
     </View>
   )
 });

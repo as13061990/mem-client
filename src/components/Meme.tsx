@@ -108,14 +108,15 @@ const reportSucces = () => {
 const more = (ref: React.MutableRefObject<HTMLDivElement>, data: Imeme): JSX.Element => {
   return (
     <ActionSheet toggleRef={ref} onClose={() => State.setPopout(null)}>
-      <ActionSheetItem autoclose onClick={() => { reportSucces(); Actions.reportMeme(data) }}>
-        Пожаловаться
-      </ActionSheetItem>
       {data.user_id === User.getUser().id ?
         <ActionSheetItem autoclose mode="destructive" onClick={() => { State.setPopout(deleteAlert(data)) }}>
           Удалить запись
+        </ActionSheetItem> 
+        :
+        <ActionSheetItem autoclose onClick={() => { reportSucces(); Actions.reportMeme(data) }}>
+          Пожаловаться
         </ActionSheetItem>
-        : null}
+      }
     </ActionSheet>
   );
 }

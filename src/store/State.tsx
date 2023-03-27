@@ -29,6 +29,7 @@ class State {
   private _swipe: boolean = false;
   private _stories: boolean = false;
   private _snackbar: JSX.Element = null
+  private _activeModal: string = null
 
 
   public goBack():void  {
@@ -260,6 +261,14 @@ class State {
 
   public getSnackbar(): JSX.Element {
     return this._snackbar
+  }
+
+  public setActiveModal(modal: string): void {
+    this._activeModal = modal
+  }
+
+  public getActiveModal(): string {
+    return this._activeModal
   }
 
   public setSnackbar(snackbar: JSX.Element): void {

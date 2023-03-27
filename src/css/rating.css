@@ -6,7 +6,6 @@
 }
 
 .rating-info-block {
-  display: flex;
   padding: 10px 25px 15px 25px; 
   min-height: 80px;
   text-align: center; 

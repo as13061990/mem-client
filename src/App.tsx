@@ -11,6 +11,7 @@ import { Observer } from 'mobx-react-lite';
 import Actions from './store/Actions';
 import { useEffect } from 'react'
 import { ViewCustom } from './ViewCustom';
+import Modals from './components/Modals';
 
 const App = (): JSX.Element => {
   const platformText = usePlatform()
@@ -28,7 +29,7 @@ const App = (): JSX.Element => {
         <AppRoot>
           <Observer render={() => (
             <>
-              <SplitLayout popout={State.getPopout()}>
+              <SplitLayout popout={State.getPopout()} modal={<Modals/>}>
                 <SplitCol>
                   <ViewCustom/>
                 </SplitCol>
