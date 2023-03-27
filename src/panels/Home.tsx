@@ -7,17 +7,17 @@ import Tabbar from '../components/Tabbar';
 import Memes from '../components/Memes';
 import CategoriesMenu from '../components/CategoriesMenu';
 
-export const Home = ({id}: IpanelProps): JSX.Element => {
+export const Home = ({ id }: IpanelProps): JSX.Element => {
 	return (
 		<Panel id={id}>
 			<FixedLayout vertical='top'>
-			<PanelHeader>v1.1.6 Категории мемов</PanelHeader>
+				<PanelHeader>v1.1.7 Категории мемов</PanelHeader>
 				<CategoriesMenu />
 			</FixedLayout>
-			<div className='header-space'/>
-			<div style={{width: '100%', height: '100px'}}></div>
+			<div className='header-space' />
+			<div style={{ width: '100%', height: '100px' }}></div>
 			<Memes />
-			<Tabbar/>
+			<Tabbar />
 		</Panel>
 	);
 };

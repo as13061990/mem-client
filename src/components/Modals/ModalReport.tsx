@@ -1,5 +1,5 @@
 import { Icon28CheckCircleOutline } from '@vkontakte/icons';
-import { Button, CustomSelectOption, FormItem, ModalCard, Select, Snackbar, Spacing, Text } from '@vkontakte/vkui';
+import { Button, CustomSelectOption, FormItem, ModalCard, Radio, Select, Snackbar, Spacing, Text } from '@vkontakte/vkui';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import Actions from '../../store/Actions';
@@ -29,8 +29,8 @@ const reportSucces = () => {
 export const ModalReport = observer(({ id }: ImodalProps) => {
 
   const [value, setValue] = useState(null)
-  const onChange = (e: React.FormEvent<HTMLSelectElement>) => {
-    setValue(e.currentTarget.value)
+  const onChange = (value) => {
+    setValue(value)
   }
   console.log(State.getReportMeme())
   return (
@@ -66,21 +66,13 @@ export const ModalReport = observer(({ id }: ImodalProps) => {
       </Text>
       <Spacing size={30} />
       <FormItem>
-        <Select
-          onChange={onChange}
-          value={value}
-          placeholder="Не выбрано"
-          options={reports.map((report) => ({
-            label: report.label,
-            value: report.value,
-          }))}
-          renderOption={({ option, ...restProps }) => (
-            <CustomSelectOption
-              {...restProps}
-              key={option.value}
-            />
-          )}
-        />
+        {reports.map((report) => {
+          return (
+            <Radio name='radio' value={report.value} onClick={()=>onChange(report.value)}>
+              {report.label}
+            </Radio>
+          )
+          })}
       </FormItem>
     </ModalCard>
   )
