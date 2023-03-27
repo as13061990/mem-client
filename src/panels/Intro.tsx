@@ -17,11 +17,12 @@ export const Intro = ({ id }: IpanelProps) => {
 						bridge.send('VKWebAppAllowNotifications', {}).then(res => {
 							if (res.result) {
 								State.setActivePanel(routes.HOME)
+								State.setHistory([routes.HOME])
 							}
 						});
 					}}>Огонь, я в деле!</Button>
 				</div>
-				<div className='intro-continue' onClick={() => State.setActivePanel(routes.HOME)}>Продолжить</div>
+				<div className='intro-continue' onClick={() => {State.setActivePanel(routes.HOME); State.setHistory([routes.HOME]) }}>Продолжить</div>
 				<div className='intro-continue-info'>
 					нажимая на «продолжить», вы соглашаетесь с <span className='intro-continue-info-link' onClick={() => { State.goToPage(routes.RULES) }}>правилами использования сервиса</span>
 				</div>

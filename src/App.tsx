@@ -11,7 +11,7 @@ import { Observer } from 'mobx-react-lite';
 import Actions from './store/Actions';
 import { useEffect } from 'react'
 import { ViewCustom } from './ViewCustom';
-import Modals from './components/Modals';
+import Modals from './components/Modals/ModalsRootCustom';
 
 const App = (): JSX.Element => {
   const platformText = usePlatform()

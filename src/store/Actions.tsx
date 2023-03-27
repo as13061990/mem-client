@@ -129,7 +129,7 @@ class Actions {
   }
 
   public async reportMeme(meme: Imeme): Promise<void> {
-    await this.sendRequest('strike',  { meme: meme.id })
+    await this.sendRequest('strike',  { meme: meme?.id })
   }
 
 }

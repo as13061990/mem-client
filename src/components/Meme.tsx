@@ -10,7 +10,6 @@ import {
   Avatar,
   IconButton,
   Alert,
-  Snackbar,
 } from '@vkontakte/vkui';
 import {
   Icon28LikeOutline,
@@ -18,7 +17,6 @@ import {
   Icon28CommentOutline,
   Icon28ShareOutline,
   Icon28StoryOutline,
-  Icon28CheckCircleOutline
 } from '@vkontakte/icons';
 import '../css/memes.css';
 import Actions from '../store/Actions';
@@ -26,6 +24,7 @@ import State from '../store/State';
 import { useRef, useState } from 'react';
 import { Icon28MoreHorizontal } from '@vkontakte/icons';
 import User from '../store/User';
+import { modals } from '../types/enums';
 
 const moderation = async (meme: number, decision: boolean): Promise<void> => {
   const moderation = await Actions.sendRequest('moderation', {
@@ -92,19 +91,6 @@ const deleteAlert = (data: Imeme): JSX.Element => {
   )
 }
 
-const reportSucces = () => {
-  if (State.getSnackbar()) return;
-  State.setSnackbar(
-    <Snackbar
-      duration={2000}
-      onClose={() => State.setSnackbar(null)}
-      before={<Icon28CheckCircleOutline fill="var(--vkui--color_icon_positive)" />}
-    >
-      Жалоба успешно отправлена
-    </Snackbar>,
-  );
-}
-
 const more = (ref: React.MutableRefObject<HTMLDivElement>, data: Imeme): JSX.Element => {
   return (
     <ActionSheet toggleRef={ref} onClose={() => State.setPopout(null)}>
@@ -113,7 +99,7 @@ const more = (ref: React.MutableRefObject<HTMLDivElement>, data: Imeme): JSX.Ele
           Удалить запись
         </ActionSheetItem> 
         :
-        <ActionSheetItem autoclose onClick={() => { reportSucces(); Actions.reportMeme(data) }}>
+        <ActionSheetItem autoclose onClick={() => { State.setActiveModal(modals.REPORT); State.setReportMeme(data)}}>
           Пожаловаться
         </ActionSheetItem>
       }

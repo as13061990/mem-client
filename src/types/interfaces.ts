@@ -47,3 +47,7 @@ interface IcommentSend {
   meme: number,
   message: string
 }
+
+interface ImodalProps {
+  id: string;
+}

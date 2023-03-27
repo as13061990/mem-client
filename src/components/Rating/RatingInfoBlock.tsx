@@ -2,17 +2,14 @@ import {
   Text,
   Link,
   Spacing,
-  ModalCard,
-  Button,
 } from '@vkontakte/vkui';
 import State from '../../store/State';
-import { ratings } from '../../types/enums';
+import { modals, ratings } from '../../types/enums';
 import { observer } from 'mobx-react-lite';
 import '../../css/rating.css';
 
 
 export const RatingInfoBlock = observer(() => {
-
   return (
     <div className='rating-info-block'>
       <Text weight='2'>
@@ -28,7 +25,7 @@ export const RatingInfoBlock = observer(() => {
         }
       </Text>
       <Spacing size={5} />
-      <Link onClick={() => State.setActiveModal('rules')} >Подробнее о правилах</Link>
+      <Link onClick={() => State.setActiveModal(modals.RULES)} >Подробнее о правилах</Link>
     </div>
   );
 })

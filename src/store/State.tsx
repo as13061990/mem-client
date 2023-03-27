@@ -28,8 +28,9 @@ class State {
   private _moderation: number = 1;
   private _swipe: boolean = false;
   private _stories: boolean = false;
-  private _snackbar: JSX.Element = null
-  private _activeModal: string = null
+  private _snackbar: JSX.Element = null;
+  private _activeModal: string = null;
+  private _reportMeme: Imeme = null
 
 
   public goBack(): void {
@@ -277,6 +278,14 @@ class State {
 
   public setSnackbar(snackbar: JSX.Element): void {
     this._snackbar = snackbar
+  }
+
+  public setReportMeme(meme: Imeme): void {
+    this._reportMeme = meme
+  }
+
+  public getReportMeme(): Imeme {
+    return this._reportMeme 
   }
 }
 

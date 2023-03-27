@@ -7,6 +7,10 @@ enum routes {
   ADMIN = 'admin',
   RULES = 'rules'
 }
+enum modals {
+  RULES = 'rules',
+  REPORT = 'report'
+}
 enum upload {
   INPUT,
   BUTTONS,
@@ -38,5 +42,6 @@ export {
   upload,
   memes,
   ratings,
+  modals,
   load
 }

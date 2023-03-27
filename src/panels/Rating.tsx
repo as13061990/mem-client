@@ -17,6 +17,7 @@ export const Rating = ({ id }: IpanelProps) => {
   useEffect(()=>{
     Actions.getDataRatingUsers()
   }, [])
+  
 
   return (
     <Panel id={id}>

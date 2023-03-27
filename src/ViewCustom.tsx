@@ -16,7 +16,6 @@ import { Rules } from './panels/Rules';
 
 export const ViewCustom = observer(() => {
   const isFirst = State.getHistory().length === 1;
-
   useEffect(() => {
     bridge.send('VKWebAppSetSwipeSettings', { history: isFirst });
   }, [isFirst])
