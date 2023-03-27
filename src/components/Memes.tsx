@@ -74,6 +74,7 @@ export default observer((): JSX.Element => {
   return (
     <div>
       {memes}
+      {State.getSnackbar()}
       <CommentsBlock />
       {lazy}
     </div>

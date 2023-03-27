@@ -27,7 +27,8 @@ class State {
   private _ratingCategory: ratings = ratings.TOP_ALL;
   private _moderation: number = 1;
   private _swipe: boolean = false;
-  private _stories: boolean = false
+  private _stories: boolean = false;
+  private _snackbar: JSX.Element = null
 
 
   public goBack():void  {
@@ -257,7 +258,13 @@ class State {
     this._memes = JSON.stringify(memes);
   }
 
+  public getSnackbar(): JSX.Element {
+    return this._snackbar
+  }
 
+  public setSnackbar(snackbar: JSX.Element): void {
+    this._snackbar = snackbar
+  }
 }
 
 export default new State();

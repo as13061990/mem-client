@@ -10,13 +10,15 @@ import {
   Avatar,
   IconButton,
   Alert,
+  Snackbar,
 } from '@vkontakte/vkui';
 import {
   Icon28LikeOutline,
   Icon28LikeFillRed,
   Icon28CommentOutline,
   Icon28ShareOutline,
-  Icon28StoryOutline
+  Icon28StoryOutline,
+  Icon28CheckCircleOutline
 } from '@vkontakte/icons';
 import '../css/memes.css';
 import Actions from '../store/Actions';
@@ -82,22 +84,35 @@ const deleteAlert = (data: Imeme): JSX.Element => {
       },
     ]}
     actionsLayout="horizontal"
-    onClose={()=>{State.setPopout(null)}}
+    onClose={() => { State.setPopout(null) }}
     header="Удаление записи"
     text="Вы уверены, что хотите удалить эту запись?"
   />
-    
+
   )
+}
+
+const reportSucces = () => {
+  if (State.getSnackbar()) return;
+  State.setSnackbar(
+    <Snackbar
+      duration={2000}
+      onClose={() => State.setSnackbar(null)}
+      before={<Icon28CheckCircleOutline fill="var(--vkui--color_icon_positive)" />}
+    >
+      Жалоба успешно отправлена
+    </Snackbar>,
+  );
 }
 
 const more = (ref: React.MutableRefObject<HTMLDivElement>, data: Imeme): JSX.Element => {
   return (
     <ActionSheet toggleRef={ref} onClose={() => State.setPopout(null)}>
-      <ActionSheetItem autoclose>
+      <ActionSheetItem autoclose onClick={() => { reportSucces(); Actions.reportMeme(data) }}>
         Пожаловаться
       </ActionSheetItem>
       {data.user_id === User.getUser().id ?
-        <ActionSheetItem autoclose mode="destructive" onClick={()=>{State.setPopout(deleteAlert(data))}}>
+        <ActionSheetItem autoclose mode="destructive" onClick={() => { State.setPopout(deleteAlert(data)) }}>
           Удалить запись
         </ActionSheetItem>
         : null}
@@ -146,7 +161,7 @@ export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
       toWall(data)
     }
   }
-  
+
   return (
     <>
       <SimpleCell
@@ -154,12 +169,12 @@ export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
         disabled
         before={<Avatar src={data.avatar} />}
         after={
-          data.status === 1 ? 
-          <IconButton
-            onClick={() => State.setPopout(more(refMore, data))}
-          >
-            <Icon28MoreHorizontal getRootRef={refMore}/>
-          </IconButton> : null
+          data.status === 1 ?
+            <IconButton
+              onClick={() => State.setPopout(more(refMore, data))}
+            >
+              <Icon28MoreHorizontal getRootRef={refMore} />
+            </IconButton> : null
         }
       >
         {data.name}

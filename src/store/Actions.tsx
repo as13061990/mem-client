@@ -118,12 +118,17 @@ class Actions {
       }, INTERSTITIAL_AD_DELAY)
     }
   }
+
   public async deleteMeme(meme: Imeme): Promise<void> {
     await this.sendRequest('deleteMeme',  { meme: meme.id }).then(res => {
       if (!res.error) { 
         State.deleteOneMeme(meme.id)
       }
     });
+  }
+
+  public async reportMeme(meme: Imeme): Promise<void> {
+    await this.sendRequest('strike',  { meme: meme.id })
   }
 
 }
