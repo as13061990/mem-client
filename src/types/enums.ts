@@ -4,7 +4,8 @@ enum routes {
   HOME = 'home',
   RATING = 'rating',
   PROFILE = 'profile',
-  ADMIN = 'admin'
+  ADMIN = 'admin',
+  RULES = 'rules'
 }
 enum upload {
   INPUT,

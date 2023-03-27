@@ -25,10 +25,10 @@ class Actions {
       User.setSubscribe(res.data.user.subscribe);
       User.setMemes(res.data.user.memes);
       const rewarded = reward && res.data.rewarded;
-      State.setStories(true)
+      State.setStories(res.data.stories)
       State.setReward(rewarded);
       State.setTimer(res.data.time);
-      State.setActivePanel(res.data.user.member ? routes.HOME : routes.INTRO);
+      State.setActivePanel( routes.INTRO);
       State.setAdmin(res.data.admin);
       State.setPopout(null);
       this.subscribes();

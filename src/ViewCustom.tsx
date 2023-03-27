@@ -12,6 +12,7 @@ import State from "./store/State";
 import { routes } from "./types/enums";
 import { useCallback, useEffect } from 'react'
 import bridge from '@vkontakte/vk-bridge';
+import { Rules } from './panels/Rules';
 
 export const ViewCustom = observer(() => {
   const isFirst = State.getHistory().length === 1;
@@ -44,7 +45,7 @@ export const ViewCustom = observer(() => {
         <Rating id={routes.RATING} />
         <Profile id={routes.PROFILE} />
         <Admin id={routes.ADMIN} />
-
+        <Rules id={routes.RULES} />
     </View>
   )
 });
