@@ -36,6 +36,7 @@
   text-decoration: underline;
   color: #00438f;
   cursor: pointer;
+  margin: 8px 0;
 }
 
 .intro-continue-info {

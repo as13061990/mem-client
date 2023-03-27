@@ -14,7 +14,7 @@ export const Rules = observer(({ id }: IpanelProps) => {
     <Panel id={id} className='rules-panel'>
       <FixedLayout vertical='top'>
         <PanelHeader
-          before={<PanelHeaderBack onClick={() => State.setActivePanel(routes.INTRO)} />}
+          before={<PanelHeaderBack onClick={() => window.history.back()} />}
         >
           
         </PanelHeader>

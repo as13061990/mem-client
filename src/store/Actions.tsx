@@ -29,6 +29,7 @@ class Actions {
       State.setReward(rewarded);
       State.setTimer(res.data.time);
       State.setActivePanel( routes.INTRO);
+      State.setHistory([State.getActivePanel()])
       State.setAdmin(res.data.admin);
       State.setPopout(null);
       this.subscribes();

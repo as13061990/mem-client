@@ -21,9 +21,9 @@ class State {
   private _category: memes = memes.TIME;
   private _memeOpen: number;
   private _comments: Icomment[] = [];
-  private _history: routes[] = [routes.HOME]
+  private _history: routes[] = []
   private _activePanel: routes = routes.LOADING
-  private _ratingUsers: IratingUsers = {all: [], week: []}
+  private _ratingUsers: IratingUsers = { all: [], week: [] }
   private _ratingCategory: ratings = ratings.TOP_ALL;
   private _moderation: number = 1;
   private _swipe: boolean = false;
@@ -32,12 +32,12 @@ class State {
   private _activeModal: string = null
 
 
-  public goBack():void  {
-    if ( this._history.length === 1) {  
-      bridge.send("VKWebAppClose", { "status": "success" }); 
-    } else if (this._history.length > 1) { 
-      this._history.pop() 
-      const newPanel: routes = this._history[this._history.length - 1] 
+  public goBack(): void {
+    if (this._history.length === 1) {
+      bridge.send("VKWebAppClose", { "status": "success" });
+    } else if (this._history.length > 1) {
+      this._history.pop()
+      const newPanel: routes = this._history[this._history.length - 1]
       this._activePanel = newPanel
       if (newPanel === routes.HOME || newPanel === routes.RATING || newPanel === routes.PROFILE || newPanel === routes.ADMIN) {
         this._tab = newPanel;
@@ -46,11 +46,11 @@ class State {
   }
 
   public goToPage = (panel: routes) => {
-    window.history.pushState({ panel: panel }, panel); 
+    window.history.pushState({ panel: panel }, panel);
     if (panel === routes.HOME || panel === routes.RATING || panel === routes.PROFILE || panel === routes.ADMIN) {
       this._tab = panel;
     }
-    this._activePanel = panel; 
+    this._activePanel = panel;
     this._history.push(panel);
   };
 
@@ -208,7 +208,7 @@ class State {
     return this._comments;
   }
 
-  public addOneComment(comment: Icomment, id:number): void {
+  public addOneComment(comment: Icomment, id: number): void {
     const memes: Imeme[] = JSON.parse(this._memes);
     const meme = memes.find(data => data.id === id);
     meme.comments++
@@ -219,9 +219,13 @@ class State {
   public setMemeOpen(memeId: number): void {
     this._memeOpen = memeId;
   }
-  
+
   public getMemeOpen(): number {
     return this._memeOpen;
+  }
+
+  public setHistory(history: routes[]): void {
+    this._history = history
   }
 
   public getHistory(): routes[] {
@@ -245,14 +249,14 @@ class State {
   }
 
   public setStories(stories: boolean) {
-    this._stories = stories; 
+    this._stories = stories;
   }
 
   public getStories(): boolean {
     return this._stories;
   }
 
-  public deleteOneMeme(id:number): void {
+  public deleteOneMeme(id: number): void {
     const memes: Imeme[] = JSON.parse(this._memes);
     const memeId = memes.findIndex(data => data.id === id);
     memes.splice(memeId, 1)

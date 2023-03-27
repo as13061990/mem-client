@@ -4,7 +4,7 @@ import {
 import { observer } from 'mobx-react-lite';
 import Admin from "./panels/Admin";
 import { Home } from "./panels/Home";
-import Intro from "./panels/Intro";
+import { Intro } from "./panels/Intro";
 import Loading from "./panels/Loading";
 import { Profile } from "./panels/Profile";
 import { Rating } from "./panels/Rating";
@@ -39,13 +39,13 @@ export const ViewCustom = observer(() => {
       onSwipeBack={handleSwipeBack} // При свайпе выполняется данная функция.
     >
 
-        <Loading id={routes.LOADING} />
-        <Intro id={routes.INTRO} />
-        <Home id={routes.HOME} />
-        <Rating id={routes.RATING} />
-        <Profile id={routes.PROFILE} />
-        <Admin id={routes.ADMIN} />
-        <Rules id={routes.RULES} />
+      <Loading id={routes.LOADING} />
+      <Intro id={routes.INTRO} />
+      <Home id={routes.HOME} />
+      <Rating id={routes.RATING} />
+      <Profile id={routes.PROFILE} />
+      <Admin id={routes.ADMIN} />
+      <Rules id={routes.RULES} />
     </View>
   )
 });
