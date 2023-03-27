@@ -8,6 +8,8 @@ import {
   Spinner,
   SimpleCell,
   Avatar,
+  IconButton,
+  Alert,
 } from '@vkontakte/vkui';
 import {
   Icon28LikeOutline,
@@ -20,6 +22,8 @@ import '../css/memes.css';
 import Actions from '../store/Actions';
 import State from '../store/State';
 import { useRef, useState } from 'react';
+import { Icon28MoreHorizontal } from '@vkontakte/icons';
+import User from '../store/User';
 
 const moderation = async (meme: number, decision: boolean): Promise<void> => {
   const moderation = await Actions.sendRequest('moderation', {
@@ -62,6 +66,45 @@ const share = (ref: React.MutableRefObject<HTMLDivElement>, data: Imeme): JSX.El
   );
 }
 
+const deleteAlert = (data: Imeme): JSX.Element => {
+  return (<Alert
+    actions={[
+      {
+        title: 'Отмена',
+        autoclose: true,
+        mode: 'cancel',
+      },
+      {
+        title: 'Удалить',
+        autoclose: true,
+        mode: 'destructive',
+        action: () => Actions.deleteMeme(data),
+      },
+    ]}
+    actionsLayout="horizontal"
+    onClose={()=>{State.setPopout(null)}}
+    header="Удаление записи"
+    text="Вы уверены, что хотите удалить эту запись?"
+  />
+    
+  )
+}
+
+const more = (ref: React.MutableRefObject<HTMLDivElement>, data: Imeme): JSX.Element => {
+  return (
+    <ActionSheet toggleRef={ref} onClose={() => State.setPopout(null)}>
+      <ActionSheetItem autoclose>
+        Пожаловаться
+      </ActionSheetItem>
+      {data.user_id === User.getUser().id ?
+        <ActionSheetItem autoclose mode="destructive" onClick={()=>{State.setPopout(deleteAlert(data))}}>
+          Удалить запись
+        </ActionSheetItem>
+        : null}
+    </ActionSheet>
+  );
+}
+
 const toWall = (data: Imeme): void => {
   const message = 'Хочешь ржачных приколов?😜\nЗаходи на фабрику мемов! С каждым лайком и репостом где-то улыбается наш админ😉\n#мемы #приколы #ФабрикаМемов';
   bridge.send('VKWebAppShowWallPostBox', {
@@ -75,7 +118,7 @@ const toWall = (data: Imeme): void => {
   });
 }
 
-export const Meme = ({ data }: { data: Imeme}): JSX.Element => {
+export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
   const [spinner, setSpinner] = useState(<Spinner size='regular' />);
 
   const url = data.url !== '' ? process.env.REACT_APP_API + '/uploads/' + data.url : data.vk_url;
@@ -93,7 +136,8 @@ export const Meme = ({ data }: { data: Imeme}): JSX.Element => {
     }
   }
   const like = data.opinion ? <Icon28LikeFillRed /> : <Icon28LikeOutline />;
-  const ref: React.MutableRefObject<HTMLDivElement> = useRef();
+  const refShare: React.MutableRefObject<HTMLDivElement> = useRef();
+  const refMore: React.MutableRefObject<HTMLDivElement> = useRef();
 
   const onShareClick = (ref: React.MutableRefObject<HTMLDivElement>, data: Imeme) => {
     if (State.getStories()) {
@@ -102,12 +146,21 @@ export const Meme = ({ data }: { data: Imeme}): JSX.Element => {
       toWall(data)
     }
   }
-
+  
   return (
     <>
       <SimpleCell
         description={data.time}
+        disabled
         before={<Avatar src={data.avatar} />}
+        after={
+          data.status === 1 ? 
+          <IconButton
+            onClick={() => State.setPopout(more(refMore, data))}
+          >
+            <Icon28MoreHorizontal getRootRef={refMore}/>
+          </IconButton> : null
+        }
       >
         {data.name}
       </SimpleCell>
@@ -129,8 +182,8 @@ export const Meme = ({ data }: { data: Imeme}): JSX.Element => {
               {data.comments}
             </Text>
           </div>
-          <div className='share' onClick={() => onShareClick(ref, data)}>
-            <Icon28ShareOutline getRootRef={ref} />
+          <div className='share' onClick={() => onShareClick(refShare, data)}>
+            <Icon28ShareOutline getRootRef={refShare} />
             <Text weight='2' className='buttons-text'>
               {data.share}
             </Text>

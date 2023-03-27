@@ -11,7 +11,7 @@ export const Home = ({id}: IpanelProps): JSX.Element => {
 	return (
 		<Panel id={id}>
 			<FixedLayout vertical='top'>
-			<PanelHeader>Категории мемов</PanelHeader>
+			<PanelHeader>v1.1.0 Категории мемов</PanelHeader>
 				<CategoriesMenu />
 			</FixedLayout>
 			<div className='header-space'/>

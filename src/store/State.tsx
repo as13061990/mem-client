@@ -250,6 +250,13 @@ class State {
     return this._stories;
   }
 
+  public deleteOneMeme(id:number): void {
+    const memes: Imeme[] = JSON.parse(this._memes);
+    const memeId = memes.findIndex(data => data.id === id);
+    memes.splice(memeId, 1)
+    this._memes = JSON.stringify(memes);
+  }
+
 
 }
 

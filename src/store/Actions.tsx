@@ -2,7 +2,7 @@ import bridge, { EAdsFormats } from '@vkontakte/vk-bridge';
 import State from './State';
 import User from './User';
 import { ScreenSpinner } from '@vkontakte/vkui';
-import { routes } from '../types/enums';
+import { load, routes } from '../types/enums';
 import axios from 'axios';
 
 const OFFER_SUBSCRIBE_DELAY: number = 30000
@@ -25,7 +25,7 @@ class Actions {
       User.setSubscribe(res.data.user.subscribe);
       User.setMemes(res.data.user.memes);
       const rewarded = reward && res.data.rewarded;
-      State.setStories(res.data.stories)
+      State.setStories(true)
       State.setReward(rewarded);
       State.setTimer(res.data.time);
       State.setActivePanel(res.data.user.member ? routes.HOME : routes.INTRO);
@@ -117,6 +117,13 @@ class Actions {
         });
       }, INTERSTITIAL_AD_DELAY)
     }
+  }
+  public async deleteMeme(meme: Imeme): Promise<void> {
+    await this.sendRequest('deleteMeme',  { meme: meme.id }).then(res => {
+      if (!res.error) { 
+        State.deleteOneMeme(meme.id)
+      }
+    });
   }
 
 }

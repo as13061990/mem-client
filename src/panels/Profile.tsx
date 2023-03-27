@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import bridge from '@vkontakte/vk-bridge';
 import {
 	Panel,
 	PanelHeader,
