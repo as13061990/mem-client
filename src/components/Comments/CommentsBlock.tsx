@@ -1,4 +1,4 @@
-import { FixedLayout, PanelHeader, PopoutWrapper, Separator, Spacing } from "@vkontakte/vkui"
+import { FixedLayout, IconButton, PanelHeader, PopoutWrapper, Separator, Spacing } from "@vkontakte/vkui"
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import '../../css/comments.css';
@@ -6,6 +6,8 @@ import Actions from "../../store/Actions";
 import State from "../../store/State";
 import { Comment } from "./Comment";
 import { CommentForm } from "./CommentForm";
+import { Icon20AddCircle } from '@vkontakte/icons';
+
 
 export const CommentsBlock = observer(() => {
 
@@ -40,27 +42,34 @@ export const CommentsBlock = observer(() => {
         style={{ transform: active ? 'translateY(0)' : 'translateY(60vh)' }}
         onClick={(e) => { onClickContent(e) }}
       >
+        <div style={{ position: 'relative' }}>
+          <Icon20AddCircle fill="black"
+            onClick={()=>{State.setMemeOpen(-1)}}
+            className='comments-block-close-btn'
+            style={{ position: 'absolute', right: 30, top: -50, zIndex: 20, cursor: 'pointer', transform: 'rotate(45deg) scale(1.8)', opacity: active ? '0.8' : '0' }}
+          />
+        </div>
 
         <FixedLayout>
           <PanelHeader>Комментарии</PanelHeader>
           <CommentForm />
-          <Spacing size={4}/>
+          <Spacing size={4} />
         </FixedLayout>
-        <div style={{width: '100%', marginTop: '120px'}}></div>
+        <div style={{ width: '100%', marginTop: '120px' }}></div>
 
-        <div style={{overflowY: 'auto', height: '74%', marginBottom: '120px', marginTop: '120px'}}>
+        <div style={{ overflowY: 'auto', height: '74%', marginBottom: '120px', marginTop: '120px' }}>
 
-        {State.getComments().map((comment: Icomment, i: number) => {
-          return (
-            <Comment
-              key={i}
-              avatar={comment.avatar}
-              message={comment.message}
-              name={comment.name}
-              time={comment.time}
-            />
-          )
-        })}
+          {State.getComments().map((comment: Icomment, i: number) => {
+            return (
+              <Comment
+                key={i}
+                avatar={comment.avatar}
+                message={comment.message}
+                name={comment.name}
+                time={comment.time}
+              />
+            )
+          })}
 
         </div>
       </div >
