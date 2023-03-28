@@ -2,7 +2,7 @@ import bridge, { EAdsFormats } from '@vkontakte/vk-bridge';
 import State from './State';
 import User from './User';
 import { ScreenSpinner } from '@vkontakte/vkui';
-import { load, routes } from '../types/enums';
+import { routes } from '../types/enums';
 import axios from 'axios';
 
 const OFFER_SUBSCRIBE_DELAY: number = 30000

@@ -5,8 +5,6 @@ import {
 } from '@vkontakte/vkui';
 import { observer } from 'mobx-react-lite';
 import '../css/rules.css'
-import State from '../store/State';
-import { routes } from '../types/enums';
 
 export const Rules = observer(({ id }: IpanelProps) => {
 

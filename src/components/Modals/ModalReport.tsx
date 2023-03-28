@@ -1,16 +1,17 @@
 import { Icon28CheckCircleOutline } from '@vkontakte/icons';
-import { Button, CustomSelectOption, FormItem, ModalCard, Radio, Select, Snackbar, Spacing, Text } from '@vkontakte/vkui';
+import { Button, FormItem, ModalCard, Radio, Snackbar, Spacing, Text } from '@vkontakte/vkui';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import Actions from '../../store/Actions';
 import State from '../../store/State';
+import { reports } from '../../types/enums';
 
-const reports = [
-  { label: 'Спам', value: '0' },
-  { label: 'Насилие и вражда', value: '1' },
-  { label: 'Обман', value: '2' },
-  { label: 'Запрещенные товары', value: '3' },
-  { label: 'Порнография', value: '4' }
+const reportsArr = [
+  { label: 'Спам', value: reports.SPAM },
+  { label: 'Насилие и вражда', value: reports.VIOLENCE },
+  { label: 'Обман', value: reports.SCAM },
+  { label: 'Запрещенные товары', value: reports.FORBIDDEN },
+  { label: 'Порнография', value: reports.PORNO }
 ]
 
 const reportSucces = () => {
@@ -32,7 +33,7 @@ export const ModalReport = observer(({ id }: ImodalProps) => {
   const onChange = (value) => {
     setValue(value)
   }
-  console.log(State.getReportMeme())
+
   return (
     <ModalCard
       id={id}
@@ -66,9 +67,9 @@ export const ModalReport = observer(({ id }: ImodalProps) => {
       </Text>
       <Spacing size={30} />
       <FormItem>
-        {reports.map((report) => {
+        {reportsArr.map((report) => {
           return (
-            <Radio name='radio' value={report.value} onClick={()=>onChange(report.value)}>
+            <Radio key={report.value} name='radio' value={report.value} onClick={()=>onChange(report.value)}>
               {report.label}
             </Radio>
           )

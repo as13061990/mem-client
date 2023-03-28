@@ -37,6 +37,13 @@ enum load {
   LOADING,
   END
 }
+enum reports {
+  SPAM = 1,
+  VIOLENCE = 2,
+  SCAM = 3,
+  FORBIDDEN = 4,
+  PORNO = 5,
+}
 
 export {
   routes,
@@ -44,5 +51,6 @@ export {
   memes,
   ratings,
   modals,
-  load
+  load,
+  reports
 }

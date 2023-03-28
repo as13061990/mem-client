@@ -21,7 +21,7 @@ import {
 import '../css/memes.css';
 import Actions from '../store/Actions';
 import State from '../store/State';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Icon28MoreHorizontal } from '@vkontakte/icons';
 import User from '../store/User';
 import { modals, routes } from '../types/enums';

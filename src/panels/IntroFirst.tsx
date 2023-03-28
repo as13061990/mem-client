@@ -1,5 +1,4 @@
 import { Panel, Button } from '@vkontakte/vkui';
-import bridge from '@vkontakte/vk-bridge';
 import '../css/intro.css';
 import State from '../store/State';
 import { routes } from '../types/enums';

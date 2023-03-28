@@ -1,4 +1,4 @@
-import { FixedLayout, IconButton, PanelHeader, PopoutWrapper, Separator, Spacing } from "@vkontakte/vkui"
+import { FixedLayout, PanelHeader, Spacing } from "@vkontakte/vkui"
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import '../../css/comments.css';
@@ -46,7 +46,7 @@ export const CommentsBlock = observer(() => {
           <Icon20AddCircle fill="black"
             onClick={()=>{State.setMemeOpen(-1)}}
             className='comments-block-close-btn'
-            style={{ position: 'absolute', right: 30, top: -50, zIndex: 20, cursor: 'pointer', transform: 'rotate(45deg) scale(1.8)', opacity: active ? '0.8' : '0' }}
+            style={{ position: 'absolute', right: 30, top: 15, zIndex: 20, cursor: 'pointer', transform: 'rotate(45deg) scale(1.8)', opacity: active ? '0.8' : '0' }}
           />
         </div>
 

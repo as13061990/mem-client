@@ -8,10 +8,11 @@ const reg = /<script(.*?)>(.*?)<\/script>/mg
 
 export const CommentForm = () => {
   const [comment, setComment] = useState('');
-
+  const [valid, setValid] = useState(true)
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     const isValid = reg.test(value)
+    setValid(true)
     if ( isValid ) { 
       setComment('') 
     } else {
@@ -20,9 +21,12 @@ export const CommentForm = () => {
   };
 
   const onClick = () => {
-    if (comment) {
-      Actions.sendComment({ message: comment, meme: State.getMemeOpen() })
+    if (comment.trim()) {
+      Actions.sendComment({ message: comment.trim(), meme: State.getMemeOpen() })
       setComment('')
+      setValid(true)
+    } else {
+      setValid(false)
     }
   }
 
@@ -35,6 +39,7 @@ export const CommentForm = () => {
           placeholder="Написать комментарий"
           onChange={onChange}
           value={comment}
+          status={valid ? 'default' : 'error'}
         />
         <IconButton disabled={!comment} onClick={onClick}>
           <div className="comments-block-form-btn " />

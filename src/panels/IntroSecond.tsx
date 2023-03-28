@@ -15,7 +15,11 @@ export const IntroSecond = ({ id }: IpanelProps) => {
       <div className='intro'>
         <div className='intro-header'>Добро пожаловать<br />на <b>фабрику мемов!</b></div>
         <div className='intro-logo' />
-        <div className='intro-notif'>Обязательно подпишись на уведомления,<br />чтобы не пропустить самое интересное.</div>
+        <div className='intro-notif'>
+          Обязательно подпишись на уведомления,
+          <br />чтобы не пропустить самое интересное:
+          <br /> - Новые публикации
+          <br /> - Публикация вашего контента</div>
         <div className='intro-button'>
           <Button size='m' onClick={() => {
             bridge.send('VKWebAppAllowNotifications', {}).then(res => {
