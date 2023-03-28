@@ -31,8 +31,6 @@ class State {
   private _snackbar: JSX.Element = null;
   private _activeModal: string = null;
   private _reportMeme: Imeme = null;
-  private _activeMeme: string = null
-
 
   public goBack(): void {
     if (this._history.length === 1) {
@@ -287,14 +285,6 @@ class State {
 
   public getReportMeme(): Imeme {
     return this._reportMeme
-  }
-
-  public setActiveMeme(meme: string): void {
-    this._activeMeme = meme
-  }
-
-  public getActiveMeme(): string {
-    return this._activeMeme
   }
 }
 

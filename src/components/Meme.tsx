@@ -154,7 +154,7 @@ export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
         {data.name}
       </SimpleCell>
       <Card mode='shadow' className='meme-card'>
-        <div id={'meme' + data.id} className='meme' onClick={() => { State.setActiveMeme(url); State.setActiveModal(modals.MEME)}}>
+        <div id={'meme' + data.id} className='meme'>
           {url ? <img src={url} alt='meme' className='meme-img' /> : <Spinner size='regular' />}
         </div>
 
