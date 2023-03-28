@@ -4,7 +4,7 @@ import {
 import { observer } from 'mobx-react-lite';
 import Admin from "./panels/Admin";
 import { Home } from "./panels/Home";
-import { Intro } from "./panels/Intro";
+import { IntroFirst } from "./panels/IntroFirst";
 import Loading from "./panels/Loading";
 import { Profile } from "./panels/Profile";
 import { Rating } from "./panels/Rating";
@@ -13,6 +13,7 @@ import { routes } from "./types/enums";
 import { useCallback, useEffect } from 'react'
 import bridge from '@vkontakte/vk-bridge';
 import { Rules } from './panels/Rules';
+import { IntroSecond } from './panels/IntroSecond';
 
 export const ViewCustom = observer(() => {
   const isFirst = State.getHistory().length === 1;
@@ -39,7 +40,8 @@ export const ViewCustom = observer(() => {
     >
 
       <Loading id={routes.LOADING} />
-      <Intro id={routes.INTRO} />
+      <IntroFirst id={routes.INTROFIRST} />
+      <IntroSecond id={routes.INTROSECOND} />
       <Home id={routes.HOME} />
       <Rating id={routes.RATING} />
       <Profile id={routes.PROFILE} />

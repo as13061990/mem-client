@@ -62,8 +62,11 @@ export default observer((): JSX.Element => {
   }, [State.getCategory(), State.getModeration()]);
 
   const lazy = State.getLoadMemes() === load.LAZY ? <div id='more-memes'></div> :
-    State.getLoadMemes() === load.LOADING ? <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}><Spinner size='regular' /></div> :
-      <Text weight='2' style={{textAlign: 'center'}}>Мемов нет, но вы держитесь</Text>;
+    State.getLoadMemes() === load.LOADING ?
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}><Spinner size='regular' /></div> :
+      State.getMemes().length === 0 ?
+        <Text weight='2' style={{ textAlign: 'center', marginTop: '20px' }}>Мемов нет, но вы держитесь</Text>
+        : null
 
   const memes = State.getMemes().map(data => {
     return (

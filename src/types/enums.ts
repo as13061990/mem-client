@@ -1,6 +1,7 @@
 enum routes {
   LOADING = 'loading',
-  INTRO = 'intro',
+  INTROFIRST = 'introfirst',
+  INTROSECOND = 'introsecond',
   HOME = 'home',
   RATING = 'rating',
   PROFILE = 'profile',

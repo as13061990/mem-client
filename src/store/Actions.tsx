@@ -28,7 +28,7 @@ class Actions {
       State.setStories(res.data.stories)
       State.setReward(rewarded);
       State.setTimer(res.data.time);
-      State.setActivePanel( routes.INTRO);
+      State.setActivePanel( routes.INTROFIRST);
       State.setHistory([State.getActivePanel()])
       State.setAdmin(res.data.admin);
       State.setPopout(null);
