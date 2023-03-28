@@ -30,7 +30,7 @@ export const ViewCustom = observer(() => {
     State.goBack();
     State.setSwipe(false)
   }, []);
-
+  console.log(JSON.parse(JSON.stringify(State.getPlatform())))
   return (
     <View
       activePanel={State.getActivePanel()} // Активная панель равная стейту.

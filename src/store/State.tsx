@@ -31,6 +31,7 @@ class State {
   private _snackbar: JSX.Element = null;
   private _activeModal: string = null;
   private _reportMeme: Imeme = null;
+  private _platform: string = null;
 
   public goBack(): void {
     if (this._history.length === 1) {
@@ -285,6 +286,14 @@ class State {
 
   public getReportMeme(): Imeme {
     return this._reportMeme
+  }
+
+  public setPlatform(platform: string): void {
+    this._platform = platform
+  }
+
+  public getPlatform(): string {
+    return this._platform
   }
 }
 

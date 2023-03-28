@@ -32,13 +32,6 @@
 .intro-button {
   margin: 20px 0 5px 0;
 }
-.intro-continue {
-  font-size: 16px;
-  text-decoration: underline;
-  color: #00438f;
-  cursor: pointer;
-  margin-top: 6px;
-}
 
 .intro-continue-info {
   font-size: 13px;

@@ -12,8 +12,10 @@ import { RatingList } from '../components/Rating/RatingList';
 import { RatingInfoBlock } from '../components/Rating/RatingInfoBlock';
 import { useEffect } from "react";
 import Actions from '../store/Actions';
+import State from '../store/State';
+import { observer } from 'mobx-react-lite';
 
-export const Rating = ({ id }: IpanelProps) => {
+export const Rating = observer(({ id }: IpanelProps) => {
   useEffect(()=>{
     Actions.getDataRatingUsers()
   }, [])
@@ -32,6 +34,7 @@ export const Rating = ({ id }: IpanelProps) => {
         </PanelHeader>
         <CategoriesRating />
       </FixedLayout>
+      {State.getPlatform() === 'mobile_iphone' ? <div style={{ width: '100%', height: '62px' }}></div> : null}
       <div style={{width: '100%', height: '100px'}}></div>
       <div className='header-space'/>
       <RatingInfoBlock/>
@@ -39,4 +42,4 @@ export const Rating = ({ id }: IpanelProps) => {
       <Tabbar />
     </Panel>
   );
-}
+})

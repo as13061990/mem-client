@@ -6,8 +6,10 @@ import {
 } from '@vkontakte/vkui';
 import Tabbar from '../components/Tabbar';
 import Memes from '../components/Memes';
+import { observer } from 'mobx-react-lite';
+import State from '../store/State';
 
-export default ({id}: IpanelProps) => {
+export default observer(({id}: IpanelProps) => {
 	return (
 		<Panel id={id}>
 			<FixedLayout vertical='top'>
@@ -15,10 +17,10 @@ export default ({id}: IpanelProps) => {
 					before={<PanelHeaderBack onClick={() => window.history.back()} />}
 				>Модерация</PanelHeader>
 			</FixedLayout>
-			<div className='header-space'/>
+			{State.getPlatform() === 'mobile_iphone' ? <div style={{ width: '100%', height: '42px' }}></div> : null}
 			<div style={{width: '100%', height: '60px'}}></div>
 			<Memes />
 			<Tabbar/>
 		</Panel>
 	);
-}
+})

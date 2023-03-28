@@ -10,8 +10,10 @@ import Tabbar from '../components/Tabbar';
 import Subscribe from '../components/Subscribe';
 import Upload from '../components/Upload';
 import Session from '../store/Session';
+import { observer } from 'mobx-react-lite';
+import State from '../store/State';
 
-export const Profile = ({ id }: IpanelProps) => {
+export const Profile = observer(({ id }: IpanelProps) => {
 	useEffect(() => {
 		Session.clearMemesNotif()
 	}, []);
@@ -23,6 +25,7 @@ export const Profile = ({ id }: IpanelProps) => {
 					before={<PanelHeaderBack onClick={() => window.history.back()} />}
 				>Профиль</PanelHeader>
 			</FixedLayout>
+			{State.getPlatform() === 'mobile_iphone' ? <div style={{ width: '100%', height: '42px' }}></div> : null}
 			<div style={{width: '100%', height: '40px'}}></div>
 			<Upload />
 			<Subscribe />
@@ -30,4 +33,4 @@ export const Profile = ({ id }: IpanelProps) => {
 			<Tabbar />
 		</Panel>
 	);
-}
+})

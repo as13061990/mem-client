@@ -16,7 +16,7 @@ export const IntroSecond = ({ id }: IpanelProps) => {
         <div className='intro-header'>Добро пожаловать<br />на <b>фабрику мемов!</b></div>
         <div className='intro-logo' />
         <div className='intro-notif'>
-          Обязательно подпишись на уведомления,
+          Подпишись на уведомления,
           <br />чтобы не пропустить самое интересное:
           <br /> - Новые публикации
           <br /> - Публикация вашего контента</div>
@@ -30,14 +30,16 @@ export const IntroSecond = ({ id }: IpanelProps) => {
             });
           }}
           >
-            Огонь, я в деле!
+            Подписаться
           </Button>
-          <div
-            className='intro-continue'
+          <Button
+            size='m'
+            mode="tertiary"
+            style={{display: 'block', margin: '10px auto 0 auto'}}
             onClick={() => { State.setActivePanel(routes.HOME); State.setHistory([routes.HOME]) }}
           >
-            Продолжить
-          </div>
+            Пропустить
+          </Button>
         </div>
       </div>
     </Panel>

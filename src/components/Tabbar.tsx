@@ -20,7 +20,7 @@ export default observer((): JSX.Element => (
   <>
     <div style={{ height: '50px' }} />
     <FixedLayout vertical='bottom'>
-      <Tabbar style={{ position: 'static', margin: '10px 0' }} shadow={false}>
+      <Tabbar style={{ position: 'static', margin: '10px 0', marginBottom: State.getPlatform() === 'mobile_iphone' ? '-32px' : '10px' }} shadow={false}>
         <TabbarItem
           style={{ cursor: 'pointer' }}
           selected={State.getTab() === routes.HOME}

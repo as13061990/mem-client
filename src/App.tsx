@@ -12,17 +12,19 @@ import Actions from './store/Actions';
 import { useEffect } from 'react'
 import { ViewCustom } from './ViewCustom';
 import Modals from './components/Modals/ModalsRootCustom';
+import bridge from '@vkontakte/vk-bridge';
 
 const App = (): JSX.Element => {
   const platformText = usePlatform()
+
   useEffect(() => {
+    bridge.send("VKWebAppGetLaunchParams").then(res=>State.setPlatform(res.vk_platform));
     Actions.getData();
     window.addEventListener('popstate', () => {State.goBack();});
     return () => {
       window.removeEventListener('popstate', () => State.goBack());
     }
   }, [])
-
   return (
     <ConfigProvider isWebView={true} platform={platformText}>
       <AdaptivityProvider>
