@@ -120,7 +120,6 @@ class State {
 
   public getMemes(): Imeme[] {
     try {
-      console.log(JSON.parse(this._memes))
       return JSON.parse(this._memes);
     } catch (e) {
       return [];
@@ -128,6 +127,7 @@ class State {
   }
 
   public setMemes(memes: Imeme[]): void {
+    console.log(memes)
     memes = this._boolOpinions(memes);
     this._memes = JSON.stringify(memes);
   }

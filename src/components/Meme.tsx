@@ -94,15 +94,16 @@ const deleteAlert = (data: Imeme): JSX.Element => {
 const more = (ref: React.MutableRefObject<HTMLDivElement>, data: Imeme): JSX.Element => {
   return (
     <ActionSheet toggleRef={ref} onClose={() => State.setPopout(null)}>
-      {data.user_id === User.getUser().id ?
+      {data.user_id === User.getUser().id || State.isAdmin() ?
         <ActionSheetItem autoclose mode="destructive" onClick={() => { State.setPopout(deleteAlert(data)) }}>
           Удалить запись
         </ActionSheetItem>
-        :
+        : null}
+      {data.user_id !== User.getUser().id ?
         <ActionSheetItem autoclose onClick={() => { State.setActiveModal(modals.REPORT); State.setReportMeme(data) }}>
           Пожаловаться
         </ActionSheetItem>
-      }
+        : null}
     </ActionSheet>
   );
 }

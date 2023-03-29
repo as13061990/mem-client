@@ -54,13 +54,8 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
         <div className="comments-block-comment-info-wrapper" >
 
           <div className="comments-block-comment-info">
-            <Text weight='2' style={{display: 'flex'}}>
+            <Text weight='2' style={{ display: 'flex' }}>
               {data.name}
-              {State.isAdmin() ?
-                <Text weight='2' style={{ marginLeft: '10px', color: 'red' }}>
-                  Жалобы - {commentReports}
-                </Text>
-                : null}
             </Text>
             <div style={{ display: 'flex', gap: '20px' }}>
               <Subhead
@@ -76,7 +71,11 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
               />
             </div>
           </div>
-
+          {State.isAdmin() ?
+            <Text weight='2' style={{ marginTop: '-10px', color: 'red' }}>
+              Жалобы - {commentReports}
+            </Text>
+            : null}
           <Text weight='3' className="comments-block-comment-info-text">
             {textLength > 120 ?
               isExpanded ? data.message : `${data.message.slice(0, 120)}...`
