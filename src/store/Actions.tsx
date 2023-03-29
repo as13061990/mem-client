@@ -83,21 +83,10 @@ class Actions {
 
   public async sendComment(comment: IcommentSend): Promise<void> {
     await this.sendRequest('sendComment', comment)
-    function padTo2Digits(num) {
-      return num.toString().padStart(2, '0');
-    }
-    const date = new Date()
-    const time = [date.getFullYear(), padTo2Digits(date.getMonth() + 1),padTo2Digits(date.getDate()),].join('.') 
-    + ' ' + [ padTo2Digits(date.getHours()), padTo2Digits(date.getMinutes())].join(':')
-
-    State.addOneComment({
-      name: User.getUser().first_name,
-      message: comment.message,
-      avatar: User.getUser().photo_100,
-      time: time,
-    }, comment.meme)
+    const responseComments = await this.sendRequest('getCommemts', { meme: State.getMemeOpen() })
+    State.setComments(responseComments.data)
   }
-  
+
   public async notifyToSubscribe(subscribeOffer: boolean, userSubscribe: boolean): Promise<void> {
     if (subscribeOffer && !userSubscribe) {
       setTimeout(() => {
@@ -121,28 +110,27 @@ class Actions {
   }
 
   public async deleteMeme(meme: Imeme): Promise<void> {
-    await this.sendRequest('deleteMeme',  { meme: meme.id }).then(res => {
-      if (!res.error) { 
+    await this.sendRequest('deleteMeme', { meme: meme.id }).then(res => {
+      if (!res.error) {
         State.deleteOneMeme(meme.id)
       }
     });
   }
 
   public async reportMeme(meme: Imeme): Promise<void> {
-    await this.sendRequest('strike',  { meme: meme?.id })
+    await this.sendRequest('strike', { meme: meme?.id })
   }
 
   public async deleteComment(comment: Icomment): Promise<void> {
-    await this.sendRequest('deleteComment',  { comment: comment }).then(res => {
-      if (!res.error) { 
-        this.sendRequest('getCommemts', { meme: State.getMemeOpen() })
-        console.log('delete comment')
-      }
-    });
+    const response = await this.sendRequest('deleteComment', { comment: comment.id })
+    if (!response.error) {
+      const responseComments = await this.sendRequest('getCommemts', { meme: State.getMemeOpen() })
+      State.setComments(responseComments.data)
+    };
   }
 
   public async reportComment(comment: Icomment): Promise<void> {
-    await this.sendRequest('strikeComment',  { comment: comment }).then(res => {
+    await this.sendRequest('strikeComment', { comment: comment }).then(res => {
       console.log('report comment')
     });
   }

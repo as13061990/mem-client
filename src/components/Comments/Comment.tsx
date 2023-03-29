@@ -9,16 +9,22 @@ import { modals, routes } from "../../types/enums";
 
 
 const more = (ref: React.MutableRefObject<HTMLDivElement>, comment: Icomment): JSX.Element => {
+  console.log(User.getUser())
   return (
     <ActionSheet toggleRef={ref} onClose={() => State.setPopout(null)}>
-      {comment.name === User.getNickname() ?
+      {comment.user_id === User.getUser().id || State.isAdmin() ?
         <ActionSheetItem autoclose mode="destructive" onClick={() => { Actions.deleteComment(comment) }}>
           Удалить комментарий
         </ActionSheetItem>
         :
+        null
+      }
+      {comment.user_id !== User.getUser().id ?
         <ActionSheetItem autoclose onClick={() => { State.setActiveModal(modals.REPORT); State.setReportComment(comment) }}>
           Пожаловаться
         </ActionSheetItem>
+        :
+        null
       }
     </ActionSheet>
   );
@@ -43,14 +49,14 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
 
     <Div>
       <div className="comments-block-comment">
-        <Avatar src={data.avatar} onClick={()=>{State.goToPage(routes.USERPROFILE)}} />
+        <Avatar src={data.avatar} onClick={() => { State.goToPage(routes.USERPROFILE) }} />
         <div className="comments-block-comment-info-wrapper" >
 
           <div className="comments-block-comment-info">
             <Text weight='2'>
               {data.name}
             </Text>
-            <div style={{display: 'flex', gap: '20px'}}>
+            <div style={{ display: 'flex', gap: '20px' }}>
               <Subhead
                 className="comments-block-comment-info-time"
                 weight='3'

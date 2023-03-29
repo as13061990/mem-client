@@ -37,6 +37,9 @@ interface IratingUsers {
 }
 
 interface Icomment {
+  id: number // id комментария
+  user_id: number // id автора комментария
+  strikes: number // количество жалоб
   avatar: string; // аватар пользователя
   message: string; // текст комментария
   name:string; // имя автора комментария

@@ -214,14 +214,6 @@ class State {
     return this._comments;
   }
 
-  public addOneComment(comment: Icomment, id: number): void {
-    const memes: Imeme[] = JSON.parse(this._memes);
-    const meme = memes.find(data => data.id === id);
-    meme.comments++
-    this._memes = JSON.stringify(memes);
-    this._comments.unshift(comment)
-  }
-
   public setMemeOpen(memeId: number): void {
     this._memeOpen = memeId;
   }
