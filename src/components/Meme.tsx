@@ -25,6 +25,7 @@ import { useRef } from 'react';
 import { Icon28MoreHorizontal } from '@vkontakte/icons';
 import User from '../store/User';
 import { modals, routes } from '../types/enums';
+import ReportInfo, { ReportInfoType } from './ReportInfo';
 
 const moderation = async (meme: number, decision: boolean): Promise<void> => {
   const moderation = await Actions.sendRequest('moderation', {
@@ -136,7 +137,6 @@ export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
       toWall(data)
     }
   }
-  const memeReports: any = Object.values(data.strikes).reduce((cur: number, acc: number) => cur + acc, 0)
 
   return (
     <>
@@ -155,11 +155,7 @@ export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
       >
         <div style={{ display: 'flex' }}>
           {data.name}
-          {State.isAdmin() ?
-            <Text weight='2' style={{ marginLeft: '10px', color: 'red' }}>
-              Жалобы - {memeReports}
-            </Text>
-            : null}
+          <ReportInfo reports={data.strikes} type={ReportInfoType.meme}/>
         </div>
 
       </SimpleCell>

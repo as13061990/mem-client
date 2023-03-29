@@ -20,7 +20,7 @@ interface Imeme {
   attachments: string; // аттачмент для стены
   avatar: string; // аватар пользователя
   name: string; // имя пользователя 
-  strikes: {}
+  strikes: {} // жалобы
 }
 
 interface IratingUser {
@@ -40,11 +40,15 @@ interface IratingUsers {
 interface Icomment {
   id: number // id комментария
   user_id: number // id автора комментария
-  strikes: number // количество жалоб
+  strikes: {} // жалобы
   avatar: string; // аватар пользователя
   message: string; // текст комментария
   name:string; // имя автора комментария
   time: string; // время отправки комментария
+}
+
+interface Istrikes {
+  
 }
 
 interface IcommentSend {

@@ -6,6 +6,7 @@ import Actions from "../../store/Actions";
 import State from "../../store/State";
 import User from "../../store/User";
 import { modals, routes } from "../../types/enums";
+import ReportInfo, { ReportInfoType } from "../ReportInfo";
 
 
 const more = (ref: React.MutableRefObject<HTMLDivElement>, comment: Icomment): JSX.Element => {
@@ -44,7 +45,6 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
   };
 
   const refMore: React.MutableRefObject<HTMLDivElement> = useRef();
-  const commentReports: any = Object.values(data.strikes).reduce((cur: number, acc: number) => cur + acc, 0)
 
   return (<>
 
@@ -71,11 +71,7 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
               />
             </div>
           </div>
-          {State.isAdmin() ?
-            <Text weight='2' style={{ marginTop: '-10px', color: 'red' }}>
-              Жалобы - {commentReports}
-            </Text>
-            : null}
+          <ReportInfo reports={data.strikes} type={ReportInfoType.comment}/>
           <Text weight='3' className="comments-block-comment-info-text">
             {textLength > 120 ?
               isExpanded ? data.message : `${data.message.slice(0, 120)}...`
