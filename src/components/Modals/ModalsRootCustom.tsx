@@ -6,12 +6,16 @@ import ModalReport from './ModalReport';
 import ModalRules from './ModalRules';
 
 export const ModalsRootCustom = observer(() => {
-
+  const closeModals = () => {
+    State.setActiveModal(null);
+    State.setReportMeme(null);
+    State.setReportComment(null)
+  }
   return (
-    <ModalRoot activeModal={State.getActiveModal()} onClose={()=>{State.setActiveModal(null); State.setReportMeme(null); State.setReportComment(null)}}>
+    <ModalRoot activeModal={State.getActiveModal()} onClose={() => closeModals()}>
       <ModalRules id={modals.RULES} />
       <ModalReport id={modals.REPORT} />
-    </ModalRoot>
+    </ModalRoot >
   )
 });
 

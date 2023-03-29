@@ -12,7 +12,6 @@ export const CommentForm = () => {
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     const isValid = reg.test(value)
-    setValid(true)
     if (isValid) { 
       setComment('') 
     } else {
@@ -20,6 +19,7 @@ export const CommentForm = () => {
         setValid(false)
       } else {
         setComment(value)
+        setValid(true)
       }
     }
   };

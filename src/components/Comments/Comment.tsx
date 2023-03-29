@@ -9,7 +9,7 @@ import { modals, routes } from "../../types/enums";
 
 
 const more = (ref: React.MutableRefObject<HTMLDivElement>, comment: Icomment): JSX.Element => {
-  console.log(User.getUser())
+
   return (
     <ActionSheet toggleRef={ref} onClose={() => State.setPopout(null)}>
       {comment.user_id === User.getUser().id || State.isAdmin() ?
@@ -20,7 +20,7 @@ const more = (ref: React.MutableRefObject<HTMLDivElement>, comment: Icomment): J
         null
       }
       {comment.user_id !== User.getUser().id ?
-        <ActionSheetItem autoclose onClick={() => { State.setActiveModal(modals.REPORT); State.setReportComment(comment) }}>
+        <ActionSheetItem autoclose onClick={() => {  State.setReportComment(comment); State.setActiveModal(modals.REPORT) }}>
           Пожаловаться
         </ActionSheetItem>
         :

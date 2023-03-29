@@ -36,19 +36,19 @@ export const ModalReport = observer(({ id }: ImodalProps) => {
 
   const closeModal = (success?: boolean) => {
     if (State.getReportMeme()) {
-      State.setActiveModal(null);
-      State.setReportMeme(null);
       if (success) {
         Actions.reportMeme(State.getReportMeme(), value);
         reportSucces();
       }
-    } else {
       State.setActiveModal(null);
-      State.setReportComment(null);
+      State.setReportMeme(null);
+    } else {
       if (success) {
         Actions.reportComment(State.getReportComment(), value);
         reportSucces();
       }
+      State.setActiveModal(null);
+      State.setReportComment(null);
     }
   }
 

@@ -21,7 +21,6 @@ export const ViewCustom = observer(() => {
   useEffect(() => {
     bridge.send('VKWebAppSetSwipeSettings', { history: isFirst });
   }, [isFirst])
-
   const handleSwipeBackStart = useCallback(() => {
     State.setSwipe(true)
   }, []);

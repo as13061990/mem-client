@@ -130,9 +130,7 @@ class Actions {
   }
 
   public async reportComment(comment: Icomment, type: reports): Promise<void> {
-    await this.sendRequest('strikeComment', { comment: comment.id, type: type }).then(res => {
-      console.log('report comment')
-    });
+    await this.sendRequest('strikeComment', { comment: comment.id, type: type })
   }
 
 }
