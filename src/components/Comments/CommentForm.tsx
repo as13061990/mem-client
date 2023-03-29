@@ -13,10 +13,14 @@ export const CommentForm = () => {
     const { value } = e.currentTarget;
     const isValid = reg.test(value)
     setValid(true)
-    if ( isValid ) { 
+    if (isValid) { 
       setComment('') 
     } else {
-      setComment(value)
+      if (value.length > 300) {
+        setValid(false)
+      } else {
+        setComment(value)
+      }
     }
   };
 

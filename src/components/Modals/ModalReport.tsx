@@ -39,14 +39,14 @@ export const ModalReport = observer(({ id }: ImodalProps) => {
       State.setActiveModal(null);
       State.setReportMeme(null);
       if (success) {
-        Actions.reportMeme(State.getReportMeme());
+        Actions.reportMeme(State.getReportMeme(), value);
         reportSucces();
       }
     } else {
       State.setActiveModal(null);
       State.setReportComment(null);
       if (success) {
-        Actions.reportComment(State.getReportComment());
+        Actions.reportComment(State.getReportComment(), value);
         reportSucces();
       }
     }

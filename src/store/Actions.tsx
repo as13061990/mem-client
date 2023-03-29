@@ -2,7 +2,7 @@ import bridge, { EAdsFormats } from '@vkontakte/vk-bridge';
 import State from './State';
 import User from './User';
 import { ScreenSpinner } from '@vkontakte/vkui';
-import { routes } from '../types/enums';
+import { reports, routes } from '../types/enums';
 import axios from 'axios';
 
 const OFFER_SUBSCRIBE_DELAY: number = 30000
@@ -117,8 +117,8 @@ class Actions {
     });
   }
 
-  public async reportMeme(meme: Imeme): Promise<void> {
-    await this.sendRequest('strike', { meme: meme?.id })
+  public async reportMeme(meme: Imeme, type: reports): Promise<void> {
+    await this.sendRequest('strikeMeme', { meme: meme.id, type: type })
   }
 
   public async deleteComment(comment: Icomment): Promise<void> {
@@ -129,8 +129,8 @@ class Actions {
     };
   }
 
-  public async reportComment(comment: Icomment): Promise<void> {
-    await this.sendRequest('strikeComment', { comment: comment }).then(res => {
+  public async reportComment(comment: Icomment, type: reports): Promise<void> {
+    await this.sendRequest('strikeComment', { comment: comment.id, type: type }).then(res => {
       console.log('report comment')
     });
   }
