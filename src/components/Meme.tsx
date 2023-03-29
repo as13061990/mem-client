@@ -141,7 +141,7 @@ export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
       <SimpleCell
         description={data.time}
         disabled
-        before={<Avatar src={data.avatar} />}
+        before={<Avatar style={{cursor: 'pointer'}}src={data.avatar} onClick={()=>{State.goToPage(routes.USERPROFILE)}}/>}
         after={
           data.status === 1 ?
             <IconButton

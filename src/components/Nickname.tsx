@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Alert,
   Group,
@@ -41,7 +41,7 @@ export default observer((): JSX.Element => {
   const [checked, setChecked] = useState(User.getUseNickname());
   const [name, setNickname] = useState(User.getNickname());
   const [change, setChange] = useState(false);
-  const [isFocus, setIsFocus] = useState(false)
+
   const user = User.getUser();
 
 

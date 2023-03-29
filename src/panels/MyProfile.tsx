@@ -13,7 +13,7 @@ import Session from '../store/Session';
 import { observer } from 'mobx-react-lite';
 import State from '../store/State';
 
-export const Profile = observer(({ id }: IpanelProps) => {
+export const MyProfile = observer(({ id }: IpanelProps) => {
 	useEffect(() => {
 		Session.clearMemesNotif()
 	}, []);

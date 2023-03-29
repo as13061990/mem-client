@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import Actions from "../../store/Actions";
 import State from "../../store/State";
 import User from "../../store/User";
-import { modals } from "../../types/enums";
+import { modals, routes } from "../../types/enums";
 
 
 const more = (ref: React.MutableRefObject<HTMLDivElement>, comment: Icomment): JSX.Element => {
@@ -43,7 +43,7 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
 
     <Div>
       <div className="comments-block-comment">
-        <Avatar src={data.avatar} />
+        <Avatar src={data.avatar} onClick={()=>{State.goToPage(routes.USERPROFILE)}} />
         <div className="comments-block-comment-info-wrapper" >
 
           <div className="comments-block-comment-info">

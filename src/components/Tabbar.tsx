@@ -35,9 +35,9 @@ export default observer((): JSX.Element => (
         ><Icon28CupOutline /></TabbarItem>
         <TabbarItem
           style={{ cursor: 'pointer' }}
-          selected={State.getTab() === routes.PROFILE}
+          selected={State.getTab() === routes.MYPROFILE}
           indicator={Session.getMemesNotif() && User.getMemes() > 0 && <Counter size='s' mode='prominent'>{User.getMemes()}</Counter>}
-          onClick={() => State.goToPage(routes.PROFILE)}
+          onClick={() => State.goToPage(routes.MYPROFILE)}
           text='Профиль'
         ><Icon28UserCircleOutline /></TabbarItem>
         {State.isAdmin() &&

@@ -4,7 +4,8 @@ enum routes {
   INTROSECOND = 'introsecond',
   HOME = 'home',
   RATING = 'rating',
-  PROFILE = 'profile',
+  MYPROFILE = 'myprofile',
+  USERPROFILE = 'userprofile',
   ADMIN = 'admin',
   RULES = 'rules'
 }

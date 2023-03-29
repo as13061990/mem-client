@@ -41,16 +41,20 @@ class State {
       this._history.pop()
       const newPanel: routes = this._history[this._history.length - 1]
       this._activePanel = newPanel
-      if (newPanel === routes.HOME || newPanel === routes.RATING || newPanel === routes.PROFILE || newPanel === routes.ADMIN) {
+      if (newPanel === routes.HOME || newPanel === routes.RATING || newPanel === routes.MYPROFILE || newPanel === routes.ADMIN) {
         this._tab = newPanel;
+      } else {
+        this._tab = null
       }
     }
   }
 
   public goToPage = (panel: routes) => {
     window.history.pushState({ panel: panel }, panel);
-    if (panel === routes.HOME || panel === routes.RATING || panel === routes.PROFILE || panel === routes.ADMIN) {
+    if (panel === routes.HOME || panel === routes.RATING || panel === routes.MYPROFILE || panel === routes.ADMIN) {
       this._tab = panel;
+    } else {
+      this._tab = null
     }
     this._activePanel = panel;
     this._history.push(panel);

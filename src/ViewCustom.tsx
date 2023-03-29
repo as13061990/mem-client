@@ -6,7 +6,7 @@ import Admin from "./panels/Admin";
 import { Home } from "./panels/Home";
 import { IntroFirst } from "./panels/IntroFirst";
 import Loading from "./panels/Loading";
-import { Profile } from "./panels/Profile";
+import { MyProfile } from "./panels/MyProfile";
 import { Rating } from "./panels/Rating";
 import State from "./store/State";
 import { routes } from "./types/enums";
@@ -14,6 +14,7 @@ import { useCallback, useEffect } from 'react'
 import bridge from '@vkontakte/vk-bridge';
 import { Rules } from './panels/Rules';
 import { IntroSecond } from './panels/IntroSecond';
+import { UserProfile } from './panels/UserProfile';
 
 export const ViewCustom = observer(() => {
   const isFirst = State.getHistory().length === 1;
@@ -43,7 +44,8 @@ export const ViewCustom = observer(() => {
       <IntroSecond id={routes.INTROSECOND} />
       <Home id={routes.HOME} />
       <Rating id={routes.RATING} />
-      <Profile id={routes.PROFILE} />
+      <MyProfile id={routes.MYPROFILE} />
+      <UserProfile id={routes.USERPROFILE} />
       <Admin id={routes.ADMIN} />
       <Rules id={routes.RULES} />
     </View>
