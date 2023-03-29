@@ -12,6 +12,7 @@ enum routes {
 enum modals {
   RULES = 'rules',
   REPORT = 'report',
+  REPORTINFO = 'reportinfo'
 }
 enum upload {
   INPUT,

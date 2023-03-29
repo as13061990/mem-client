@@ -6,6 +6,15 @@ interface IrequestRespons {
   error_type: number;
   data: any;
 }
+
+interface Istrikes {
+  spam:number, 
+  violence:number, 
+  scam:number, 
+  forbidden:number, 
+  porno:number
+}
+
 interface Imeme {
   id: number; // id мема
   url: string; // локально-серверный урл картинки
@@ -20,7 +29,7 @@ interface Imeme {
   attachments: string; // аттачмент для стены
   avatar: string; // аватар пользователя
   name: string; // имя пользователя 
-  strikes: {} // жалобы
+  strikes: Istrikes // жалобы
 }
 
 interface IratingUser {
@@ -40,7 +49,7 @@ interface IratingUsers {
 interface Icomment {
   id: number // id комментария
   user_id: number // id автора комментария
-  strikes: {} // жалобы
+  strikes: Istrikes // жалобы
   avatar: string; // аватар пользователя
   message: string; // текст комментария
   name:string; // имя автора комментария

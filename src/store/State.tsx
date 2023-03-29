@@ -33,7 +33,7 @@ class State {
   private _reportMeme: Imeme = null;
   private _reportComment: Icomment = null;
   private _platform: string = null;
-  private _reportInfo: {} = null
+  private _reportInfo: Istrikes = null
 
   public goBack(): void {
     if (this._history.length === 1) {
@@ -304,11 +304,11 @@ class State {
     return this._reportComment
   }
 
-  public setReportInfo(info: {}): void {
+  public setReportInfo(info: Istrikes): void {
     this._reportInfo = info
   }
 
-  public getReportInfo(): {} {
+  public getReportInfo(): Istrikes {
     return this._reportInfo
   }
 }

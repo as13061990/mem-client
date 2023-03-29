@@ -3,18 +3,22 @@ import { observer } from 'mobx-react-lite';
 import State from '../../store/State';
 
 export const ModalReportInfo = observer(({ id }: ImodalProps) => {
+  const onClose = () => {
+    State.setActiveModal(null)
+    State.setReportInfo(null)
+  }
 
   return (
     <ModalCard
       id={id}
-      onClose={() => State.setActiveModal(null)}
+      onClose={() => onClose()}
       header="Жалобы"
       actions={
         <Button
           size="l"
           mode="primary"
           stretched
-          onClick={() => State.setActiveModal(null)}
+          onClick={() => onClose()}
         >
           Понятно
         </Button>
@@ -22,13 +26,15 @@ export const ModalReportInfo = observer(({ id }: ImodalProps) => {
     >
       <Text weight='3' style={{ textAlign: 'center' }}>
         <Spacing size={20} />
-        Лайк - 1
+        Спам - {State.getReportInfo()?.spam || 0}
         <Spacing size={3} />
-        Коммент - 3
+        Насилие и вражда - {State.getReportInfo()?.violence || 0}
         <Spacing size={3} />
-        Поделиться - 5
+        Обман - {State.getReportInfo()?.scam || 0}
         <Spacing size={3} />
-        Загрузить мем - 10
+        Запрещенные товары - {State.getReportInfo()?.forbidden || 0}
+        <Spacing size={3} />
+        Порнография - {State.getReportInfo()?.porno || 0}
         <Spacing size={15} />
       </Text>
     </ModalCard>
