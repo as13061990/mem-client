@@ -31,6 +31,7 @@ class State {
   private _snackbar: JSX.Element = null;
   private _activeModal: string = null;
   private _reportMeme: Imeme = null;
+  private _reportComment: Icomment = null;
   private _platform: string = null;
 
   public goBack(): void {
@@ -294,6 +295,14 @@ class State {
 
   public getPlatform(): string {
     return this._platform
+  }
+
+  public setReportComment(comment: Icomment): void {
+    this._reportComment = comment
+  }
+
+  public getReportComment(): Icomment {
+    return this._reportComment
   }
 }
 

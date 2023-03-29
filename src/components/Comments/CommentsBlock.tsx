@@ -16,6 +16,7 @@ export const CommentsBlock = observer(() => {
   }
 
   const active = State.getMemeOpen() > 0
+  const reportComment = State.getReportComment()
 
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export const CommentsBlock = observer(() => {
       document.body.style.overflowY = 'hidden'
     }
 
-  }, [active])
+  }, [active, reportComment])
 
   return (<>
     <div
@@ -44,7 +45,7 @@ export const CommentsBlock = observer(() => {
       >
         <div style={{ position: 'relative' }}>
           <Icon20AddCircle fill="black"
-            onClick={()=>{State.setMemeOpen(-1)}}
+            onClick={() => { State.setMemeOpen(-1) }}
             className='comments-block-close-btn'
             style={{ position: 'absolute', right: 30, top: 15, zIndex: 20, cursor: 'pointer', transform: 'rotate(45deg) scale(1.8)', opacity: active ? '0.8' : '0' }}
           />
@@ -63,10 +64,7 @@ export const CommentsBlock = observer(() => {
             return (
               <Comment
                 key={i}
-                avatar={comment.avatar}
-                message={comment.message}
-                name={comment.name}
-                time={comment.time}
+                data={comment}
               />
             )
           })}

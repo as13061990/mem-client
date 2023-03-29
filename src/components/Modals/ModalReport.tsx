@@ -34,10 +34,28 @@ export const ModalReport = observer(({ id }: ImodalProps) => {
     setValue(value)
   }
 
+  const closeModal = (success?: boolean) => {
+    if (State.getReportMeme()) {
+      State.setActiveModal(null);
+      State.setReportMeme(null);
+      if (success) {
+        Actions.reportMeme(State.getReportMeme());
+        reportSucces();
+      }
+    } else {
+      State.setActiveModal(null);
+      State.setReportComment(null);
+      if (success) {
+        Actions.reportComment(State.getReportComment());
+        reportSucces();
+      }
+    }
+  }
+
   return (
     <ModalCard
       id={id}
-      onClose={() => {State.setActiveModal(null); State.setReportMeme(null)}}
+      onClose={() => closeModal()}
       header="Пожаловаться"
       actions={
         <>
@@ -45,7 +63,7 @@ export const ModalReport = observer(({ id }: ImodalProps) => {
             size="l"
             mode="secondary"
             stretched
-            onClick={() =>{State.setActiveModal(null); State.setReportMeme(null)}}
+            onClick={() => closeModal()}
           >
             Отмена
           </Button>
@@ -54,7 +72,7 @@ export const ModalReport = observer(({ id }: ImodalProps) => {
             mode="primary"
             stretched
             disabled={value === null}
-            onClick={() => {State.setActiveModal(null); Actions.reportMeme(State.getReportMeme()); reportSucces(); State.setReportMeme(null)}}
+            onClick={() => closeModal(true)}
           >
             Отправить
           </Button>
@@ -69,11 +87,11 @@ export const ModalReport = observer(({ id }: ImodalProps) => {
       <FormItem>
         {reportsArr.map((report) => {
           return (
-            <Radio key={report.value} name='radio' value={report.value} onClick={()=>onChange(report.value)}>
+            <Radio key={report.value} name='radio' value={report.value} onClick={() => onChange(report.value)}>
               {report.label}
             </Radio>
           )
-          })}
+        })}
       </FormItem>
     </ModalCard>
   )

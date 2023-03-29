@@ -1,6 +1,6 @@
 {
   "name": "memes-factory",
-  "homepage": "./",
+  "homepage": "http://as13061990.github.io/mem-client",
   "version": "1.0.0",
   "private": true,
   "dependencies": {

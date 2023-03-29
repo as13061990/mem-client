@@ -132,6 +132,21 @@ class Actions {
     await this.sendRequest('strike',  { meme: meme?.id })
   }
 
+  public async deleteComment(comment: Icomment): Promise<void> {
+    await this.sendRequest('deleteComment',  { comment: comment }).then(res => {
+      if (!res.error) { 
+        this.sendRequest('getCommemts', { meme: State.getMemeOpen() })
+        console.log('delete comment')
+      }
+    });
+  }
+
+  public async reportComment(comment: Icomment): Promise<void> {
+    await this.sendRequest('strikeComment',  { comment: comment }).then(res => {
+      console.log('report comment')
+    });
+  }
+
 }
 
 export default new Actions();
