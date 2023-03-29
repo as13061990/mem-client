@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Alert,
-	Group,
-	Avatar,
-	RichCell,
-	Button,
+  Group,
+  Avatar,
+  RichCell,
+  Button,
   Input,
   Checkbox,
   Header
@@ -37,35 +37,47 @@ const save = (name: string, checked: boolean, setChange: React.Dispatch<React.Se
 }
 
 export default observer((): JSX.Element => {
+
   const [checked, setChecked] = useState(User.getUseNickname());
   const [name, setNickname] = useState(User.getNickname());
   const [change, setChange] = useState(false);
-	const user = User.getUser();
-  return (
+  const [isFocus, setIsFocus] = useState(false)
+  const user = User.getUser();
+
+
+  return (<>
     <Group header={<Header mode='secondary'>Твой никнейм</Header>}>
-      {change ?<RichCell
+      {change ? <RichCell
         disabled
         before={<Avatar size={72} src={user.photo_200} />}
         actions={
           <React.Fragment>
             <Button onClick={() => save(name, checked, setChange)}>Сохранить</Button>
-            <Button mode='secondary'onClick={() => setChange(!change)}>Отменить</Button>
+            <Button mode='secondary' onClick={() => setChange(!change)}>Отменить</Button>
           </React.Fragment>
         }
       >
-        <Input type='text' onChange={(e) => setNickname(e.target.value)} defaultValue={name} placeholder='Введите никнейм' />
+        <Input
+          type='text'
+          autoFocus
+          onChange={(e) => setNickname(e.target.value)}
+          defaultValue={name}
+          placeholder='Введите никнейм'
+        />
         <Checkbox defaultChecked={checked} onChange={(e) => setChecked(e.target.checked)}>Использовать никнейм</Checkbox>
       </RichCell>
-      :
-      <RichCell
-        disabled
-        before={<Avatar size={72} src={user.photo_200} />}
-        actions={
-          <Button onClick={() => setChange(!change)}>Сменить никнейм</Button>
-        }
-      >
-        {User.getUseNickname() ? User.getNickname() : user.first_name}
-      </RichCell>}
-    </Group>
+        :
+        <RichCell
+          disabled
+          before={<Avatar size={72} src={user.photo_200} />}
+          actions={
+            <Button onClick={() => { setChange(!change); window.scrollTo(0, 0); }}>Сменить никнейм</Button>
+          }
+        >
+          {User.getUseNickname() ? User.getNickname() : user.first_name}
+        </RichCell>}
+       
+    </Group >
+    </>
   );
 });
