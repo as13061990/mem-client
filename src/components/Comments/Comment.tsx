@@ -45,23 +45,24 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
       <div className="comments-block-comment">
         <Avatar src={data.avatar} />
         <div className="comments-block-comment-info-wrapper" >
-          
+
           <div className="comments-block-comment-info">
-            <Text weight='2' style={{ flexBasis: '75%' }}>
+            <Text weight='2'>
               {data.name}
             </Text>
-            <Subhead
-              className="comments-block-comment-info-time"
-              weight='3'
-              style={{ flexBasis: '25%'}}
-            >
-              {data.time}
-            </Subhead>
-            <Icon28MoreHorizontal
-              style={{ flexBasis: '1%', cursor: 'pointer', marginTop: '-5px' }}
-              getRootRef={refMore}
-              onClick={() => State.setPopout(more(refMore, data))}
-            />
+            <div style={{display: 'flex', gap: '20px'}}>
+              <Subhead
+                className="comments-block-comment-info-time"
+                weight='3'
+              >
+                {data.time}
+              </Subhead>
+              <Icon28MoreHorizontal
+                style={{ flexBasis: '1%', cursor: 'pointer', marginTop: '-5px' }}
+                getRootRef={refMore}
+                onClick={() => State.setPopout(more(refMore, data))}
+              />
+            </div>
           </div>
 
           <Text weight='3' className="comments-block-comment-info-text">
