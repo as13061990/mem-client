@@ -20,7 +20,7 @@ const more = (ref: React.MutableRefObject<HTMLDivElement>, comment: Icomment): J
         null
       }
       {comment.user_id !== User.getUser().id ?
-        <ActionSheetItem autoclose onClick={() => {  State.setReportComment(comment); State.setActiveModal(modals.REPORT) }}>
+        <ActionSheetItem autoclose onClick={() => { State.setReportComment(comment); State.setActiveModal(modals.REPORT) }}>
           Пожаловаться
         </ActionSheetItem>
         :
@@ -44,6 +44,7 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
   };
 
   const refMore: React.MutableRefObject<HTMLDivElement> = useRef();
+  const commentReports: any = Object.values(data.strikes).reduce((cur: number, acc: number) => cur + acc, 0)
 
   return (<>
 
@@ -53,8 +54,13 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
         <div className="comments-block-comment-info-wrapper" >
 
           <div className="comments-block-comment-info">
-            <Text weight='2'>
+            <Text weight='2' style={{display: 'flex'}}>
               {data.name}
+              {State.isAdmin() ?
+                <Text weight='2' style={{ marginLeft: '10px', color: 'red' }}>
+                  Жалобы - {commentReports}
+                </Text>
+                : null}
             </Text>
             <div style={{ display: 'flex', gap: '20px' }}>
               <Subhead

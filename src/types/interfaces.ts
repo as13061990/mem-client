@@ -20,6 +20,7 @@ interface Imeme {
   attachments: string; // аттачмент для стены
   avatar: string; // аватар пользователя
   name: string; // имя пользователя 
+  strikes: {}
 }
 
 interface IratingUser {

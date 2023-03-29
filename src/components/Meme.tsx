@@ -135,13 +135,14 @@ export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
       toWall(data)
     }
   }
+  const memeReports: any = Object.values(data.strikes).reduce((cur: number, acc: number) => cur + acc, 0)
 
   return (
     <>
       <SimpleCell
         description={data.time}
         disabled
-        before={<Avatar style={{cursor: 'pointer'}}src={data.avatar} onClick={()=>{State.goToPage(routes.USERPROFILE)}}/>}
+        before={<Avatar style={{ cursor: 'pointer' }} src={data.avatar} onClick={() => { State.goToPage(routes.USERPROFILE) }} />}
         after={
           data.status === 1 ?
             <IconButton
@@ -151,7 +152,15 @@ export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
             </IconButton> : null
         }
       >
-        {data.name}
+        <div style={{ display: 'flex' }}>
+          {data.name}
+          {State.isAdmin() ?
+            <Text weight='2' style={{ marginLeft: '10px', color: 'red' }}>
+              Жалобы - {memeReports}
+            </Text>
+            : null}
+        </div>
+
       </SimpleCell>
       <Card mode='shadow' className='meme-card'>
         <div id={'meme' + data.id} className='meme'>
