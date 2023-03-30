@@ -27,29 +27,8 @@ import User from '../../store/User';
 import { modals, routes } from '../../types/enums';
 import ReportInfo, { ReportInfoType } from '../UI/ReportInfo';
 import { More } from '../UI/More';
+import { StatusBlock } from './StatusBlock';
 
-const moderation = async (meme: number, decision: boolean): Promise<void> => {
-  const moderation = await Actions.sendRequest('moderation', {
-    decision: decision,
-    meme: meme
-  }).then(res => res);
-
-  if (decision) {
-    const wall = await bridge.send('VKWebAppCallAPIMethod', {
-      method: 'wall.post', params: {
-        owner_id: -Number(process.env.REACT_APP_GROUP),
-        v: '5.131',
-        from_group: 1,
-        attachments: moderation.data.attachments,
-        close_comments: 0,
-        access_token: moderation.data.access_token,
-      }
-    }).then(res => res);
-
-    await Actions.sendRequest('updateAttachments', { post_id: wall.response.post_id, meme: meme });
-  }
-  State.markModeration();
-}
 
 const sendOpinion = (meme: Imeme): void => {
   Actions.sendRequest('like', { meme: meme.id, opinion: !meme.opinion });
@@ -90,13 +69,13 @@ export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
   const refShare: React.MutableRefObject<HTMLDivElement> = useRef();
   const refMore: React.MutableRefObject<HTMLDivElement> = useRef();
 
-  const onShareClick = (ref: React.MutableRefObject<HTMLDivElement>, data: Imeme) => {
+  const onShareClick = useCallback((ref: React.MutableRefObject<HTMLDivElement>, data: Imeme) => {
     if (State.getStories()) {
       State.setPopout(share(ref, data))
     } else {
       toWall(data)
     }
-  }
+  }, [])
 
   const onProfileClick = useCallback(()=>{
     State.goToPage(routes.USERPROFILE); 
@@ -150,14 +129,7 @@ export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
           </div>
         </div>}
 
-        {data.status === 0 && State.getActivePanel() === routes.ADMIN ?
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Button size='l' onClick={() => moderation(data.id, true)} stretched>Принять</Button>
-            <Button size='l' onClick={() => moderation(data.id, false)} stretched mode='secondary'>Отклонить</Button>
-          </div>
-          : null}
-        {data.status === 2 && <div className='rejection'>Отклонён</div>}
-        {data.status === 0 && State.getActivePanel() !== routes.ADMIN ? <div className='rejection in-moderation'>На модерации</div> : null}
+        <StatusBlock data={data}/>
       </Card>
     </>
   );
