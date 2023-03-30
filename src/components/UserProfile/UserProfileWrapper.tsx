@@ -9,7 +9,7 @@ const color = 'rgb(52,163,255)'
 export const UserProfileWrapper = observer(() => {
 
   return (
-    <Div>
+    <Div style={{height: '75vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
       {State.getLoading() ?
         <Spinner size="large" />
         :
