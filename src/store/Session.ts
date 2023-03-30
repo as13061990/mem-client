@@ -16,4 +16,4 @@ class Session {
   }
 }
 
-export default new Session;
+export default new Session();
