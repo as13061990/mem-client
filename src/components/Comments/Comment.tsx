@@ -1,11 +1,10 @@
 import { Icon28MoreHorizontal } from "@vkontakte/icons";
-import { ActionSheet, ActionSheetItem, Avatar, Div, Link, Separator, Spacing, Subhead, Text } from "@vkontakte/vkui"
+import { Avatar, Div, Link, Separator, Spacing, Subhead, Text } from "@vkontakte/vkui"
 import { observer } from "mobx-react-lite";
 import { useRef, useState, useCallback } from "react";
 import Actions from "../../store/Actions";
 import State from "../../store/State";
-import User from "../../store/User";
-import { modals, routes } from "../../types/enums";
+import { routes } from "../../types/enums";
 import { More } from "../UI/More";
 
 import ReportInfo, { ReportInfoType } from "../UI/ReportInfo";

@@ -53,13 +53,16 @@ const loadMemes = (): void => {
 }
 
 export default observer((): JSX.Element => {
+  const category = State.getCategory()
+  const moderation = State.getModeration()
+
   useEffect((): void => {
     State.setMemesIteration(0);
     State.setMemes([]);
     State.setLoadMemes(load.LAZY);
     window.addEventListener('scroll', (): void => lazyLoad());
     loadMemes();
-  }, [State.getCategory(), State.getModeration()]);
+  }, [category, moderation]);
 
   const lazy = State.getLoadMemes() === load.LAZY ? <div id='more-memes'></div> :
     State.getLoadMemes() === load.LOADING ?

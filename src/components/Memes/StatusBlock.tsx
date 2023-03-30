@@ -36,7 +36,6 @@ const moderation = async (meme: number, decision: boolean): Promise<void> => {
 
 export const StatusBlock = observer(({data}: IstatusBlockProps): JSX.Element => {
 
-
   const component = useMemo(() => {
     if (data.status === 0 && State.getActivePanel() === routes.ADMIN) {
       return (
