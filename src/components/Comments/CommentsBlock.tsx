@@ -31,14 +31,9 @@ export const CommentsBlock = observer(() => {
     
   useEffect(() => {
     if (active) {
-      document.body.style.overflowY = 'hidden'
       Actions.getDataComments(State.getMemeOpen())
     } else {
-      document.body.style.overflowY = 'scroll'
       State.setComments([])
-    }
-    return () => {
-      document.body.style.overflowY = 'auto'
     }
   }, [active])
 
