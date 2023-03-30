@@ -16,7 +16,7 @@ export const CommentsBlock = observer(() => {
   }
 
   const active = State.getMemeOpen() > 0
-  const reportComment = State.getReportComment()
+  const reportComment = State.getReportInfo()
 
   useEffect(() => {
     if (active) {
@@ -27,14 +27,18 @@ export const CommentsBlock = observer(() => {
     return () => {
       document.body.style.overflowY = 'auto'
     }
-
   }, [active, reportComment])
-
+    
   useEffect(() => {
     if (active) {
+      document.body.style.overflowY = 'hidden'
       Actions.getDataComments(State.getMemeOpen())
     } else {
+      document.body.style.overflowY = 'scroll'
       State.setComments([])
+    }
+    return () => {
+      document.body.style.overflowY = 'auto'
     }
   }, [active])
 

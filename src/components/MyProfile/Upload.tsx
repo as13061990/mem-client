@@ -15,11 +15,11 @@ import {
 } from '@vkontakte/icons';
 import { observer } from 'mobx-react-lite';
 import md5 from 'md5';
-import State from '../store/State';
-import { upload } from '../types/enums';
+import State from '../../store/State';
+import { upload } from '../../types/enums';
 import axios from 'axios';
-import User from '../store/User';
-import Actions from '../store/Actions';
+import User from '../../store/User';
+import Actions from '../../store/Actions';
 
 const handleSelectedFile = (e: React.ChangeEvent<HTMLInputElement>): void => {
   const file = e.target.files[0];

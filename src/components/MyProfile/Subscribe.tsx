@@ -9,7 +9,7 @@ import {
 	Icon28Notifications,
   Icon28Users3Outline
 } from '@vkontakte/icons';
-import User from '../store/User';
+import User from '../../store/User';
 import { observer } from 'mobx-react-lite';
 
 const notify = (): void => {

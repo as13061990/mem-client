@@ -5,10 +5,10 @@ import {
 	PanelHeaderBack,
 	FixedLayout
 } from '@vkontakte/vkui';
-import Nickname from '../components/Nickname';
+import Nickname from '../components/MyProfile/Nickname';
 import Tabbar from '../components/UI/Tabbar';
-import Subscribe from '../components/Subscribe';
-import Upload from '../components/Upload';
+import Subscribe from '../components/MyProfile/Subscribe';
+import Upload from '../components/MyProfile/Upload';
 import Session from '../store/Session';
 import { observer } from 'mobx-react-lite';
 import State from '../store/State';

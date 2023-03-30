@@ -9,14 +9,13 @@ import {
   Checkbox,
   Header
 } from '@vkontakte/vkui';
-import User from '../store/User';
+import User from '../../store/User';
 import { observer } from 'mobx-react-lite';
-import State from '../store/State';
-import Actions from '../store/Actions';
+import State from '../../store/State';
+import Actions from '../../store/Actions';
 
 const save = (name: string, checked: boolean, setChange: React.Dispatch<React.SetStateAction<boolean>>) => {
   const reg = /^[a-zA-Zа-яА-Я]+$/;
-
   if (reg.test(name) && name.length > 2 && name.length <= 20) {
     Actions.setName(name, checked);
     setChange(false);
