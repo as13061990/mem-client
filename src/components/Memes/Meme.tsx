@@ -69,30 +69,6 @@ const share = (ref: React.MutableRefObject<HTMLDivElement>, data: Imeme): JSX.El
   );
 }
 
-const deleteAlert = (data: Imeme): JSX.Element => {
-  return (<Alert
-    actions={[
-      {
-        title: 'Отмена',
-        autoclose: true,
-        mode: 'cancel',
-      },
-      {
-        title: 'Удалить',
-        autoclose: true,
-        mode: 'destructive',
-        action: () => Actions.deleteMeme(data),
-      },
-    ]}
-    actionsLayout="horizontal"
-    onClose={() => { State.setPopout(null) }}
-    header="Удаление записи"
-    text="Вы уверены, что хотите удалить эту запись?"
-  />
-
-  )
-}
-
 const toWall = (data: Imeme): void => {
   const message = 'Хочешь ржачных приколов?😜\nЗаходи на фабрику мемов! С каждым лайком и репостом где-то улыбается наш админ😉\n#мемы #приколы #ФабрикаМемов';
   bridge.send('VKWebAppShowWallPostBox', {
