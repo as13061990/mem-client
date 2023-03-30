@@ -13,6 +13,7 @@ import { useEffect } from 'react'
 import { ViewCustom } from './ViewCustom';
 import Modals from './components/Modals/ModalsRootCustom';
 import bridge from '@vkontakte/vk-bridge';
+import axios from 'axios';
 
 const App = (): JSX.Element => {
   const platformText = usePlatform()
@@ -25,6 +26,23 @@ const App = (): JSX.Element => {
       window.removeEventListener('popstate', () => State.goBack());
     }
   }, [])
+
+  axios.interceptors.request.use((config) => {
+    State.setLoading(true)
+    return config;
+  }, (error) => {
+    State.setLoading(false)
+    return Promise.reject(error);
+  });
+
+  axios.interceptors.response.use((response) => {
+    State.setLoading(false)
+    return response;
+  }, (error) => {
+    State.setLoading(false)
+    return Promise.reject(error);
+  });
+
   return (
     <ConfigProvider isWebView={true} platform={platformText}>
       <AdaptivityProvider>

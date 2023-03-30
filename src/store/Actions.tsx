@@ -133,6 +133,13 @@ class Actions {
     await this.sendRequest('strikeComment', { comment: comment.id, type: type })
   }
 
+  public async getDataUserProfile(id: number): Promise<void> {
+    const response = await this.sendRequest('getUserProfile', {user: id})
+    if (!response.error) {
+      State.setUserProfile(response.data)
+    };
+  }
+
 }
 
 export default new Actions();

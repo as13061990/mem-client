@@ -8,11 +8,11 @@ interface IrequestRespons {
 }
 
 interface Istrikes {
-  spam:number, 
-  violence:number, 
-  scam:number, 
-  forbidden:number, 
-  porno:number
+  spam: number,
+  violence: number,
+  scam: number,
+  forbidden: number,
+  porno: number
 }
 
 interface Imeme {
@@ -52,12 +52,8 @@ interface Icomment {
   strikes: Istrikes // жалобы
   avatar: string; // аватар пользователя
   message: string; // текст комментария
-  name:string; // имя автора комментария
+  name: string; // имя автора комментария
   time: string; // время отправки комментария
-}
-
-interface Istrikes {
-  
 }
 
 interface IcommentSend {
@@ -67,4 +63,15 @@ interface IcommentSend {
 
 interface ImodalProps {
   id: string;
+}
+
+interface IuserProfile {
+  avatar: string // ссылка на аватар
+  comments: number // кол-во комментов
+  likes: number // кол-во лайков
+  memes: number // кол-во загруженных мемов
+  name: string // имя
+  share: number // кол-во репостов
+  top_all: number // топ всего
+  top_week: number // топ недели
 }

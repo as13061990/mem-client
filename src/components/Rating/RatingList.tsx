@@ -11,13 +11,14 @@ import { RatingListItem } from './RatingListItem';
 
 export const RatingList = observer(() => {
   const arr = State.getRatingCategory() === ratings.TOP_ALL ? State.getRatingUsers().all : State.getRatingUsers().week
-
+  
   return (
     <List>
       {arr.map((user) => {
         return (
           <RatingListItem
             key={user.id}
+            id={user.id}
             avatar={user.avatar}
             name={user.name}
             place={user.place}

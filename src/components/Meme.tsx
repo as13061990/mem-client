@@ -21,7 +21,7 @@ import {
 import '../css/memes.css';
 import Actions from '../store/Actions';
 import State from '../store/State';
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { Icon28MoreHorizontal } from '@vkontakte/icons';
 import User from '../store/User';
 import { modals, routes } from '../types/enums';
@@ -138,12 +138,17 @@ export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
     }
   }
 
+  const onProfileClick = useCallback(()=>{
+    State.goToPage(routes.USERPROFILE); 
+    Actions.getDataUserProfile(data.user_id);
+  }, [data.user_id])
+
   return (
     <>
       <SimpleCell
         description={data.time}
         disabled
-        before={<Avatar style={{ cursor: 'pointer' }} src={data.avatar} onClick={() => { State.goToPage(routes.USERPROFILE) }} />}
+        before={<Avatar style={{ cursor: 'pointer' }} src={data.avatar} onClick={onProfileClick} />}
         after={
           data.status === 1 ?
             <IconButton
@@ -154,7 +159,7 @@ export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
         }
       >
         <div style={{ display: 'flex' }}>
-          {data.name}
+          <Text onClick={onProfileClick} style={{ cursor: 'pointer' }}>{data.name}</Text>
           <ReportInfo reports={data.strikes} type={ReportInfoType.meme}/>
         </div>
 

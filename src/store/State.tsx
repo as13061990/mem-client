@@ -34,6 +34,8 @@ class State {
   private _reportComment: Icomment = null;
   private _platform: string = null;
   private _reportInfo: Istrikes = null
+  private _userProfile: IuserProfile = null
+  private _loading: boolean = false
 
   public goBack(): void {
     if (this._history.length === 1) {
@@ -128,7 +130,6 @@ class State {
   }
 
   public setMemes(memes: Imeme[]): void {
-    console.log(memes)
     memes = this._boolOpinions(memes);
     this._memes = JSON.stringify(memes);
   }
@@ -311,6 +312,23 @@ class State {
   public getReportInfo(): Istrikes {
     return this._reportInfo
   }
+
+  public setUserProfile(info: IuserProfile): void {
+    this._userProfile = info
+  }
+
+  public getUserProfile(): IuserProfile {
+    return this._userProfile
+  }
+
+  public setLoading(loading: boolean): void {
+    this._loading = loading
+  }
+
+  public getLoading(): boolean {
+    return this._loading
+  }
+
 }
 
 

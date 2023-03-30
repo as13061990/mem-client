@@ -1,7 +1,7 @@
 import { Icon28MoreHorizontal } from "@vkontakte/icons";
 import { ActionSheet, ActionSheetItem, Avatar, Div, Link, Separator, Spacing, Subhead, Text } from "@vkontakte/vkui"
 import { observer } from "mobx-react-lite";
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import Actions from "../../store/Actions";
 import State from "../../store/State";
 import User from "../../store/User";
@@ -44,17 +44,22 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
     setIsExpanded(prev => !prev);
   };
 
+  const onProfileClick = useCallback(()=>{
+    State.goToPage(routes.USERPROFILE); 
+    Actions.getDataUserProfile(data.user_id);
+  }, [data.user_id])
+
   const refMore: React.MutableRefObject<HTMLDivElement> = useRef();
 
   return (<>
 
     <Div>
       <div className="comments-block-comment">
-        <Avatar src={data.avatar} onClick={() => { State.goToPage(routes.USERPROFILE) }} />
+        <Avatar src={data.avatar} style={{ cursor: 'pointer' }} onClick={onProfileClick} />
         <div className="comments-block-comment-info-wrapper" >
 
           <div className="comments-block-comment-info">
-            <Text weight='2' style={{ display: 'flex' }}>
+            <Text weight='2' style={{ display: 'flex', cursor: 'pointer' }} onClick={onProfileClick}>
               {data.name}
             </Text>
             <div style={{ display: 'flex', gap: '20px' }}>

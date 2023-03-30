@@ -5,3 +5,8 @@
   align-items: center;
   gap: 5px;
 }
+
+.profile-info-item-basis {
+  flex-basis: 50%;
+  margin-top: 20px;
+}
