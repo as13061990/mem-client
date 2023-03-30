@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { ScreenSpinner } from '@vkontakte/vkui';
 import { load, memes, ratings, routes, upload } from '../types/enums';
 import bridge from '@vkontakte/vk-bridge';
+import Actions from './Actions';
 
 class State {
   constructor() {
@@ -36,6 +37,9 @@ class State {
   private _reportInfo: Istrikes = null
   private _userProfile: IuserProfile = null
   private _loading: boolean = false
+  private _interstitial: boolean = false
+  private _interstitialADTimer: boolean = false
+  private _INTERSTITIAL_AD_DELAY: number = 60000
 
   public goBack(): void {
     if (this._history.length === 1) {
@@ -45,6 +49,10 @@ class State {
       const newPanel: routes = this._history[this._history.length - 1]
       this._activePanel = newPanel
       if (newPanel === routes.HOME || newPanel === routes.RATING || newPanel === routes.MYPROFILE || newPanel === routes.ADMIN) {
+        if (!this.getInterstitialADTimer()) {
+          Actions.showInterstitialAd()
+          this.startInterstitialADTimer()
+        }
         this._tab = newPanel;
       } else {
         this._tab = null
@@ -55,6 +63,10 @@ class State {
   public goToPage = (panel: routes) => {
     window.history.pushState({ panel: panel }, panel);
     if (panel === routes.HOME || panel === routes.RATING || panel === routes.MYPROFILE || panel === routes.ADMIN) {
+      if (!this.getInterstitialADTimer()) {
+        Actions.showInterstitialAd()
+        this.startInterstitialADTimer()
+      }
       this._tab = panel;
     } else {
       this._tab = null
@@ -210,7 +222,7 @@ class State {
   }
 
   public setComments(comments: Icomment[]): void {
-    
+
     this._comments = comments;
   }
 
@@ -327,6 +339,28 @@ class State {
 
   public getLoading(): boolean {
     return this._loading
+  }
+
+  public startInterstitialADTimer(): void {
+    if (this.getInterstitial()) {
+      this._interstitialADTimer = true
+      setTimeout(() => {
+        this._interstitialADTimer = false
+        this._INTERSTITIAL_AD_DELAY *= 2
+      }, this._INTERSTITIAL_AD_DELAY)
+    }
+  }
+
+  public getInterstitialADTimer(): boolean {
+    return this._interstitialADTimer
+  }
+
+  public setInterstitial(interstitial: boolean): void {
+    this._interstitial = interstitial
+  }
+
+  public getInterstitial(): boolean {
+    return this._interstitial
   }
 
 }

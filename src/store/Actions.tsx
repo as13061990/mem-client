@@ -6,7 +6,6 @@ import { reports, routes } from '../types/enums';
 import axios from 'axios';
 
 const OFFER_SUBSCRIBE_DELAY: number = 30000
-const INTERSTITIAL_AD_DELAY: number = 60000
 
 class Actions {
 
@@ -32,9 +31,10 @@ class Actions {
       State.setHistory([State.getActivePanel()])
       State.setAdmin(res.data.admin);
       State.setPopout(null);
+      State.setInterstitial(res.data.interstitial)
+      State.startInterstitialADTimer()
       this.subscribes();
       this.notifyToSubscribe(res.data.subscribeOffer, res.data.user.subscribe)
-      this.showInterstitialAd(res.data.interstitial)
     }
   }
 
@@ -99,14 +99,10 @@ class Actions {
     }
   }
 
-  public async showInterstitialAd(interstitial: boolean): Promise<void> {
-    if (interstitial) {
-      setTimeout(() => {
-        bridge.send('VKWebAppShowNativeAds', { ad_format: EAdsFormats.INTERSTITIAL }).catch(error => {
-          console.log(error);
-        });
-      }, INTERSTITIAL_AD_DELAY)
-    }
+  public async showInterstitialAd(): Promise<void> {
+    bridge.send('VKWebAppShowNativeAds', { ad_format: EAdsFormats.INTERSTITIAL }).catch(error => {
+      console.log(error);
+    });
   }
 
   public async deleteMeme(meme: Imeme): Promise<void> {
@@ -134,7 +130,7 @@ class Actions {
   }
 
   public async getDataUserProfile(id: number): Promise<void> {
-    const response = await this.sendRequest('getUserProfile', {user: id})
+    const response = await this.sendRequest('getUserProfile', { user: id })
     if (!response.error) {
       State.setUserProfile(response.data)
     };
