@@ -28,7 +28,7 @@ export const CommentsBlock = observer(() => {
       document.body.style.overflowY = 'auto'
     }
   }, [active, reportComment])
-    
+
   useEffect(() => {
     if (active) {
       Actions.getDataComments(State.getMemeOpen())
@@ -60,7 +60,7 @@ export const CommentsBlock = observer(() => {
           <CommentForm />
           <Spacing size={4} />
         </FixedLayout>
-        <div style={{ width: '100%', marginTop: '120px' }}></div>
+        <div style={{ width: '100%', marginTop: '120px' }} />
 
         <div style={{ overflowY: 'auto', height: '74%', marginBottom: '120px', marginTop: '120px' }}>
 
