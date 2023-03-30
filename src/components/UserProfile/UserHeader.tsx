@@ -7,7 +7,7 @@ import '../../css/profile.css'
 export const UserHeader = observer(({ color }: { color: string }) => {
   const platform = usePlatform()
   return (
-    <Div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'row', alignItems: 'center', gap: '50px' }}>
+    <Div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'row', alignItems: 'center', gap: platform !== 'vkcom' ? '20px' : '50px' }}>
       <div className='profile-info-item'>
         <Text>Топ недели</Text>
         <Icon28CupOutline fill={color} style={{ transform: 'scale(2)', margin: '15px 0' }} />
@@ -17,7 +17,7 @@ export const UserHeader = observer(({ color }: { color: string }) => {
         <Link
           href={`https://vk.com/id${State.getUserProfile().id}`}
           target='_blank'
-          style={{ margin: 0, padding: 0, textDecoration: 'none', color: 'black', display: 'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center' }}
+          style={{ textDecoration: 'none', color: 'black', display: 'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center' }}
         >
           <Text weight="1" style={{ marginLeft: '12px', fontSize: platform !== 'vkcom' ? '24px' : '28px', }}>
             {State.getUserProfile().name}
