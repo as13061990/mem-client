@@ -10,11 +10,11 @@ import {
   Icon28CupOutline,
   Icon28CrownOutline
 } from '@vkontakte/icons';
-import State from '../store/State';
-import { routes } from '../types/enums';
-import User from '../store/User';
+import State from '../../store/State';
+import { routes } from '../../types/enums';
+import User from '../../store/User';
 import { observer } from 'mobx-react-lite';
-import Session from '../store/Session';
+import Session from '../../store/Session';
 
 export default observer((): JSX.Element => (
   <>

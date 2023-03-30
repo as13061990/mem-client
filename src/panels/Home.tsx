@@ -3,9 +3,9 @@ import {
 	PanelHeader,
 	FixedLayout
 } from '@vkontakte/vkui';
-import Tabbar from '../components/Tabbar';
-import Memes from '../components/Memes';
-import CategoriesMenu from '../components/CategoriesMenu';
+import Tabbar from '../components/UI/Tabbar';
+import Memes from '../components/Memes/Memes';
+import CategoriesMenu from '../components/Memes/CategoriesMenu';
 import { observer } from 'mobx-react-lite';
 import State from '../store/State';
 

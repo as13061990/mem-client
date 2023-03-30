@@ -4,7 +4,7 @@ import {
   PanelHeaderBack,
   FixedLayout,
 } from '@vkontakte/vkui';
-import Tabbar from '../components/Tabbar';
+import Tabbar from '../components/UI/Tabbar';
 import { Icon28CupOutline } from '@vkontakte/icons';
 import '../css/rating.css';
 import { CategoriesRating } from '../components/Rating/CategoriesRating';

@@ -6,7 +6,7 @@ import {
 	FixedLayout
 } from '@vkontakte/vkui';
 import Nickname from '../components/Nickname';
-import Tabbar from '../components/Tabbar';
+import Tabbar from '../components/UI/Tabbar';
 import Subscribe from '../components/Subscribe';
 import Upload from '../components/Upload';
 import Session from '../store/Session';

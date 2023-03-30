@@ -1,7 +1,7 @@
 import { Text } from "@vkontakte/vkui";
 import { observer } from "mobx-react-lite";
-import State from "../store/State";
-import { modals } from "../types/enums";
+import State from "../../store/State";
+import { modals } from "../../types/enums";
 
 export enum ReportInfoType {
   comment = 'comment',

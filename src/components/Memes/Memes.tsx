@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { Spinner, Text } from '@vkontakte/vkui';
-import Actions from '../store/Actions';
-import { load, routes } from '../types/enums';
+import Actions from '../../store/Actions';
+import { load, routes } from '../../types/enums';
 import { observer } from 'mobx-react-lite';
-import State from '../store/State';
-import '../css/memes.css';
+import State from '../../store/State';
+import '../../css/memes.css';
 import { Meme } from './Meme';
-import { CommentsBlock } from './Comments/CommentsBlock';
+import { CommentsBlock } from '../Comments/CommentsBlock';
 
 const lazyLoad = (): void => {
   const more = document.querySelector('#more-memes');

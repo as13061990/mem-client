@@ -3,8 +3,8 @@ import {
 	HorizontalScroll,
 	TabsItem
 } from '@vkontakte/vkui';
-import { memes } from '../types/enums';
-import State from '../store/State';
+import { memes } from '../../types/enums';
+import State from '../../store/State';
 import { observer } from 'mobx-react-lite';
 
 export default observer((): JSX.Element => {

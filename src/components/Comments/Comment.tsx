@@ -6,33 +6,9 @@ import Actions from "../../store/Actions";
 import State from "../../store/State";
 import User from "../../store/User";
 import { modals, routes } from "../../types/enums";
-import ReportInfo, { ReportInfoType } from "../ReportInfo";
+import { More } from "../UI/More";
 
-
-const more = (ref: React.MutableRefObject<HTMLDivElement>, comment: Icomment): JSX.Element => {
-
-  return (
-    <ActionSheet toggleRef={ref} onClose={() => State.setPopout(null)}>
-      {comment.user_id === User.getUser().id || State.isAdmin() ?
-        <ActionSheetItem autoclose mode="destructive" onClick={() => { Actions.deleteComment(comment) }}>
-          Удалить комментарий
-        </ActionSheetItem>
-        :
-        null
-      }
-      {comment.user_id !== User.getUser().id ?
-        <ActionSheetItem autoclose onClick={() => { State.setReportComment(comment); State.setActiveModal(modals.REPORT) }}>
-          Пожаловаться
-        </ActionSheetItem>
-        :
-        null
-      }
-    </ActionSheet>
-  );
-}
-
-
-
+import ReportInfo, { ReportInfoType } from "../UI/ReportInfo";
 
 export const Comment = observer(({ data }: { data: Icomment }) => {
 
@@ -72,7 +48,7 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
               <Icon28MoreHorizontal
                 style={{ flexBasis: '1%', cursor: 'pointer', marginTop: '-5px' }}
                 getRootRef={refMore}
-                onClick={() => State.setPopout(more(refMore, data))}
+                onClick={() => State.setPopout(<More refMore={refMore} data={data}/>)}
               />
             </div>
           </div>

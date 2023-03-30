@@ -4,7 +4,7 @@ import {
   PanelHeaderBack,
   FixedLayout,
 } from '@vkontakte/vkui';
-import Tabbar from '../components/Tabbar';
+import Tabbar from '../components/UI/Tabbar';
 import { observer } from 'mobx-react-lite';
 import State from '../store/State';
 import '../css/profile.css';
