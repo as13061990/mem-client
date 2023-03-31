@@ -27,22 +27,6 @@ const App = (): JSX.Element => {
     }
   }, [])
 
-  axios.interceptors.request.use((config) => {
-    State.setLoading(true)
-    return config;
-  }, (error) => {
-    State.setLoading(false)
-    return Promise.reject(error);
-  });
-
-  axios.interceptors.response.use((response) => {
-    State.setLoading(false)
-    return response;
-  }, (error) => {
-    State.setLoading(false)
-    return Promise.reject(error);
-  });
-
   return (
     <ConfigProvider isWebView={true} platform={platformText}>
       <AdaptivityProvider>

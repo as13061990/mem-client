@@ -67,6 +67,7 @@ interface ImodalProps {
 
 interface IuserProfile {
   id: number // айди
+  ban: boolean // бан на комментарии
   avatar: string // ссылка на аватар
   comments: number // кол-во комментов
   likes: number // кол-во лайков

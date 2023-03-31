@@ -72,8 +72,10 @@ class Actions {
   }
 
   public async getDataRatingUsers(): Promise<void> {
+    State.setLoading(true)
     const response = await this.sendRequest('getRatings', {})
     State.setRatingUsers(response.data)
+    State.setLoading(false)
   }
 
   public async getDataComments(memeId: number): Promise<void> {
@@ -130,9 +132,18 @@ class Actions {
   }
 
   public async getDataUserProfile(id: number): Promise<void> {
+    State.setLoading(true)
     const response = await this.sendRequest('getUserProfile', { user: id })
     if (!response.error) {
       State.setUserProfile(response.data)
+    };
+    State.setLoading(false)
+  }
+
+  public async banUser(user: IuserProfile, ban: boolean): Promise<void> {
+    const response = await this.sendRequest('ban', { user: user.id, ban: ban })
+    if (!response.error) {
+      console.log('ban')
     };
   }
 
