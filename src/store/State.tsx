@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { ScreenSpinner } from '@vkontakte/vkui';
-import { load, memes, ratings, routes, upload } from '../types/enums';
+import { admins, load, memes, ratings, routes, upload } from '../types/enums';
 import bridge from '@vkontakte/vk-bridge';
 import Actions from './Actions';
 
@@ -40,6 +40,7 @@ class State {
   private _interstitial: boolean = false
   private _interstitialADTimer: boolean = false
   private _INTERSTITIAL_AD_DELAY: number = 60000
+  private _adminCategory: admins = admins.MEMES
 
   public goBack(): void {
     if (this._history.length === 1) {
@@ -361,6 +362,14 @@ class State {
 
   public getInterstitial(): boolean {
     return this._interstitial
+  }
+
+  public setAdminCategory(category: admins): void {
+    this._adminCategory = category
+  }
+
+  public getAdminCategory(): admins {
+    return this._adminCategory
   }
 
 }

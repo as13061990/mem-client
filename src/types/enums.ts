@@ -34,6 +34,11 @@ enum ratings {
   TOP_ALL = 1,
   TOP_WEEK = 2,
 }
+enum admins {
+  MEMES = 1,
+  USERS = 2,
+  COMMENTS = 3
+}
 enum load {
   LAZY,
   LOADING,
@@ -54,5 +59,6 @@ export {
   ratings,
   modals,
   load,
+  admins,
   reports
 }

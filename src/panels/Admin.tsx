@@ -5,9 +5,9 @@ import {
 	FixedLayout
 } from '@vkontakte/vkui';
 import Tabbar from '../components/UI/Tabbar';
-import Memes from '../components/Memes/Memes';
 import { observer } from 'mobx-react-lite';
 import State from '../store/State';
+import AdminWrapper from '../components/Admin/AdminWrapper';
 
 export default observer(({id}: IpanelProps) => {
 	return (
@@ -17,9 +17,9 @@ export default observer(({id}: IpanelProps) => {
 					before={<PanelHeaderBack onClick={() => window.history.back()} />}
 				>Модерация</PanelHeader>
 			</FixedLayout>
-			{State.getPlatform() === 'mobile_iphone' ? <div style={{ width: '100%', height: '42px' }}></div> : null}
-			<div style={{width: '100%', height: '60px'}}></div>
-			<Memes />
+			{State.getPlatform() === 'mobile_iphone' ? <div style={{ width: '100%', height: '62px' }}></div> : null}
+			<div style={{width: '100%', height: '49px'}}></div>
+			<AdminWrapper/>
 			<Tabbar/>
 		</Panel>
 	);
