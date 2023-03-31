@@ -41,6 +41,7 @@ class State {
   private _interstitialADTimer: boolean = false
   private _INTERSTITIAL_AD_DELAY: number = 60000
   private _adminCategory: admins = admins.MEMES
+  private _commentsStrikes: Icomment[] = []
 
   public goBack(): void {
     if (this._history.length === 1) {
@@ -370,6 +371,14 @@ class State {
 
   public getAdminCategory(): admins {
     return this._adminCategory
+  }
+
+  public setCommentsStrikes(comments: Icomment[]): void {
+    this._commentsStrikes = comments
+  }
+
+  public getCommentsStrikes(): Icomment[] {
+    return this._commentsStrikes
   }
 
 }

@@ -149,6 +149,13 @@ class Actions {
     };
   }
 
+  public async getCommentsStrikes(): Promise<void> {
+    const response = await this.sendRequest('getCommentsStrikes', {})
+    if (!response.error) {
+      State.setCommentsStrikes(response.data)
+    };
+  }
+
 }
 
 export default new Actions();
