@@ -1,14 +1,13 @@
 import { Div, SimpleCell, Switch } from "@vkontakte/vkui";
 import { observer } from "mobx-react-lite";
-import { useState } from 'react'
 import Actions from "../../store/Actions";
 import State from "../../store/State";
 
 export const BanSwitcher = observer(() => {
-  const [value, setValue] = useState(false)
+  const value = State.getUserProfile()?.ban_comments
+
   const onClick = () => {
-    setValue(prev => !prev)
-    Actions.banUser(State.getUserProfile(), value)
+    Actions.banUser(State.getUserProfile(), !value)
   }
 
   return (<>
@@ -16,7 +15,7 @@ export const BanSwitcher = observer(() => {
       <Div style={{ display: 'flex', justifyContent: 'center' }}>
         <SimpleCell
           Component="label"
-          after={<Switch onClick={onClick} defaultChecked={value} />} >
+          after={<Switch onClick={onClick} defaultChecked={State.getUserProfile()?.ban_comments} />} >
           Бан на комментарии
         </SimpleCell>
       </Div>

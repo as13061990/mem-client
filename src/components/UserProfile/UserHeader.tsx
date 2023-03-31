@@ -11,24 +11,24 @@ export const UserHeader = observer(({ color }: { color: string }) => {
       <div className='profile-info-item'>
         <Text>Топ недели</Text>
         <Icon28CupOutline fill={color} style={{ transform: 'scale(2)', margin: '15px 0' }} />
-        <Text>{State.getUserProfile().top_week}</Text>
+        <Text>{State.getUserProfile()?.top_week}</Text>
       </div>
       <div className='profile-info-item'>
         <Link
-          href={`https://vk.com/id${State.getUserProfile().id}`}
+          href={`https://vk.com/id${State.getUserProfile()?.id}`}
           target='_blank'
           style={{ textDecoration: 'none', color: 'black', display: 'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center' }}
         >
           <Text weight="1" style={{ marginLeft: '12px', fontSize: platform !== 'vkcom' ? '24px' : '28px', }}>
-            {State.getUserProfile().name}
+            {State.getUserProfile()?.name}
           </Text>
-          <Avatar src={State.getUserProfile().avatar} style={{ margin: '40px 0 20px 15px', transform: 'scale(1.3)' }} size={96} />
+          <Avatar src={State.getUserProfile()?.avatar} style={{ margin: '40px 0 20px 15px', transform: 'scale(1.3)' }} size={96} />
         </Link>
       </div>
       <div className='profile-info-item'>
         <Text>Топ участников</Text>
         <Icon28CupOutline fill={color} style={{ transform: 'scale(2)', margin: '15px 0' }} />
-        <Text>{State.getUserProfile().top_all}</Text>
+        <Text>{State.getUserProfile()?.top_all}</Text>
       </div>
     </Div>
   )

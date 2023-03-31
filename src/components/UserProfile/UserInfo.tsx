@@ -12,22 +12,22 @@ export const UserInfo = observer(({ color }: { color: string }) => {
       <div className='profile-info-item profile-info-item-basis' >
         <Text weight='2' style={{ fontSize: platform !== 'vkcom' ? '13px' : '16px' }}>Лайки</Text>
         <Icon56LikeOutline fill={color} style={{ transform: 'scale(0.8)' }} />
-        <Text weight='3'>{State.getUserProfile().likes}</Text>
+        <Text weight='3'>{State.getUserProfile()?.likes}</Text>
       </div>
       <div className='profile-info-item profile-info-item-basis' >
         <Text weight='2' style={{ fontSize: platform !== 'vkcom' ? '13px' : '16px' }}>Репосты</Text>
         <Icon56ShareOutline fill={color} style={{ transform: 'scale(0.8)' }} />
-        <Text weight='3'>{State.getUserProfile().share}</Text>
+        <Text weight='3'>{State.getUserProfile()?.share}</Text>
       </div>
       <div className='profile-info-item profile-info-item-basis' >
         <Text weight='2' style={{ fontSize: platform !== 'vkcom' ? '13px' : '16px' }}>Комменты</Text>
         <Icon56CommentsOutline fill={color} style={{ transform: 'scale(0.8)' }} />
-        <Text weight='3'>{State.getUserProfile().comments}</Text>
+        <Text weight='3'>{State.getUserProfile()?.comments}</Text>
       </div>
       <div className='profile-info-item profile-info-item-basis'>
         <Text weight='2' style={{ fontSize: platform !== 'vkcom' ? '13px' : '16px' }}>Мемы</Text>
         <Icon56DownloadOutline fill={color} style={{ transform: 'scale(0.8)' }} />
-        <Text weight='3'>{State.getUserProfile().memes}</Text>
+        <Text weight='3'>{State.getUserProfile()?.memes}</Text>
       </div>
     </Div>
   )

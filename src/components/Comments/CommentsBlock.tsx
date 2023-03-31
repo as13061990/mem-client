@@ -65,7 +65,7 @@ export const CommentsBlock = observer(() => {
 
         <div style={{ overflowY: 'auto', height: '74%', marginBottom: '120px', marginTop: '120px' }}>
 
-          {State.getComments().map((comment: Icomment, i: number) => {
+          {State.getComments()?.map((comment: Icomment, i: number) => {
             return (
               <Comment
                 key={i}

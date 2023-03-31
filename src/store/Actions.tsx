@@ -22,7 +22,7 @@ class Actions {
       User.setUseNickname(res.data.user.nickname);
       User.setNotify(res.data.user.notify);
       User.setSubscribe(res.data.user.subscribe);
-      User.setBan(true);
+      User.setBan(res.data.user.ban_comments);
       User.setMemes(res.data.user.memes);
       const rewarded = reward && res.data.rewarded;
       State.setStories(res.data.stories)
@@ -80,13 +80,13 @@ class Actions {
   }
 
   public async getDataComments(memeId: number): Promise<void> {
-    const response = await this.sendRequest('getCommemts', { meme: memeId })
+    const response = await this.sendRequest('getComments', { meme: memeId })
     State.setComments(response.data)
   }
 
   public async sendComment(comment: IcommentSend): Promise<void> {
     await this.sendRequest('sendComment', comment)
-    const responseComments = await this.sendRequest('getCommemts', { meme: State.getMemeOpen() })
+    const responseComments = await this.sendRequest('getComments', { meme: State.getMemeOpen() })
     State.setComments(responseComments.data)
   }
 
@@ -123,7 +123,7 @@ class Actions {
   public async deleteComment(comment: Icomment): Promise<void> {
     const response = await this.sendRequest('deleteComment', { comment: comment.id })
     if (!response.error) {
-      const responseComments = await this.sendRequest('getCommemts', { meme: State.getMemeOpen() })
+      const responseComments = await this.sendRequest('getComments', { meme: State.getMemeOpen() })
       State.setComments(responseComments.data)
     };
   }
@@ -142,9 +142,10 @@ class Actions {
   }
 
   public async banUser(user: IuserProfile, ban: boolean): Promise<void> {
-    const response = await this.sendRequest('ban', { user: user.id, ban: ban })
+    await this.sendRequest('setBan', { user: user.id, ban_comments: ban })
+    const response = await this.sendRequest('getUserProfile', { user: user.id})
     if (!response.error) {
-      console.log('ban')
+      State.setUserProfile(response.data)
     };
   }
 
