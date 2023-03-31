@@ -13,18 +13,21 @@ export const CategoriesAdmin = observer((): JSX.Element => {
     <Tabs>
       <HorizontalScroll>
         <TabsItem
+          style={{ flexBasis: '33%' }}
           onClick={() => State.setAdminCategory(admins.MEMES)}
           selected={State.getAdminCategory() === admins.MEMES}
         >
           Мемы
         </TabsItem>
         <TabsItem
+          style={{ flexBasis: '34%' }}
           onClick={() => State.setAdminCategory(admins.USERS)}
           selected={State.getAdminCategory() === admins.USERS}
         >
           Пользователи
         </TabsItem>
         <TabsItem
+          style={{ flexBasis: '33%' }}
           onClick={() => State.setAdminCategory(admins.COMMENTS)}
           selected={State.getAdminCategory() === admins.COMMENTS}
         >

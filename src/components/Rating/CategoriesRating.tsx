@@ -13,12 +13,14 @@ export const CategoriesRating = observer((): JSX.Element => {
     <Tabs>
       <HorizontalScroll>
         <TabsItem
+          style={{ flexBasis: '50%' }}
           onClick={() => State.setRatingCategory(ratings.TOP_ALL)}
           selected={State.getRatingCategory() === ratings.TOP_ALL}
         >
           ТОП участников
         </TabsItem>
         <TabsItem
+          style={{ flexBasis: '50%' }}
           onClick={() => State.setRatingCategory(ratings.TOP_WEEK)}
           selected={State.getRatingCategory() === ratings.TOP_WEEK}
         >

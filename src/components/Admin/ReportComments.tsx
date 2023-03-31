@@ -1,9 +1,6 @@
 import { Div } from "@vkontakte/vkui";
 import { observer } from "mobx-react-lite";
-import State from "../../store/State";
 import { Comment } from "../Comments/Comment";
-
-
 
 const comments = [{
   avatar: "https://sun1-87.userapi.com/s/v1/ig2/-nyTmGSQjur6zwI_8ZnismjCg3ordIxmvUE2XEGatzeM3JzsuS8PfgBVNa7zoEi4Ea4EyMaVllf4WKNwS7beB3lm.jpg?size=100x100&quality=95&crop=125,0,414,414&ava=1",
