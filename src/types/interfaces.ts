@@ -77,3 +77,12 @@ interface IuserProfile {
   top_all: number // топ всего
   top_week: number // топ недели
 }
+
+
+interface IuserStrikes {
+  avatar: string; // аватар пользователя
+  id: number; // айди пользоваля
+  name: string; // имя или никнейм пользователя
+  place: number; // место пользователя в рейтинге
+  strikes: Istrikes // жалобы
+}

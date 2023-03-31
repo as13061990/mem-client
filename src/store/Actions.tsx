@@ -150,10 +150,21 @@ class Actions {
   }
 
   public async getCommentsStrikes(): Promise<void> {
+    State.setLoading(true)
     const response = await this.sendRequest('getCommentsStrikes', {})
     if (!response.error) {
       State.setCommentsStrikes(response.data)
     };
+    State.setLoading(false)
+  }
+
+  public async getUsersStrikes(): Promise<void> {
+    State.setLoading(true)
+    const response = await this.sendRequest('getUsersStrikes', {})
+    if (!response.error) {
+      State.setUsersStrikes(response.data)
+    };
+    State.setLoading(false)
   }
 
 }
