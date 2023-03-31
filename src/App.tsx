@@ -13,7 +13,6 @@ import { useEffect } from 'react'
 import { ViewCustom } from './ViewCustom';
 import Modals from './components/Modals/ModalsRootCustom';
 import bridge from '@vkontakte/vk-bridge';
-import axios from 'axios';
 
 const App = (): JSX.Element => {
   const platformText = usePlatform()

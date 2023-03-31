@@ -22,6 +22,7 @@ class Actions {
       User.setUseNickname(res.data.user.nickname);
       User.setNotify(res.data.user.notify);
       User.setSubscribe(res.data.user.subscribe);
+      User.setBan(true);
       User.setMemes(res.data.user.memes);
       const rewarded = reward && res.data.rewarded;
       State.setStories(res.data.stories)

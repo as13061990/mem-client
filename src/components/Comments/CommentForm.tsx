@@ -3,6 +3,7 @@ import { useState } from "react";
 import '../../css/comments.css';
 import Actions from "../../store/Actions";
 import State from "../../store/State";
+import User from "../../store/User";
 
 const reg = /<script(.*?)>(.*?)<\/script>/mg
 
@@ -12,8 +13,8 @@ export const CommentForm = () => {
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     const isValid = reg.test(value)
-    if (isValid) { 
-      setComment('') 
+    if (isValid) {
+      setComment('')
     } else {
       if (value.length > 300) {
         setValid(false)
@@ -33,16 +34,17 @@ export const CommentForm = () => {
       setValid(false)
     }
   }
-
+  User.getBan()
   return (<>
 
     <FormItem>
       <div className="comments-block-form">
         <Input
           className="comments-block-textarea"
-          placeholder="Написать комментарий"
+          placeholder={User.getBan() ? "Вы забанены" : "Написать комментарий"}
           onChange={onChange}
           value={comment}
+          disabled={User.getBan()}
           status={valid ? 'default' : 'error'}
         />
         <IconButton disabled={!comment} onClick={onClick}>
