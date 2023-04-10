@@ -30,6 +30,7 @@ export const MyProfile = observer(({ id }: IpanelProps) => {
 			<Upload />
 			<Subscribe />
 			<Nickname />
+			<div style={{ width: '100%', height: '30px' }}></div>
 			<Tabbar />
 		</Panel>
 	);

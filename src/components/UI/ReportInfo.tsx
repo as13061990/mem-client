@@ -15,7 +15,7 @@ export const ReportInfo = observer(({ reports, type }: { reports: Istrikes, type
   if (type === ReportInfoType.meme) {
     styles = { cursor: 'pointer', marginLeft: '10px', color: 'red' }
   } else if (type === ReportInfoType.comment) {
-    styles = { cursor: 'pointer', flexBasis: '100%', color: 'red', textAlign: 'right' }
+    styles = { cursor: 'pointer', width: '120px', color: 'red', marginLeft: 'auto' }
   } else if (type === ReportInfoType.user) {
     styles = { cursor: 'pointer', color: 'red' }
   }

@@ -44,7 +44,7 @@ const toWall = (data: Imeme): void => {
     message: message,
     attachments: data.attachments + ',https://vk.com/app' + process.env.REACT_APP_ID
   }).then(res => {
-    if (res.post_id > 0) {
+    if (Number(res.post_id) > 0) {
       Actions.sendRequest('share', { meme: data.id });
       State.memeShare(data.id);
     }

@@ -36,26 +36,11 @@
   flex-grow: 1;
 }
 
-.comments-block-comment {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-}
-
-.comments-block-comment-info-wrapper {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
 .comments-block-comment-info {
   width: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  height: 30px;
 }
 
 .comments-block-comment-info-time {

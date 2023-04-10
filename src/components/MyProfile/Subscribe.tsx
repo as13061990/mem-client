@@ -47,7 +47,7 @@ const subscribe = (): void => {
 export default observer((): JSX.Element => {
 	return (
     <Group
-      header={<Header mode='secondary'>Будь ВКонтакте</Header>} description='Подпишись на уведомления и вступи в группу, чтобы не пропустить новые мемы. Получи возможность публиковать свои мемы 3 раза в день'>
+      header={<Header mode='secondary'>Будь ВКонтакте</Header>} description='Подпишись на уведомления и вступи в группу, чтобы не пропустить новые мемы. Получи возможность публиковать свои мемы 3 раза в день.'>
       <Cell
         onClick={() => notify()}
         before={<Icon28Notifications />}

@@ -13,13 +13,13 @@ export const UserHeader = observer(({ color }: { color: string }) => {
         <Icon28CupOutline fill={color} style={{ transform: 'scale(2)', margin: '15px 0' }} />
         <Text>{State.getUserProfile()?.top_week}</Text>
       </div>
-      <div className='profile-info-item'>
+      <div className='profile-info-item profile-info-item-avatar'>
         <Link
           href={`https://vk.com/id${State.getUserProfile()?.id}`}
           target='_blank'
           style={{ textDecoration: 'none', color: 'black', display: 'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center' }}
         >
-          <Text weight="1" style={{ marginLeft: '12px', fontSize: platform !== 'vkcom' ? '24px' : '28px', }}>
+          <Text weight="1" style={{marginLeft: '12px', fontSize: platform !== 'vkcom' ? '18px' : '24px', wordBreak: 'break-word', lineHeight: '28px'}}>
             {State.getUserProfile()?.name}
           </Text>
           <Avatar src={State.getUserProfile()?.avatar} style={{ margin: '40px 0 20px 15px', transform: 'scale(1.3)' }} size={96} />

@@ -1,8 +1,6 @@
 import { Div } from "@vkontakte/vkui"
 import { observer } from "mobx-react-lite";
-import Actions from "../../store/Actions";
 import { ReportUser } from "./ReportUser";
-import { useEffect } from 'react'
 import State from "../../store/State";
 
 export const ReportUsers = observer(() => {

@@ -30,53 +30,50 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
   return (<>
 
     <Div>
-      <div className="comments-block-comment">
-        <Avatar src={data.avatar} style={{ cursor: 'pointer' }} onClick={onProfileClick} />
-        <div className="comments-block-comment-info-wrapper" >
-
-          <div className="comments-block-comment-info">
-            <Text weight='2'
-              style=
-              {{
-                cursor: 'pointer',
-                width: platform === 'vkcom' ? '69%' : 'calc(80%)',
-                display: 'inline-block',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-              }}
-              onClick={onProfileClick}>
+      <div className="comments-block-comment-info">
+        <div style={{display: 'flex', width: '72%', gap: '18px'}}>
+          <Avatar src={data.avatar} style={{ cursor: 'pointer', display: 'inline-block' }} onClick={onProfileClick} />
+          <Text weight='2'
+            style=
+            {{
+              display: 'inline-block',
+              width: '82%',
+            }}
+          >
+            <span style={{ maxWidth: '100%', whiteSpace: 'nowrap', cursor: 'pointer', display: 'inline-block', overflow: 'hidden', textOverflow: 'ellipsis' }} onClick={onProfileClick}>
               {data.name}
-            </Text>
-            <div style={{ display: 'flex', gap: '20px' }}>
-              {platform === 'vkcom' ?
-                <Subhead
-                  className="comments-block-comment-info-time"
-                  weight='3'
-                  style={{ textAlign: 'right', flexBasis: '100%' }}
-                >
-                  {data.time}
-                </Subhead> : null}
-              <Icon28MoreHorizontal
-                style={{ flexBasis: '1%', cursor: 'pointer', marginTop: '-5px' }}
-                getRootRef={refMore}
-                onClick={() => State.setPopout(<More refMore={refMore} data={data} />)}
-              />
-            </div>
-          </div>
-          <Text weight='3' className="comments-block-comment-info-text">
-            {textLength > 120 ?
-              isExpanded ? data.message : `${data.message.slice(0, 120)}...`
-              : data.message}
-            {textLength > 120 && !isExpanded ?
-              <Link onClick={toggleText}>
-                Читать
-              </Link> : null
-            }
+            </span>
           </Text>
+        </div>
 
+
+        <div style={{ display: 'flex', gap: '20px' }}>
+          {platform === 'vkcom' ?
+            <Subhead
+              className="comments-block-comment-info-time"
+              weight='3'
+              style={{ textAlign: 'right', flexBasis: '100%' }}
+            >
+              {data.time}
+            </Subhead> : null}
+          <Icon28MoreHorizontal
+            style={{ flexBasis: '1%', cursor: 'pointer', marginTop: '-5px' }}
+            getRootRef={refMore}
+            onClick={() => State.setPopout(<More refMore={refMore} data={data} />)}
+          />
         </div>
       </div>
+      <Text weight='3' className="comments-block-comment-info-text" style={{ marginLeft: '65px', marginTop: '-25px', width: '84%' }}>
+        {textLength > 120 ?
+          isExpanded ? data.message : `${data.message.slice(0, 120)}...`
+          : data.message}
+        {textLength > 120 && !isExpanded ?
+          <Link onClick={toggleText}>
+            Читать
+          </Link> : null
+        }
+      </Text>
+
       {platform !== 'vkcom' ?
         <Subhead
           className="comments-block-comment-info-time"
@@ -87,7 +84,7 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
         </Subhead> : null}
       <ReportInfo reports={data.strikes} type={ReportInfoType.comment} />
     </Div >
-    <Spacing size={10} />
+    <Spacing size={8} />
     <Separator />
   </>
   )

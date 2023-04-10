@@ -19,7 +19,7 @@ export const IntroFirst = ({ id }: IpanelProps) => {
           </Button>
         </div>
         <div className='intro-continue-info'>
-          нажимая на «продолжить», вы соглашаетесь с <span className='intro-continue-info-link' onClick={() => { State.goToPage(routes.RULES) }}>правилами использования сервиса</span>
+          Нажимая на «продолжить», вы соглашаетесь с <span className='intro-continue-info-link' onClick={() => { State.goToPage(routes.RULES) }}>правилами использования сервиса</span>
         </div>
       </div>
     </Panel>
