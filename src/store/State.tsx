@@ -63,16 +63,18 @@ class State {
   }
 
   public goToPage = (panel: routes) => {
-    window.history.pushState({ panel: panel }, panel);
-    if (panel === routes.HOME || panel === routes.RATING || panel === routes.MYPROFILE || panel === routes.ADMIN) {
-      if (!this.getInterstitialADTimer()) {
-        Actions.showInterstitialAd()
-        this.startInterstitialADTimer()
+    if (panel !==  this._history[this._history.length - 1]) {
+      window.history.pushState({ panel: panel }, panel);
+      if (panel === routes.HOME || panel === routes.RATING || panel === routes.MYPROFILE || panel === routes.ADMIN) {
+        if (!this.getInterstitialADTimer()) {
+          Actions.showInterstitialAd()
+          this.startInterstitialADTimer()
+        }
+        this._tab = panel;
       }
-      this._tab = panel;
+      this._activePanel = panel;
+      this._history.push(panel);
     }
-    this._activePanel = panel;
-    this._history.push(panel);
   };
 
   public getTab(): routes {

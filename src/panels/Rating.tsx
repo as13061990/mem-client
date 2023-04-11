@@ -20,7 +20,6 @@ export const Rating = observer(({ id }: IpanelProps) => {
     Actions.getDataRatingUsers()
   }, [])
   
-
   return (
     <Panel id={id}>
       <FixedLayout vertical='top'>

@@ -11,7 +11,7 @@ class Actions {
 
   public async getData(): Promise<void> {
     const user = await bridge.send('VKWebAppGetUserInfo')
-    console.log('user', user)
+
     User.setUser(user);
 
     const res = await this.sendRequest('getData', {});

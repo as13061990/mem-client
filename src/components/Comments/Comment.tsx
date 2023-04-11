@@ -31,7 +31,7 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
 
     <Div>
       <div className="comments-block-comment-info">
-        <div style={{display: 'flex', width: '72%', gap: '18px'}}>
+        <div style={{display: 'flex', width: '72%', gap: '18px', }}>
           <Avatar src={data.avatar} style={{ cursor: 'pointer', display: 'inline-block' }} onClick={onProfileClick} />
           <Text weight='2'
             style=
@@ -63,7 +63,7 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
           />
         </div>
       </div>
-      <Text weight='3' className="comments-block-comment-info-text" style={{ marginLeft: '65px', marginTop: '-25px', width: '84%', wordBreak: 'break-word' }}>
+      <Text weight='3' className="comments-block-comment-info-text" style={{ overflow: 'hidden', marginLeft: '65px', marginTop: '-25px', width: '84%', wordBreak: 'break-word' }}>
         {textLength > 120 ?
           isExpanded ? data.message : `${data.message.slice(0, 120)}...`
           : data.message}
