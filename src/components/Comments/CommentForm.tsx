@@ -1,4 +1,4 @@
-import { FormItem, IconButton, Input } from "@vkontakte/vkui"
+import { FormItem, FormLayout, IconButton, Input } from "@vkontakte/vkui"
 import { useState } from "react";
 import '../../css/comments.css';
 import Actions from "../../store/Actions";
@@ -25,7 +25,8 @@ export const CommentForm = () => {
     }
   };
 
-  const onClick = () => {
+  const onClick = (e: React.FormEvent) => {
+    e.preventDefault()
     if (comment.trim()) {
       Actions.sendComment({ message: comment.trim(), meme: State.getMemeOpen() })
       setComment('')
@@ -34,25 +35,24 @@ export const CommentForm = () => {
       setValid(false)
     }
   }
-  User.getBan()
   return (<>
-
-    <FormItem>
-      <div className="comments-block-form">
-        <Input
-          className="comments-block-textarea"
-          placeholder={User.getBan() ? "Вы забанены" : "Написать комментарий"}
-          onChange={onChange}
-          value={comment}
-          disabled={User.getBan()}
-          status={valid ? 'default' : 'error'}
-        />
-        <IconButton disabled={!comment} onClick={onClick}>
-          <div className="comments-block-form-btn " />
-        </IconButton>
-      </div>
-    </FormItem>
-
+    <FormLayout onSubmit={(e) => { onClick(e) }}>
+      <FormItem>
+        <div className="comments-block-form">
+          <Input
+            className="comments-block-textarea"
+            placeholder={User.getBan() ? "Вы забанены" : "Написать комментарий"}
+            onChange={onChange}
+            value={comment}
+            disabled={User.getBan()}
+            status={valid ? 'default' : 'error'}
+          />
+          <IconButton disabled={!comment} type="submit">
+            <div className="comments-block-form-btn " />
+          </IconButton>
+        </div>
+      </FormItem>
+    </FormLayout>
   </>
   )
 }
