@@ -23,8 +23,6 @@ export const UserProfile = observer(({ id }: IpanelProps) => {
           Наш герой
         </PanelHeader>
       </FixedLayout>
-      {State.getPlatform() === 'mobile_iphone' ? <div style={{ width: '100%', height: '42px' }}></div> : null}
-      <div style={{ width: '100%', height: '40px' }}></div>
       <UserProfileWrapper/>
       <Tabbar />
     </Panel>

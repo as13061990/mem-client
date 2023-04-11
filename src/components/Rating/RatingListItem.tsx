@@ -3,6 +3,7 @@ import {
   Avatar,
   Text,
   Separator,
+  Div,
 } from '@vkontakte/vkui';
 import '../../css/rating.css';
 import { observer } from 'mobx-react-lite';
@@ -13,9 +14,9 @@ import { useCallback } from "react";
 
 export const RatingListItem = observer(({ avatar, name, points, place, self, id }: IratingUser): JSX.Element => {
   const weight = self ? '1' : '3'
-  
-  const onProfileClick = useCallback(()=>{
-    State.goToPage(routes.USERPROFILE); 
+
+  const onProfileClick = useCallback(() => {
+    State.goToPage(routes.USERPROFILE);
     Actions.getDataUserProfile(id);
   }, [id])
 
@@ -23,21 +24,21 @@ export const RatingListItem = observer(({ avatar, name, points, place, self, id 
     <>
       <Cell
         before={
-          <>
-            <Text weight={weight} style={{ width: '35px' }}>
+          <Div style={{display: 'flex', alignItems: 'center', gap: '10px', flexBasis: '10%'}}>
+            <Text weight={weight} style={{width: '25px'}}>
               {place}.
             </Text>
-            <Avatar src={avatar}/>
-          </>
+            <Avatar src={avatar} />
+          </Div>
         }
         onClick={onProfileClick}
-        after={<Text weight={weight}>{points}</Text>}
+        after={<Text style={{marginLeft: '20px'}} weight={weight}>{points}</Text>}
       >
-        <Text weight={weight}>
+        <Text weight={weight} style={{ display: 'inline-block', maxWidth: '100%', whiteSpace: 'nowrap', cursor: 'pointer', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {name}
         </Text>
       </Cell>
-      <Separator/>
+      <Separator />
     </>
   )
 

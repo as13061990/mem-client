@@ -9,7 +9,7 @@ export const IntroFirst = ({ id }: IpanelProps) => {
       <div className='intro'>
         <div className='intro-header'>Добро пожаловать<br />на <b>фабрику мемов!</b></div>
         <div className='intro-logo' />
-        <div className='intro-descr'>Здесь можно кекнуть с чужих мемасов,<br />либо залить свой.</div>
+        <div className='intro-descr'>Здесь можно кекнуть с чужих мемасов<br />либо залить свой.</div>
         <div className='intro-button'>
           <Button size='m' onClick={() => {
             State.goToPage(routes.INTROSECOND)

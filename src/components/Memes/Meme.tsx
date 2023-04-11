@@ -45,7 +45,7 @@ export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
         }
       >
         <div style={{ display: 'flex' }}>
-          <Text onClick={onProfileClick} style={{ cursor: 'pointer' }}>{data.name}</Text>
+          <Text onClick={onProfileClick} style={{ display: 'inline-block', maxWidth: '100%', whiteSpace: 'nowrap', cursor: 'pointer', overflow: 'hidden', textOverflow: 'ellipsis' }}>{data.name}</Text>
           <ReportInfo reports={data.strikes} type={ReportInfoType.meme}/>
         </div>
 

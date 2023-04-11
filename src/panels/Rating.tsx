@@ -39,6 +39,8 @@ export const Rating = observer(({ id }: IpanelProps) => {
       <div className='header-space'/>
       <RatingInfoBlock/>
       <RatingList />
+      {State.getPlatform() === 'mobile_iphone' ? <div style={{ width: '100%', height: '42px' }}></div> : null}
+      <div style={{ width: '100%', height: '40px' }}></div>
       <Tabbar />
     </Panel>
   );
