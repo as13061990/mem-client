@@ -10,12 +10,14 @@ const OFFER_SUBSCRIBE_DELAY: number = 30000
 class Actions {
 
   public async getData(): Promise<void> {
-    const user = await bridge.send('VKWebAppGetUserInfo');
+    const user = await bridge.send('VKWebAppGetUserInfo')
+    console.log('user', user)
     User.setUser(user);
-    const reward = await bridge.send('VKWebAppCheckNativeAds', { ad_format: EAdsFormats.REWARD }).then(data => data.result);
+
     const res = await this.sendRequest('getData', {});
 
     if (res.error) {
+      console.log('error', res)
       State.setPopout(<ScreenSpinner state='error' aria-label='Ошибка' />);
     } else {
       State.setActivePanel(routes.LOADING);
@@ -25,9 +27,7 @@ class Actions {
       User.setSubscribe(res.data.user.subscribe);
       User.setBan(res.data.user.ban_comments);
       User.setMemes(res.data.user.memes);
-      const rewarded = reward && res.data.rewarded;
       State.setStories(res.data.stories)
-      State.setReward(rewarded);
       State.setTimer(res.data.time);
       State.setActivePanel(res.data.user.member ? routes.HOME : routes.INTROFIRST);
       State.setHistory([res.data.user.member ? routes.HOME : routes.INTROFIRST])
@@ -35,8 +35,21 @@ class Actions {
       State.setPopout(null);
       State.setInterstitial(res.data.interstitial)
       State.startInterstitialADTimer()
+
       this.subscribes();
       this.notifyToSubscribe(res.data.subscribeOffer, res.data.user.subscribe)
+
+      await bridge.send('VKWebAppCheckNativeAds', { ad_format: EAdsFormats.REWARD })
+        .then((data) => {
+          if (data.result) {
+            const rewarded = data.result && res.data.rewarded;
+            console.log(rewarded, 'reward')
+            State.setReward(rewarded);
+          } else {
+            State.setReward(false);
+          }
+        })
+        .catch((error) => { console.log(error); State.setReward(false); })
     }
   }
 
@@ -144,7 +157,7 @@ class Actions {
 
   public async banUser(user: IuserProfile, ban: boolean): Promise<void> {
     await this.sendRequest('setBan', { user: user.id, ban_comments: ban })
-    const response = await this.sendRequest('getUserProfile', { user: user.id})
+    const response = await this.sendRequest('getUserProfile', { user: user.id })
     if (!response.error) {
       State.setUserProfile(response.data)
     };

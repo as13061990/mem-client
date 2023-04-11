@@ -7,6 +7,7 @@ import {
   File,
   Text,
   Spinner,
+  Alert,
 } from '@vkontakte/vkui';
 import {
   Icon24Camera,
@@ -23,8 +24,23 @@ import Actions from '../../store/Actions';
 
 const handleSelectedFile = (e: React.ChangeEvent<HTMLInputElement>): void => {
   const file = e.target.files[0];
-  State.setFile(file);
-  State.setUploadState(upload.BUTTONS);
+  if (file.type === 'image/png' || file.type === 'image/jpeg') {
+    State.setFile(file);
+    State.setUploadState(upload.BUTTONS);
+  } else {
+    State.setPopout(
+      <Alert
+        actions={[{
+          title: 'Понятно',
+          autoclose: true,
+          mode: 'cancel'
+        }]}
+        onClose={() => State.setPopout(null)}
+      >
+        <p>Файл должен быть формата .jpeg или .png</p>
+      </Alert>
+    );
+  }
 }
 
 const buttons = (): JSX.Element => {
@@ -49,7 +65,7 @@ const inputFile = (): JSX.Element => {
         <Text weight='2'>Осталось жетонов: {User.getMemes()}</Text>
         {State.getReward() && <Button mode='secondary' style={{ marginLeft: '4px' }} before={<Icon16Add />} onClick={() => showRewarded()}></Button>}
       </div>
-      <div style={{textAlign: 'center', marginTop: '10px', marginBottom: '25px'}}>
+      <div style={{ textAlign: 'center', marginTop: '10px', marginBottom: '25px' }}>
         <File
           before={<Icon24Camera role='presentation' />}
           size='l'
@@ -164,7 +180,7 @@ export default observer((): JSX.Element => {
             inputFile();
   return (
     <Group header={<Header mode='secondary'>Загрузить свой мем</Header>}>
-      <FormItem style={{overflow: 'hidden'}}>{jsx}</FormItem>
+      <FormItem style={{ overflow: 'hidden' }}>{jsx}</FormItem>
     </Group>
   );
 });
