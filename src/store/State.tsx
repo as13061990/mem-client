@@ -43,6 +43,7 @@ class State {
   private _adminCategory: admins = admins.MEMES
   private _commentsStrikes: Icomment[] = []
   private _usersStrikes: IuserStrikes[] = []
+  private _activeSubscribesAlert: boolean = false
 
   public goBack(): void {
     if (this._history.length === 1) {
@@ -388,6 +389,14 @@ class State {
 
   public getUsersStrikes(): IuserStrikes[] {
     return this._usersStrikes
+  }
+
+  public setActiveSubscribesAlert(active: boolean): void {
+    this._activeSubscribesAlert = active
+  }
+
+  public getActiveSubscribesAlert(): boolean {
+    return this._activeSubscribesAlert
   }
 
 }
