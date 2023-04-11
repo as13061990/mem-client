@@ -24,6 +24,7 @@ import Actions from '../../store/Actions';
 
 const handleSelectedFile = (e: React.ChangeEvent<HTMLInputElement>): void => {
   const file = e.target.files[0];
+  console.log(file)
   if (file.type === 'image/png' || file.type === 'image/jpeg') {
     State.setFile(file);
     State.setUploadState(upload.BUTTONS);

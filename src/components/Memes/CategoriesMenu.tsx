@@ -1,14 +1,14 @@
 import {
-	Tabs,
-	HorizontalScroll,
-	TabsItem
+  Tabs,
+  HorizontalScroll,
+  TabsItem
 } from '@vkontakte/vkui';
 import { memes } from '../../types/enums';
 import State from '../../store/State';
 import { observer } from 'mobx-react-lite';
 
 export default observer((): JSX.Element => {
-	return (
+  return (
     <Tabs>
       <HorizontalScroll>
         <TabsItem
@@ -37,5 +37,5 @@ export default observer((): JSX.Element => {
         >Мои</TabsItem>
       </HorizontalScroll>
     </Tabs>
-	);
+  );
 });

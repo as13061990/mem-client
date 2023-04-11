@@ -12,3 +12,6 @@ div, p, span, h1, h2, h3, h4, img {
 .FixedLayout--bottom {
 	background-color: #FFFFFF;
 }
+body {
+	overflow-y: scroll;
+}
