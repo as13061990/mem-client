@@ -63,7 +63,7 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
           />
         </div>
       </div>
-      <Text weight='3' className="comments-block-comment-info-text" style={{ marginLeft: '65px', marginTop: '-25px', width: '84%' }}>
+      <Text weight='3' className="comments-block-comment-info-text" style={{ marginLeft: '65px', marginTop: '-25px', width: '84%', wordBreak: 'break-word' }}>
         {textLength > 120 ?
           isExpanded ? data.message : `${data.message.slice(0, 120)}...`
           : data.message}

@@ -18,6 +18,7 @@ export const CommentsBlock = observer(() => {
   const active = State.getMemeOpen() > 0
   const reportInfo = State.getReportInfo()
   const reportComment = State.getReportComment()
+  const popout = State.getPopout()
 
   useEffect(() => {
     if (active) {
@@ -28,7 +29,7 @@ export const CommentsBlock = observer(() => {
     return () => {
       document.body.style.overflowY = 'auto'
     }
-  }, [active, reportComment, reportInfo])
+  }, [active, reportComment, reportInfo, popout])
 
   useEffect(() => {
     if (active) {

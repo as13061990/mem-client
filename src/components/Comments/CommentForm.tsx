@@ -1,15 +1,18 @@
-import { FormItem, FormLayout, IconButton, Input } from "@vkontakte/vkui"
+import { Alert, FormItem, FormLayout, IconButton, Input } from "@vkontakte/vkui"
 import { useState } from "react";
 import '../../css/comments.css';
 import Actions from "../../store/Actions";
 import State from "../../store/State";
 import User from "../../store/User";
+import { observer } from "mobx-react-lite";
 
 const reg = /<script(.*?)>(.*?)<\/script>/mg
 
 export const CommentForm = () => {
+
   const [comment, setComment] = useState('');
   const [valid, setValid] = useState(true)
+
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     const isValid = reg.test(value)
@@ -33,8 +36,21 @@ export const CommentForm = () => {
       setValid(true)
     } else {
       setValid(false)
+      State.setPopout(
+        <Alert
+          actions={[{
+            title: 'Понятно',
+            autoclose: true,
+            mode: 'cancel'
+          }]}
+          onClose={() => State.setPopout(null)}
+        >
+          <p>Нельзя отправить пустое сообщение!</p>
+        </Alert>
+      );
     }
   }
+  
   return (<>
     <FormLayout onSubmit={(e) => { onClick(e) }}>
       <FormItem>
