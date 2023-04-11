@@ -58,8 +58,6 @@ class State {
           this.startInterstitialADTimer()
         }
         this._tab = newPanel;
-      } else {
-        this._tab = null
       }
     }
   }
@@ -72,8 +70,6 @@ class State {
         this.startInterstitialADTimer()
       }
       this._tab = panel;
-    } else {
-      this._tab = null
     }
     this._activePanel = panel;
     this._history.push(panel);

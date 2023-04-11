@@ -4,7 +4,6 @@ import '../../css/comments.css';
 import Actions from "../../store/Actions";
 import State from "../../store/State";
 import User from "../../store/User";
-import { observer } from "mobx-react-lite";
 
 const reg = /<script(.*?)>(.*?)<\/script>/mg
 
@@ -50,7 +49,7 @@ export const CommentForm = () => {
       );
     }
   }
-  
+
   return (<>
     <FormLayout onSubmit={(e) => { onClick(e) }}>
       <FormItem>

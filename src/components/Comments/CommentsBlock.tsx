@@ -64,7 +64,7 @@ export const CommentsBlock = observer(() => {
         </FixedLayout>
         <div style={{ width: '100%', marginTop: '120px' }} />
 
-        <div style={{ overflowY: 'auto', height: '74%', marginBottom: '120px', marginTop: '120px' }}>
+        <div style={{ overflowY: 'auto', height: '74%', marginBottom: '120px', marginTop: '120px' }} onScroll={()=>{State.setPopout(null)}}>
 
           {State.getComments()?.map((comment: Icomment, i: number) => {
             return (

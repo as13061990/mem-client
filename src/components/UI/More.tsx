@@ -3,7 +3,7 @@ import Actions from "../../store/Actions";
 import State from "../../store/State";
 import User from "../../store/User";
 import { modals } from "../../types/enums";
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 interface ImoreProps {
   refMore: React.MutableRefObject<HTMLDivElement>
@@ -59,6 +59,13 @@ export const More = ({ refMore, data }: ImoreProps): JSX.Element => {
     State.setPopout(null)
   }, [])
 
+  useEffect(()=>{
+    window.addEventListener('scroll', onClose)
+    return () => {
+      window.removeEventListener('scroll', onClose)
+    }
+  }, [onClose])
+  
   return (
     <ActionSheet toggleRef={refMore} onClose={onClose}>
       {data.user_id === User.getUser().id || State.isAdmin() ?
