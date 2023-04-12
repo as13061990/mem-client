@@ -11,7 +11,7 @@ import Actions from '../../store/Actions';
 import State from '../../store/State';
 import { useCallback, useRef } from 'react';
 import { Icon28MoreHorizontal } from '@vkontakte/icons';
-import { routes } from '../../types/enums';
+import { popouts, routes } from '../../types/enums';
 import ReportInfo, { ReportInfoType } from '../UI/ReportInfo';
 import { More } from '../UI/More';
 import { StatusBlock } from './StatusBlock';
@@ -38,7 +38,7 @@ export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
         after={
           data.status === 1 ?
             <IconButton
-              onClick={() => State.setPopout(<More refMore={refMore} data={data}/>)}
+              onClick={() => State.setPopout(<More refMore={refMore} data={data}/>, popouts.ACTION)}
             >
               <Icon28MoreHorizontal getRootRef={refMore} />
             </IconButton> : null

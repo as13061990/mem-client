@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { ScreenSpinner } from '@vkontakte/vkui';
-import { admins, load, memes, modals, ratings, routes, upload } from '../types/enums';
+import { admins, load, memes, modals, popouts, ratings, routes, upload } from '../types/enums';
 import bridge from '@vkontakte/vk-bridge';
 import Actions from './Actions';
 
@@ -23,7 +23,7 @@ class State {
   private _memeOpen: number;
   private _comments: Icomment[] = [];
   private _history: routes[] = []
-  private _historyPopouts: modals[] = []
+  private _historyPopouts: (modals | popouts)[] = []
   private _activePanel: routes = routes.LOADING
   private _ratingUsers: IratingUsers = { all: [], week: [] }
   private _ratingCategory: ratings = ratings.TOP_ALL;
@@ -48,10 +48,22 @@ class State {
 
   public goBack(): void {
     if (this._historyPopouts.length !== 0) {
+      switch (this._historyPopouts[this._historyPopouts.length - 1]) {
+        case popouts.COMMENTS:
+          this.setMemeOpen(-1)
+          break;
+        case popouts.ALERT:
+        case popouts.ACTION:
+          this._popout = null
+          break;
+        case modals.REPORT:
+        case modals.REPORTINFO:
+        case modals.RULES:
+          this._activeModal = null
+          break;
+      }
       this._historyPopouts.pop()
-      this.setActiveModal(null)
     } else {
-      console.log('else')
       if (this._history.length === 1) {
         bridge.send("VKWebAppClose", { "status": "success" });
       } else if (this._history.length > 1) {
@@ -69,8 +81,8 @@ class State {
     }
   }
 
-  public goToPage = (panel: routes ) => {
-    if (panel !==  this._history[this._history.length - 1]) {
+  public goToPage = (panel: routes) => {
+    if (panel !== this._history[this._history.length - 1]) {
       window.history.pushState({ panel: panel }, panel);
       if (panel === routes.HOME || panel === routes.RATING || panel === routes.MYPROFILE || panel === routes.ADMIN) {
         if (!this.getInterstitialADTimer()) {
@@ -96,8 +108,14 @@ class State {
     return this._admin;
   }
 
-  public setPopout(spinner: JSX.Element): void {
-    this._popout = spinner;
+  public setPopout(popout: JSX.Element, type?: popouts): void {
+    if (type !== popouts.LOADING && type) {
+      this._historyPopouts.push(type);
+      window.history.pushState({ modal: type }, type);
+    } else if (popout === null && !type) {
+      this._historyPopouts.pop()
+    }
+    this._popout = popout;
   }
 
   public getPopout(): JSX.Element {

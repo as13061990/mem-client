@@ -17,7 +17,7 @@ import {
 import { observer } from 'mobx-react-lite';
 import md5 from 'md5';
 import State from '../../store/State';
-import { upload } from '../../types/enums';
+import { popouts, upload } from '../../types/enums';
 import axios from 'axios';
 import User from '../../store/User';
 import Actions from '../../store/Actions';
@@ -38,7 +38,7 @@ const handleSelectedFile = (e: React.ChangeEvent<HTMLInputElement>): void => {
         onClose={() => State.setPopout(null)}
       >
         <p>Файл должен быть формата .jpeg или .png</p>
-      </Alert>
+      </Alert>, popouts.ALERT
     );
   }
 }

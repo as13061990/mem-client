@@ -2,7 +2,7 @@ import bridge, { EAdsFormats } from '@vkontakte/vk-bridge';
 import State from './State';
 import User from './User';
 import { ScreenSpinner } from '@vkontakte/vkui';
-import { reports, routes } from '../types/enums';
+import { popouts, reports, routes } from '../types/enums';
 import axios from 'axios';
 
 const OFFER_SUBSCRIBE_DELAY: number = 30000
@@ -18,7 +18,7 @@ class Actions {
 
     if (res.error) {
       console.log('error', res)
-      State.setPopout(<ScreenSpinner state='error' aria-label='Ошибка' />);
+      State.setPopout(<ScreenSpinner state='error' aria-label='Ошибка' />, popouts.LOADING);
     } else {
       State.setActivePanel(routes.LOADING);
       User.setNickname(res.data.user.name);

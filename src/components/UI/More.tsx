@@ -2,7 +2,7 @@ import { ActionSheet, ActionSheetItem, Alert, usePlatform } from "@vkontakte/vku
 import Actions from "../../store/Actions";
 import State from "../../store/State";
 import User from "../../store/User";
-import { modals } from "../../types/enums";
+import { modals, popouts } from "../../types/enums";
 import { useCallback, useEffect } from 'react';
 
 interface ImoreProps {
@@ -44,7 +44,7 @@ export const More = ({ refMore, data }: ImoreProps): JSX.Element => {
     if ('message' in data) {
       Actions.deleteComment(data)
     } else if ('vk_url' in data) {
-      State.setPopout(deleteAlert(data))
+      State.setPopout(deleteAlert(data), popouts.ALERT)
     }
   }, [data])
 
@@ -59,7 +59,6 @@ export const More = ({ refMore, data }: ImoreProps): JSX.Element => {
 
   const onClose = useCallback(() => {
     State.setPopout(null)
-    console.log('scroll close')
   }, [])
 
   useEffect(() => {

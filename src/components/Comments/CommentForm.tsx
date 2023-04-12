@@ -4,6 +4,7 @@ import '../../css/comments.css';
 import Actions from "../../store/Actions";
 import State from "../../store/State";
 import User from "../../store/User";
+import { popouts } from "../../types/enums";
 
 const reg = /<script(.*?)>(.*?)<\/script>/mg
 
@@ -45,7 +46,7 @@ export const CommentForm = () => {
           onClose={() => State.setPopout(null)}
         >
           <p>Нельзя отправить пустое сообщение!</p>
-        </Alert>
+        </Alert>, popouts.ALERT
       );
     }
   }

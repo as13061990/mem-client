@@ -44,7 +44,7 @@ export const CommentsBlock = observer(() => {
     <div
       className={"comments-overlay"}
       style={{ backgroundColor: active ? 'rgb(0,0,0,0.5)' : 'rgb(0,0,0,0)', visibility: active ? 'visible' : 'hidden' }}
-      onClick={() => { State.setMemeOpen(-1) }}>
+      onClick={() => { State.setMemeOpen(-1); State.setPopout(null) }}>
       <div
         className="comments-block"
         style={{ transform: active ? 'translateY(0)' : 'translateY(60vh)' }}
@@ -52,7 +52,7 @@ export const CommentsBlock = observer(() => {
       >
         <div style={{ position: 'relative' }}>
           <Icon20AddCircle fill="black"
-            onClick={() => { State.setMemeOpen(-1) }}
+            onClick={() => { State.setMemeOpen(-1); State.setPopout(null) }}
             className='comments-block-close-btn'
             style={{ position: 'absolute', right: 30, top: 15, zIndex: 20, cursor: 'pointer', transform: 'rotate(45deg) scale(1.8)', opacity: active ? '0.8' : '0' }}
           />
@@ -65,9 +65,9 @@ export const CommentsBlock = observer(() => {
         </FixedLayout>
         <div style={{ width: '100%', marginTop: '120px' }} />
 
-        <div 
-        style={{ overflowY: 'auto', height: '74%', marginBottom: '120px', marginTop: '120px' }} 
-        onScroll={platform === 'vkcom'  ? ()=>State.setPopout(null) : null}
+        <div
+          style={{ overflowY: 'auto', height: '74%', marginBottom: '120px', marginTop: '120px' }}
+          onScroll={platform === 'vkcom' ? () => State.setPopout(null) : null}
         >
 
           {State.getComments()?.map((comment: Icomment, i: number) => {

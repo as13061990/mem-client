@@ -14,6 +14,12 @@ enum modals {
   REPORT = 'report',
   REPORTINFO = 'reportinfo'
 }
+enum popouts {
+  COMMENTS = 'comments',
+  ALERT = 'alert',
+  LOADING = 'loading',
+  ACTION = 'action'
+}
 enum upload {
   INPUT,
   BUTTONS,
@@ -58,6 +64,7 @@ export {
   memes,
   ratings,
   modals,
+  popouts,
   load,
   admins,
   reports

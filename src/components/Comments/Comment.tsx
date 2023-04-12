@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { useRef, useState, useCallback } from "react";
 import Actions from "../../store/Actions";
 import State from "../../store/State";
-import { routes } from "../../types/enums";
+import { popouts, routes } from "../../types/enums";
 import { More } from "../UI/More";
 
 import ReportInfo, { ReportInfoType } from "../UI/ReportInfo";
@@ -59,7 +59,7 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
           <Icon28MoreHorizontal
             style={{ flexBasis: '1%', cursor: 'pointer', marginTop: '-5px' }}
             getRootRef={refMore}
-            onClick={() => State.setPopout(<More refMore={refMore} data={data} />)}
+            onClick={() => State.setPopout(<More refMore={refMore} data={data} />, popouts.ACTION)}
           />
         </div>
       </div>

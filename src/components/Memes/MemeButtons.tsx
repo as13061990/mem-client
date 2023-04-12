@@ -15,6 +15,7 @@ import State from "../../store/State";
 import bridge from '@vkontakte/vk-bridge';
 import { useCallback, useRef } from 'react';
 import { observer } from "mobx-react-lite";
+import { popouts } from "../../types/enums";
 
 interface ImemeButtonsProps {
   data: Imeme
@@ -57,7 +58,7 @@ export const MemeButtons = observer(({ data }: ImemeButtonsProps): JSX.Element =
 
   const onShareClick = useCallback((ref: React.MutableRefObject<HTMLDivElement>, data: Imeme) => {
     if (State.getStories()) {
-      State.setPopout(share(ref, data))
+      State.setPopout(share(ref, data), popouts.ACTION)
     } else {
       toWall(data)
     }
@@ -73,7 +74,7 @@ export const MemeButtons = observer(({ data }: ImemeButtonsProps): JSX.Element =
           {data.likes}
         </Text>
       </div>
-      <div className='comments' onClick={() => { State.setMemeOpen(data.id) }}>
+      <div className='comments' onClick={() => { State.setMemeOpen(data.id); State.setPopout(null, popouts.COMMENTS) }}>
         <Icon28CommentOutline />
         <Text weight='2' className='buttons-text'>
           {data.comments}

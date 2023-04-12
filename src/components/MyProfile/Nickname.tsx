@@ -13,6 +13,7 @@ import User from '../../store/User';
 import { observer } from 'mobx-react-lite';
 import State from '../../store/State';
 import Actions from '../../store/Actions';
+import { popouts } from '../../types/enums';
 
 const save = (name: string, checked: boolean, setChange: React.Dispatch<React.SetStateAction<boolean>>) => {
   const reg = /^[a-zA-Zа-яА-Я]+$/;
@@ -30,7 +31,7 @@ const save = (name: string, checked: boolean, setChange: React.Dispatch<React.Se
         onClose={() => State.setPopout(null)}
       >
         <p>Никнейм должен состоять только из букв и быть длиной не менее трех и не более 20 символов</p>
-      </Alert>
+      </Alert>, popouts.ALERT
     );
   }
 }
