@@ -16,10 +16,20 @@ import State from '../store/State';
 import { observer } from 'mobx-react-lite';
 
 export const Rating = observer(({ id }: IpanelProps) => {
-  useEffect(()=>{
+
+  useEffect(() => {
     Actions.getDataRatingUsers()
+    const fetch = () => {
+      setTimeout(() => {
+        Actions.getDataRatingUsers()
+      }, 4000)
+    }
+    window.addEventListener('online', fetch);
+    return () => {
+      window.removeEventListener('online', fetch);
+    };
   }, [])
-  
+
   return (
     <Panel id={id}>
       <FixedLayout vertical='top'>
@@ -34,9 +44,9 @@ export const Rating = observer(({ id }: IpanelProps) => {
         <CategoriesRating />
       </FixedLayout>
       {State.getPlatform() === 'mobile_iphone' ? <div style={{ width: '100%', height: '62px' }}></div> : null}
-      <div style={{width: '100%', height: '100px'}}></div>
-      <div className='header-space'/>
-      <RatingInfoBlock/>
+      <div style={{ width: '100%', height: '100px' }}></div>
+      <div className='header-space' />
+      <RatingInfoBlock />
       <RatingList />
       {State.getPlatform() === 'mobile_iphone' ? <div style={{ width: '100%', height: '42px' }}></div> : null}
       <div style={{ width: '100%', height: '40px' }}></div>
