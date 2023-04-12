@@ -19,6 +19,10 @@ const App = (): JSX.Element => {
 
   useEffect(() => {
     bridge.send("VKWebAppGetLaunchParams").then(res=>State.setPlatform(res.vk_platform));
+    bridge.send("VKWebAppSetViewSettings", {
+      status_bar_style: "dark",
+      action_bar_color: "#ffffff",
+    });
     Actions.getData();
     window.addEventListener('popstate', () => {State.goBack();});
     return () => {

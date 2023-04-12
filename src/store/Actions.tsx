@@ -39,6 +39,7 @@ class Actions {
       this.subscribes();
       this.notifyToSubscribe(res.data.subscribeOffer, res.data.user.subscribe)
 
+      State.setReward(res.data.rewarded); 
       await bridge.send('VKWebAppCheckNativeAds', { ad_format: EAdsFormats.REWARD })
         .then((data) => {
           if (data.result) {
@@ -102,6 +103,7 @@ class Actions {
     await this.sendRequest('sendComment', comment)
     const responseComments = await this.sendRequest('getComments', { meme: State.getMemeOpen() })
     State.setComments(responseComments.data)
+    State.memeComment(comment.meme)
   }
 
   public async notifyToSubscribe(subscribeOffer: boolean, userSubscribe: boolean): Promise<void> {

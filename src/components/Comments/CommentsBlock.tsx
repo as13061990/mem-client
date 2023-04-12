@@ -1,4 +1,4 @@
-import { FixedLayout, PanelHeader, Spacing } from "@vkontakte/vkui"
+import { FixedLayout, PanelHeader, Spacing, usePlatform } from "@vkontakte/vkui"
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import '../../css/comments.css';
@@ -15,6 +15,7 @@ export const CommentsBlock = observer(() => {
     e.stopPropagation()
   }
 
+  const platform = usePlatform()
   const active = State.getMemeOpen() > 0
   const reportInfo = State.getReportInfo()
   const reportComment = State.getReportComment()
@@ -64,7 +65,10 @@ export const CommentsBlock = observer(() => {
         </FixedLayout>
         <div style={{ width: '100%', marginTop: '120px' }} />
 
-        <div style={{ overflowY: 'auto', height: '74%', marginBottom: '120px', marginTop: '120px' }} onScroll={()=>{State.setPopout(null)}}>
+        <div 
+        style={{ overflowY: 'auto', height: '74%', marginBottom: '120px', marginTop: '120px' }} 
+        onScroll={platform === 'vkcom'  ? ()=>State.setPopout(null) : null}
+        >
 
           {State.getComments()?.map((comment: Icomment, i: number) => {
             return (

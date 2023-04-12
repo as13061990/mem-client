@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { ScreenSpinner } from '@vkontakte/vkui';
-import { admins, load, memes, ratings, routes, upload } from '../types/enums';
+import { admins, load, memes, modals, ratings, routes, upload } from '../types/enums';
 import bridge from '@vkontakte/vk-bridge';
 import Actions from './Actions';
 
@@ -23,6 +23,7 @@ class State {
   private _memeOpen: number;
   private _comments: Icomment[] = [];
   private _history: routes[] = []
+  private _historyPopouts: modals[] = []
   private _activePanel: routes = routes.LOADING
   private _ratingUsers: IratingUsers = { all: [], week: [] }
   private _ratingCategory: ratings = ratings.TOP_ALL;
@@ -46,23 +47,29 @@ class State {
   private _activeSubscribesAlert: boolean = false
 
   public goBack(): void {
-    if (this._history.length === 1) {
-      bridge.send("VKWebAppClose", { "status": "success" });
-    } else if (this._history.length > 1) {
-      this._history.pop()
-      const newPanel: routes = this._history[this._history.length - 1]
-      this._activePanel = newPanel
-      if (newPanel === routes.HOME || newPanel === routes.RATING || newPanel === routes.MYPROFILE || newPanel === routes.ADMIN) {
-        if (!this.getInterstitialADTimer()) {
-          Actions.showInterstitialAd()
-          this.startInterstitialADTimer()
+    if (this._historyPopouts.length !== 0) {
+      this._historyPopouts.pop()
+      this.setActiveModal(null)
+    } else {
+      console.log('else')
+      if (this._history.length === 1) {
+        bridge.send("VKWebAppClose", { "status": "success" });
+      } else if (this._history.length > 1) {
+        this._history.pop()
+        const newPanel: routes = this._history[this._history.length - 1]
+        this._activePanel = newPanel
+        if (newPanel === routes.HOME || newPanel === routes.RATING || newPanel === routes.MYPROFILE || newPanel === routes.ADMIN) {
+          if (!this.getInterstitialADTimer()) {
+            Actions.showInterstitialAd()
+            this.startInterstitialADTimer()
+          }
+          this._tab = newPanel;
         }
-        this._tab = newPanel;
       }
     }
   }
 
-  public goToPage = (panel: routes) => {
+  public goToPage = (panel: routes ) => {
     if (panel !==  this._history[this._history.length - 1]) {
       window.history.pushState({ panel: panel }, panel);
       if (panel === routes.HOME || panel === routes.RATING || panel === routes.MYPROFILE || panel === routes.ADMIN) {
@@ -167,6 +174,13 @@ class State {
     const memes: Imeme[] = JSON.parse(this._memes);
     const meme = memes.find(data => data.id === id);
     meme.share++;
+    this._memes = JSON.stringify(memes);
+  }
+
+  public memeComment(id: number): void {
+    const memes: Imeme[] = JSON.parse(this._memes);
+    const meme = memes.find(data => data.id === id);
+    meme.comments++;
     this._memes = JSON.stringify(memes);
   }
 
@@ -283,7 +297,13 @@ class State {
     return this._snackbar
   }
 
-  public setActiveModal(modal: string): void {
+  public setActiveModal(modal: modals): void {
+    if (modal !== null) {
+      this._historyPopouts.push(modal);
+      window.history.pushState({ modal: modal }, modal);
+    } else {
+      this._historyPopouts.pop()
+    }
     this._activeModal = modal
   }
 

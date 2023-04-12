@@ -1,4 +1,4 @@
-import { ActionSheet, ActionSheetItem, Alert } from "@vkontakte/vkui";
+import { ActionSheet, ActionSheetItem, Alert, usePlatform } from "@vkontakte/vkui";
 import Actions from "../../store/Actions";
 import State from "../../store/State";
 import User from "../../store/User";
@@ -38,6 +38,8 @@ const deleteAlert = (data: Imeme): JSX.Element => {
 
 export const More = ({ refMore, data }: ImoreProps): JSX.Element => {
 
+  const platform = usePlatform()
+
   const onDelete = useCallback(() => {
     if ('message' in data) {
       Actions.deleteComment(data)
@@ -57,15 +59,21 @@ export const More = ({ refMore, data }: ImoreProps): JSX.Element => {
 
   const onClose = useCallback(() => {
     State.setPopout(null)
+    console.log('scroll close')
   }, [])
 
-  useEffect(()=>{
-    window.addEventListener('scroll', onClose)
-    return () => {
-      window.removeEventListener('scroll', onClose)
+  useEffect(() => {
+    if (platform === 'vkcom') {
+      window.addEventListener('scroll', onClose)
     }
-  }, [onClose])
-  
+
+    return () => {
+      if (platform === 'vkcom') {
+        window.removeEventListener('scroll', onClose)
+      }
+    }
+  }, [onClose, platform])
+
   return (
     <ActionSheet toggleRef={refMore} onClose={onClose}>
       {data.user_id === User.getUser().id || State.isAdmin() ?
