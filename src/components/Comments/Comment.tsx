@@ -9,6 +9,16 @@ import { More } from "../UI/More";
 
 import ReportInfo, { ReportInfoType } from "../UI/ReportInfo";
 
+function dateToISOLikeButLocal(date) {
+  const offsetMs = date.getTimezoneOffset() * 60 * 1000;
+  const msLocal =  date.getTime() - offsetMs;
+  const dateLocal = new Date(msLocal);
+  const iso = dateLocal.toISOString();
+  const isoLocal = iso.slice(0, 19);
+  const isoLocalString = isoLocal.split('T')[0].replaceAll('-', '.').split('.').reverse().join('.') + ' ' + isoLocal.split('T')[1].slice(0, -3)
+  return isoLocalString;
+}
+
 export const Comment = observer(({ data }: { data: Icomment }) => {
 
   const platform = usePlatform()
@@ -26,7 +36,7 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
   }, [data.user_id])
 
   const refMore: React.MutableRefObject<HTMLDivElement> = useRef();
-  const date = new Date(data.time).toLocaleDateString().replaceAll('/', '.') + ' ' +  new Date(data.time).toLocaleTimeString().slice(0, -3)
+  const date = dateToISOLikeButLocal(new Date(data.time))
   return (<>
 
     <Div>
@@ -63,7 +73,7 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
           />
         </div>
       </div>
-      <Text weight='3' className="comments-block-comment-info-text" style={{ overflow: 'hidden', marginLeft: '65px', marginTop: '-25px', width: '84%', wordBreak: 'break-word' }}>
+      <Text weight='3' className="comments-block-comment-info-text" style={{ overflow: 'hidden', marginLeft: '65px', marginTop: '-25px', width: '80%', wordBreak: 'break-word' }}>
         {textLength > 120 ?
           isExpanded ? data.message : `${data.message.slice(0, 120)}...`
           : data.message}
@@ -80,7 +90,7 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
           weight='3'
           style={{ textAlign: 'right', flexBasis: '100%' }}
         >
-          {data.time}
+          {date}
         </Subhead> : null}
       <ReportInfo reports={data.strikes} type={ReportInfoType.comment} />
     </Div >
