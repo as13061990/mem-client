@@ -8,6 +8,7 @@ import {
 import {
   ActionSheet,
   ActionSheetItem,
+  Alert,
   Text
 } from "@vkontakte/vkui";
 import Actions from "../../store/Actions";
@@ -48,6 +49,16 @@ const toWall = (data: Imeme): void => {
     if (Number(res.post_id) > 0) {
       Actions.sendRequest('share', { meme: data.id });
       State.memeShare(data.id);
+      State.setPopout(<Alert
+        actions={[{
+          title: 'Понятно',
+          autoclose: true,
+          mode: 'cancel'
+        }]}
+        onClose={() => State.setPopout(null)}
+      >
+        <p>Пост был успешно опубликован на вашу страницу</p>
+      </Alert>, popouts.ALERT)
     }
   });
 }

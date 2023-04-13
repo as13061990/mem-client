@@ -44,7 +44,6 @@ class Actions {
         .then((data) => {
           if (data.result) {
             const rewarded = data.result && res.data.rewarded;
-            console.log(rewarded, 'reward')
             State.setReward(rewarded);
           } else {
             State.setReward(false);
