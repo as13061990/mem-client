@@ -47,7 +47,7 @@ export const CommentsBlock = observer(() => {
       onClick={() => { State.setMemeOpen(-1); State.setPopout(null) }}>
       <div
         className="comments-block"
-        style={{ transform: active ? 'translateY(0)' : 'translateY(60vh)' }}
+        style={{ transform: active ? 'translateY(0)' : 'translateY(60vh)', position: active ? 'absolute' : 'fixed'}}
         onClick={(e) => { onClickContent(e) }}
       >
         <div style={{ position: 'relative' }}>
@@ -63,7 +63,7 @@ export const CommentsBlock = observer(() => {
           <CommentForm />
           <Spacing size={4} />
         </FixedLayout>
-        <div style={{ width: '100%', marginTop: '120px' }} />
+        <div style={{ width: '100%', marginTop: '125px' }} />
 
         <div
           style={{ overflowY: 'auto', height: '74%', marginBottom: '120px', marginTop: '120px' }}

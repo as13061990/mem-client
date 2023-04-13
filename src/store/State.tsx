@@ -202,6 +202,13 @@ class State {
     this._memes = JSON.stringify(memes);
   }
 
+  public memeCommentDelete(id: number): void {
+    const memes: Imeme[] = JSON.parse(this._memes);
+    const meme = memes.find(data => data.id === id);
+    meme.comments--;
+    this._memes = JSON.stringify(memes);
+  }
+
   private _boolOpinions(memes: Imeme[]): Imeme[] {
     for (const meme of memes) meme.opinion = Boolean(meme.opinion);
     return memes;

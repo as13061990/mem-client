@@ -141,6 +141,7 @@ class Actions {
     if (!response.error) {
       const responseComments = await this.sendRequest('getComments', { meme: State.getMemeOpen() })
       State.setComments(responseComments.data)
+      State.memeCommentDelete(State.getMemeOpen())
     };
   }
 

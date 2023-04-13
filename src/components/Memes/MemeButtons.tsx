@@ -1,14 +1,14 @@
-import { 
-  Icon28CommentOutline, 
-  Icon28LikeFillRed, 
-  Icon28LikeOutline, 
-  Icon28ShareOutline, 
-  Icon28StoryOutline 
+import {
+  Icon28CommentOutline,
+  Icon28LikeFillRed,
+  Icon28LikeOutline,
+  Icon28ShareOutline,
+  Icon28StoryOutline
 } from "@vkontakte/icons";
-import { 
-  ActionSheet, 
-  ActionSheetItem, 
-  Text 
+import {
+  ActionSheet,
+  ActionSheetItem,
+  Text
 } from "@vkontakte/vkui";
 import Actions from "../../store/Actions";
 import State from "../../store/State";

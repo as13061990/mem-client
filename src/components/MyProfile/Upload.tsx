@@ -22,24 +22,30 @@ import axios from 'axios';
 import User from '../../store/User';
 import Actions from '../../store/Actions';
 
+const AlertFile = () => {
+  return (<Alert
+    actions={[{
+      title: 'Понятно',
+      autoclose: true,
+      mode: 'cancel'
+    }]}
+    onClose={() => State.setPopout(null)}
+  >
+    <p>Файл должен быть формата .jpeg или .png, резмером меньше 2 мб</p>
+  </Alert>)
+}
+
 const handleSelectedFile = (e: React.ChangeEvent<HTMLInputElement>): void => {
   const file = e.target.files[0];
   if ((file.type === 'image/png' || file.type === 'image/jpeg') && (!/.jfif/i.test(file.name))) {
-    State.setFile(file);
-    State.setUploadState(upload.BUTTONS);
+    if (file.size / 1024 < 2048) {
+      State.setFile(file);
+      State.setUploadState(upload.BUTTONS);
+    } else {
+      State.setPopout(<AlertFile />, popouts.ALERT);
+    }
   } else {
-    State.setPopout(
-      <Alert
-        actions={[{
-          title: 'Понятно',
-          autoclose: true,
-          mode: 'cancel'
-        }]}
-        onClose={() => State.setPopout(null)}
-      >
-        <p>Файл должен быть формата .jpeg или .png</p>
-      </Alert>, popouts.ALERT
-    );
+    State.setPopout(<AlertFile />, popouts.ALERT);
   }
 }
 
@@ -107,7 +113,11 @@ const error = (): JSX.Element => {
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Text weight='2' style={{ color: 'red' }}>Ошибка загрузки файла :(</Text>
+        <Text weight='2' style={{ color: 'red', textAlign: 'center' }}>
+          Ошибка загрузки файла.
+          <br />
+          Файл должен быть формата .jpeg или .png, резмером меньше 2 мб
+        </Text>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <Button size='m' style={{ marginTop: 10 }} onClick={() => State.setUploadState(upload.INPUT)}>Ok</Button>

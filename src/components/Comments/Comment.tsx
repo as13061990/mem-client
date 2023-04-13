@@ -26,12 +26,12 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
   }, [data.user_id])
 
   const refMore: React.MutableRefObject<HTMLDivElement> = useRef();
-
+  const date = new Date(data.time).toLocaleDateString().replaceAll('/', '.') + ' ' +  new Date(data.time).toLocaleTimeString().slice(0, -3)
   return (<>
 
     <Div>
       <div className="comments-block-comment-info">
-        <div style={{display: 'flex', width: '72%', gap: '18px', }}>
+        <div style={{display: 'flex', width: '70%', gap: '18px', }}>
           <Avatar src={data.avatar} style={{ cursor: 'pointer', display: 'inline-block' }} onClick={onProfileClick} />
           <Text weight='2'
             style=
@@ -54,7 +54,7 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
               weight='3'
               style={{ textAlign: 'right', flexBasis: '100%' }}
             >
-              {data.time}
+              {date}
             </Subhead> : null}
           <Icon28MoreHorizontal
             style={{ flexBasis: '1%', cursor: 'pointer', marginTop: '-5px' }}
