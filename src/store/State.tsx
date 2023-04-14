@@ -50,6 +50,12 @@ class State {
     if (this._historyPopouts.length !== 0) {
       switch (this._historyPopouts[this._historyPopouts.length - 1]) {
         case popouts.COMMENTS:
+          if (this._history[this._history.length - 1] === routes.USERPROFILE) {
+            this._history.pop()
+            const newPanel: routes = this._history[this._history.length - 1]
+            this._activePanel = newPanel
+            return
+          }
           this.setMemeOpen(-1)
           break;
         case popouts.ALERT:

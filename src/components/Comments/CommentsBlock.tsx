@@ -47,7 +47,7 @@ export const CommentsBlock = observer(() => {
       onClick={() => { State.setMemeOpen(-1); State.setPopout(null) }}>
       <div
         className="comments-block"
-        style={{ transform: active ? 'translateY(0)' : 'translateY(60vh)', position: active ? 'absolute' : 'fixed'}}
+        style={{ transform: active ? 'translateY(0)' : 'translateY(60vh)'}}
         onClick={(e) => { onClickContent(e) }}
       >
         <div style={{ position: 'relative' }}>

@@ -31,7 +31,7 @@ const AlertFile = () => {
     }]}
     onClose={() => State.setPopout(null)}
   >
-    <p>Файл должен быть формата .jpeg или .png, резмером меньше 2 мб</p>
+    <p>Файл должен быть формата .jpeg или .png, размером меньше 2 мб</p>
   </Alert>)
 }
 
@@ -116,7 +116,7 @@ const error = (): JSX.Element => {
         <Text weight='2' style={{ color: 'red', textAlign: 'center' }}>
           Ошибка загрузки файла.
           <br />
-          Файл должен быть формата .jpeg или .png, резмером меньше 2 мб
+          Файл должен быть формата .jpeg или .png, размером меньше 2 мб
         </Text>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
