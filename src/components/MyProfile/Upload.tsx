@@ -103,7 +103,7 @@ const finish = (): JSX.Element => {
         <Text weight='2' style={{ color: 'green', textAlign: 'center' }}>Твой мем загружен! После проверки, модератор опубликует его.</Text>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Button size='m' style={{ marginTop: 10 }} onClick={() => State.setUploadState(upload.INPUT)}>Ok</Button>
+        <Button size='m' style={{ marginTop: 10 }} onClick={() => State.setUploadState(upload.INPUT)}>Понятно</Button>
       </div>
     </>
   );
@@ -120,7 +120,7 @@ const error = (): JSX.Element => {
         </Text>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Button size='m' style={{ marginTop: 10 }} onClick={() => State.setUploadState(upload.INPUT)}>Ok</Button>
+        <Button size='m' style={{ marginTop: 10 }} onClick={() => State.setUploadState(upload.INPUT)}>Понятно</Button>
       </div>
     </>
   );

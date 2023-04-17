@@ -32,6 +32,9 @@ export const ModalRules = observer(({ id }: ImodalProps) => {
         Загрузить мем - 10
         <Spacing size={15} />
       </Text>
+      <span style={{ textAlign: 'center', color: 'grey', fontSize: '13px', width: '80%', margin: '0 auto' }}>
+        Баллы за коммент и репост засчитываются только единожды за пост
+      </span>
     </ModalCard>
   )
 });

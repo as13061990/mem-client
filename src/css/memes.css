@@ -25,16 +25,17 @@
   display: flex;
   align-items: center;
   padding: 0 10px;
+  gap: 10px
 }
 .meme-buttons > div {
   display: flex;
   align-items: center;
-  margin: 0 10px;
 }
 .like, .share, .comments{
   cursor: pointer;
 }
 .buttons-text {
+  font-variant-numeric: tabular-nums;
   padding-left: 5px;
 }
 .rejection {

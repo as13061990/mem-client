@@ -1,17 +1,26 @@
 import { Alert, FormItem, FormLayout, IconButton, Input } from "@vkontakte/vkui"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import '../../css/comments.css';
 import Actions from "../../store/Actions";
 import State from "../../store/State";
 import User from "../../store/User";
 import { popouts } from "../../types/enums";
+import { observer } from "mobx-react-lite";
 
 const reg = /<script(.*?)>(.*?)<\/script>/mg
 
-export const CommentForm = () => {
+export const CommentForm = observer(() => {
 
   const [comment, setComment] = useState('');
   const [valid, setValid] = useState(true)
+
+  const opened = State.getMemeOpen()
+
+  useEffect(() => {
+    setComment('')
+    setValid(true)
+    console.log('dsa')
+  }, [opened])
 
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -71,4 +80,4 @@ export const CommentForm = () => {
     </FormLayout>
   </>
   )
-}
+})
