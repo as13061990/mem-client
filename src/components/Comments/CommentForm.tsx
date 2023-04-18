@@ -19,7 +19,6 @@ export const CommentForm = observer(() => {
   useEffect(() => {
     setComment('')
     setValid(true)
-    console.log('dsa')
   }, [opened])
 
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {

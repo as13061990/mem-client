@@ -10,9 +10,14 @@ const OFFER_SUBSCRIBE_DELAY: number = 30000
 class Actions {
 
   public async getData(): Promise<void> {
-    const user = await bridge.send('VKWebAppGetUserInfo')
-
-    User.setUser(user);
+    await bridge.send('VKWebAppGetUserInfo').then((data) => { 
+      if (data.id) {
+        User.setUser(data);
+      }
+    }).catch((er)=>{
+      State.setPopout(<ScreenSpinner state='error' aria-label='Ошибка' />, popouts.LOADING);
+      window.location.reload()
+    })
 
     const res = await this.sendRequest('getData', {});
 
