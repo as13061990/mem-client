@@ -28,7 +28,7 @@ export const CommentForm = observer(() => {
     if (isValid) {
       setComment('')
     } else {
-      if (value.length > 300) {
+      if (value.length > 299) {
         setValid(false)
       } else {
         setComment(value)

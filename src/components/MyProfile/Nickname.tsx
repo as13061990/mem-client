@@ -30,7 +30,7 @@ const save = (name: string, checked: boolean, setChange: React.Dispatch<React.Se
         }]}
         onClose={() => State.setPopout(null)}
       >
-        <p>Никнейм должен состоять только из букв и быть длиной не менее трех и не более 20 символов</p>
+        <p>Никнейм должен состоять только из букв и быть длиной не менее 3 и не более 20 символов</p>
       </Alert>, popouts.ALERT
     );
   }
