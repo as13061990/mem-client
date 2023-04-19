@@ -48,7 +48,7 @@ export const CommentsBlock = observer(() => {
       <div
         className="comments-block"
         style={{ transform: active ? 'translateY(0)' : 'translateY(60vh)'}}
-        onClick={(e) => { onClickContent(e) }}
+        onClick={(e) => { onClickContent(e); State.setPopout(null) }}
       >
         <div style={{ position: 'relative' }}>
           <Icon20AddCircle fill="black"

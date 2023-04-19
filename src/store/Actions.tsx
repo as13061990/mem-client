@@ -10,11 +10,11 @@ const OFFER_SUBSCRIBE_DELAY: number = 30000
 class Actions {
 
   public async getData(): Promise<void> {
-    await bridge.send('VKWebAppGetUserInfo').then((data) => { 
+    await bridge.send('VKWebAppGetUserInfo').then((data) => {
       if (data.id) {
         User.setUser(data);
       }
-    }).catch((er)=>{
+    }).catch((er) => {
       State.setPopout(<ScreenSpinner state='error' aria-label='Ошибка' />, popouts.LOADING);
       window.location.reload()
     })
@@ -44,7 +44,7 @@ class Actions {
       this.subscribes();
       this.notifyToSubscribe(res.data.subscribeOffer, res.data.user.subscribe)
 
-      State.setReward(res.data.rewarded); 
+      State.setReward(res.data.rewarded);
       await bridge.send('VKWebAppCheckNativeAds', { ad_format: EAdsFormats.REWARD })
         .then((data) => {
           if (data.result) {

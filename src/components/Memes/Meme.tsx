@@ -36,7 +36,7 @@ export const Meme = ({ data }: { data: Imeme }): JSX.Element => {
         disabled
         before={<Avatar style={{ cursor: 'pointer' }} src={data.avatar} onClick={onProfileClick} />}
         after={
-          data.status === 1 ?
+          data.status === 1 || data.status === 2 ?
             <IconButton
               onClick={() => State.setPopout(<More refMore={refMore} data={data}/>, popouts.ACTION)}
             >

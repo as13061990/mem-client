@@ -11,7 +11,7 @@ import ReportInfo, { ReportInfoType } from "../UI/ReportInfo";
 
 function dateToISOLikeButLocal(date) {
   const offsetMs = date.getTimezoneOffset() * 60 * 1000;
-  const msLocal =  date.getTime() - offsetMs;
+  const msLocal = date.getTime() - offsetMs;
   const dateLocal = new Date(msLocal);
   const iso = dateLocal.toISOString();
   const isoLocal = iso.slice(0, 19);
@@ -37,11 +37,20 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
 
   const refMore: React.MutableRefObject<HTMLDivElement> = useRef();
   const date = dateToISOLikeButLocal(new Date(data.time))
+
+  const onMoreClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation()
+    if (State.getPopout()) {
+      State.setPopout(null)
+    } else {
+      State.setPopout(<More refMore={refMore} data={data} />, popouts.ACTION)
+    }
+  }, [data])
   return (<>
 
     <Div>
       <div className="comments-block-comment-info">
-        <div style={{display: 'flex', width: '70%', gap: '18px', }}>
+        <div style={{ display: 'flex', width: '70%', gap: '18px', }}>
           <Avatar src={data.avatar} style={{ cursor: 'pointer', display: 'inline-block' }} onClick={onProfileClick} />
           <Text weight='2'
             style=
@@ -69,7 +78,7 @@ export const Comment = observer(({ data }: { data: Icomment }) => {
           <Icon28MoreHorizontal
             style={{ flexBasis: '1%', cursor: 'pointer', marginTop: '-5px' }}
             getRootRef={refMore}
-            onClick={() => State.setPopout(<More refMore={refMore} data={data} />, popouts.ACTION)}
+            onClick={(e) => onMoreClick(e)}
           />
         </div>
       </div>

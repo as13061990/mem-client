@@ -29,6 +29,18 @@ export const CommentForm = observer(() => {
     } else {
       if (value.length > 299) {
         setValid(false)
+        State.setPopout(
+          <Alert
+            actions={[{
+              title: 'Понятно',
+              autoclose: true,
+              mode: 'cancel'
+            }]}
+            onClose={() => State.setPopout(null)}
+          >
+            <p>Нельзя оставить комментарий длинной 300 символов и более!</p>
+          </Alert>, popouts.ALERT
+        )
       } else {
         setComment(value)
         setValid(true)
@@ -53,7 +65,7 @@ export const CommentForm = observer(() => {
           }]}
           onClose={() => State.setPopout(null)}
         >
-          <p>Нельзя отправить пустое сообщение!</p>
+          <p>Нельзя отправить пустой комментарий!</p>
         </Alert>, popouts.ALERT
       );
     }
