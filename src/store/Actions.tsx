@@ -1,7 +1,7 @@
 import bridge, { EAdsFormats } from '@vkontakte/vk-bridge';
 import State from './State';
 import User from './User';
-import { ScreenSpinner } from '@vkontakte/vkui';
+import { Alert, ScreenSpinner } from '@vkontakte/vkui';
 import { popouts, reports, routes } from '../types/enums';
 import axios from 'axios';
 
@@ -133,6 +133,17 @@ class Actions {
       if (!res.error) {
         State.deleteOneMeme(meme.id)
       }
+    }).catch(() => {
+      State.setPopout(<Alert
+        actions={[{
+          title: 'Понятно',
+          autoclose: true,
+          mode: 'cancel'
+        }]}
+        onClose={() => State.setPopout(null)}
+      >
+        <p>Что-то пошло не так</p>
+      </Alert>, popouts.ALERT)
     });
   }
 
