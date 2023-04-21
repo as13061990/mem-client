@@ -4,6 +4,7 @@ import User from './User';
 import { Alert, ScreenSpinner } from '@vkontakte/vkui';
 import { popouts, reports, routes } from '../types/enums';
 import axios from 'axios';
+import Amplitude from './Amplitude';
 
 const OFFER_SUBSCRIBE_DELAY: number = 30000
 
@@ -18,7 +19,6 @@ class Actions {
       State.setPopout(<ScreenSpinner state='error' aria-label='Ошибка' />, popouts.LOADING);
       window.location.reload()
     })
-
     const res = await this.sendRequest('getData', {});
 
     if (res.error) {
@@ -40,7 +40,7 @@ class Actions {
       State.setPopout(null);
       State.setInterstitial(res.data.interstitial)
       State.startInterstitialADTimer()
-
+      State.amplitude = new Amplitude()
       this.subscribes();
       this.notifyToSubscribe(res.data.subscribeOffer, res.data.user.subscribe)
 
@@ -123,9 +123,11 @@ class Actions {
   }
 
   public async showInterstitialAd(): Promise<void> {
-    bridge.send('VKWebAppShowNativeAds', { ad_format: EAdsFormats.INTERSTITIAL }).catch(error => {
-      console.log(error);
-    });
+    bridge.send('VKWebAppShowNativeAds', { ad_format: EAdsFormats.INTERSTITIAL })
+      .then(() => { State.amplitude.watched_ad('interstitial') })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   public async deleteMeme(meme: Imeme): Promise<void> {

@@ -170,6 +170,7 @@ const timer = (): string => {
 const showRewarded = (): void => {
   bridge.send('VKWebAppShowNativeAds', { ad_format: EAdsFormats.REWARD }).then(data => {
     if (data.result) {
+      State.amplitude.watched_ad('reward')
       const hash = md5(User.getNickname() + '_' + User.getUser().id + '_' + User.getMemes());
       Actions.sendRequest('rewardedMeme', { hash }).then(res => {
         !res.error && User.setMemes(User.getMemes() + 1);

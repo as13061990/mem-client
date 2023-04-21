@@ -3,6 +3,7 @@ import { ScreenSpinner } from '@vkontakte/vkui';
 import { admins, load, memes, modals, popouts, ratings, routes, upload } from '../types/enums';
 import bridge from '@vkontakte/vk-bridge';
 import Actions from './Actions';
+import Amplitude from './Amplitude';
 
 class State {
   constructor() {
@@ -45,6 +46,7 @@ class State {
   private _commentsStrikes: Icomment[] = []
   private _usersStrikes: IuserStrikes[] = []
   private _activeSubscribesAlert: boolean = false
+  public amplitude: Amplitude = null
 
   public goBack(): void {
     if (this._historyPopouts.length !== 0) {
