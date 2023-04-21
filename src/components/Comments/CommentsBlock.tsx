@@ -28,7 +28,7 @@ export const CommentsBlock = observer(() => {
       document.body.style.overflowY = 'scroll'
     }
     return () => {
-      document.body.style.overflowY = 'auto'
+      document.body.style.overflowY = 'scroll'
     }
   }, [active, reportComment, reportInfo, popout])
 
