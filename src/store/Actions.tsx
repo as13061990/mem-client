@@ -124,7 +124,7 @@ class Actions {
 
   public async showInterstitialAd(): Promise<void> {
     bridge.send('VKWebAppShowNativeAds', { ad_format: EAdsFormats.INTERSTITIAL })
-      .then(() => { State.amplitude.watched_ad('interstitial') })
+      .then(() => { State.amplitude.track('interstitial') })
       .catch(error => {
         console.log(error);
       });

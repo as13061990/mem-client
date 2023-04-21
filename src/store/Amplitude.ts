@@ -18,8 +18,8 @@ class Amplitude {
     this.amplitude.getInstance().identify(identify);
   }
 
-  public watched_ad(ad_type: 'reward' | 'interstitial'): void {
-    this.amplitude.getInstance().logEvent(ad_type);
+  public track(ad_type: 'reward' | 'interstitial'): void {
+    this.amplitude.getInstance().logEvent('watched_ad', {ad_type: ad_type});
   }
 
 }
