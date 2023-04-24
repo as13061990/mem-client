@@ -7,6 +7,7 @@ import axios from 'axios';
 import Amplitude from './Amplitude';
 
 const OFFER_SUBSCRIBE_DELAY: number = 30000
+const INTERSTITIAL_DELAY: number = 1000
 
 class Actions {
 
@@ -123,11 +124,23 @@ class Actions {
   }
 
   public async showInterstitialAd(): Promise<void> {
-    bridge.send('VKWebAppShowNativeAds', { ad_format: EAdsFormats.INTERSTITIAL })
-      .then(() => { State.amplitude.track('interstitial') })
-      .catch(error => {
-        console.log(error);
-      });
+    bridge.send('VKWebAppCheckNativeAds', { ad_format: EAdsFormats.INTERSTITIAL })
+      .then((data) => {
+
+        if (data.result) {
+          State.setPopout(<ScreenSpinner state='loading' />, popouts.LOADING)
+
+          setTimeout(() => {
+            State.setPopout(null)
+            bridge.send('VKWebAppShowNativeAds', { ad_format: EAdsFormats.INTERSTITIAL })
+              .then(() => { State.amplitude.track('interstitial')})
+              .catch(error => {
+                console.log(error);
+              });
+          }, INTERSTITIAL_DELAY)
+
+        }
+      })
   }
 
   public async deleteMeme(meme: Imeme): Promise<void> {
