@@ -7,6 +7,7 @@ import { ReportComments } from "./ReportComments";
 import { ReportUsers } from "./ReportUsers";
 import { useEffect } from 'react'
 import Actions from "../../store/Actions";
+import PublishRating from "./PublishRating";
 
 export const AdminWrapper = observer(() => {
   const category = State.getAdminCategory()
@@ -21,6 +22,7 @@ export const AdminWrapper = observer(() => {
     {State.getLoading() ? <Spinner size='large' />
       : <>
         {State.getAdminCategory() === admins.MEMES ? <Memes /> : null}
+        {State.getAdminCategory() === admins.RATING ? <PublishRating /> : null}
         {State.getAdminCategory() === admins.USERS ? <ReportUsers /> : null}
         {State.getAdminCategory() === admins.COMMENTS ? <ReportComments /> : null}
       </>}

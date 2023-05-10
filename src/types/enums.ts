@@ -42,8 +42,9 @@ enum ratings {
 }
 enum admins {
   MEMES = 1,
-  USERS = 2,
-  COMMENTS = 3
+  RATING = 2,
+  USERS = 3,
+  COMMENTS = 4
 }
 enum load {
   LAZY,

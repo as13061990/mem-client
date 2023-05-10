@@ -19,6 +19,13 @@ export const CategoriesAdmin = observer((): JSX.Element => {
         >
           Мемы
         </TabsItem>
+        {State.isDev() ? <TabsItem
+          style={{ flexBasis: '33%' }}
+          onClick={() => State.setAdminCategory(admins.RATING)}
+          selected={State.getAdminCategory() === admins.RATING}
+        >
+          Рейтинг
+        </TabsItem> : null}
         <TabsItem
           style={{ flexBasis: '34%' }}
           onClick={() => State.setAdminCategory(admins.USERS)}
@@ -34,6 +41,6 @@ export const CategoriesAdmin = observer((): JSX.Element => {
           Комментарии
         </TabsItem>
       </HorizontalScroll>
-    </Tabs>
+    </Tabs >
   );
 });
