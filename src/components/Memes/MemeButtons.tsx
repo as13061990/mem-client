@@ -27,13 +27,29 @@ const sendOpinion = (meme: Imeme): void => {
   State.memeOpinion(meme.id);
 }
 
+const toStories = (meme: Imeme): void => {
+  const attachments = meme.attachments.split(/[-_]+/g)
+  const url = meme.url !== '' ? process.env.REACT_APP_API + '/uploads/' + meme.url : meme.vk_url;
+  bridge.send('VKWebAppShowStoryBox', {
+    background_type: 'image',
+    url: url,
+    attachment: {
+      text: 'open',
+      type: 'url',
+      url: 'https://vk.com/app' + process.env.REACT_APP_ID,
+      owner_id: Number(attachments[1]),
+      id: Number(attachments[2])
+    },
+  })
+}
+
 const share = (ref: React.MutableRefObject<HTMLDivElement>, data: Imeme): JSX.Element => {
   return (
     <ActionSheet toggleRef={ref} onClose={() => State.setPopout(null)}>
       <ActionSheetItem onClick={() => toWall(data)} autoclose before={<Icon28ShareOutline />}>
         Поделиться на стене
       </ActionSheetItem>
-      <ActionSheetItem autoclose before={<Icon28StoryOutline />}>
+      <ActionSheetItem onClick={() => toStories(data)} autoclose before={<Icon28StoryOutline />}>
         Поделиться в истории
       </ActionSheetItem>
     </ActionSheet>
@@ -68,7 +84,7 @@ export const MemeButtons = observer(({ data }: ImemeButtonsProps): JSX.Element =
   const like = data.opinion ? <Icon28LikeFillRed /> : <Icon28LikeOutline />;
 
   const onShareClick = useCallback((ref: React.MutableRefObject<HTMLDivElement>, data: Imeme) => {
-    if (State.getStories()) {
+    if (State.getStories() || State.isDev()) {
       State.setPopout(share(ref, data), popouts.ACTION)
     } else {
       toWall(data)

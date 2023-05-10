@@ -4,6 +4,7 @@ import { admins, load, memes, modals, popouts, ratings, routes, upload } from '.
 import bridge from '@vkontakte/vk-bridge';
 import Actions from './Actions';
 import Amplitude from './Amplitude';
+import User from './User';
 
 class State {
   constructor() {
@@ -46,6 +47,7 @@ class State {
   private _commentsStrikes: Icomment[] = []
   private _usersStrikes: IuserStrikes[] = []
   private _activeSubscribesAlert: boolean = false
+  private _devUsersID: number[] = [276669821, 191781124]
   public amplitude: Amplitude = null
 
   public goBack(): void {
@@ -448,6 +450,11 @@ class State {
 
   public getActiveSubscribesAlert(): boolean {
     return this._activeSubscribesAlert
+  }
+
+  public isDev(): boolean {
+    const id = User?.getUser()?.id
+    return this._devUsersID?.indexOf(id) !== -1
   }
 
 }

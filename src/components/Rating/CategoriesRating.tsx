@@ -8,7 +8,7 @@ import State from '../../store/State';
 import { observer } from 'mobx-react-lite';
 
 export const CategoriesRating = observer((): JSX.Element => {
-
+  
   return (
     <Tabs>
       <HorizontalScroll>
