@@ -11,7 +11,6 @@ import { RatingListItem } from './RatingListItem';
 
 export const RatingList = observer(() => {
   const arr = State.getRatingCategory() === ratings.TOP_ALL ? State.getRatingUsers().all : State.getRatingUsers().week
-  console.log(arr)
   return (
     <List>
       {State.getLoading() ?

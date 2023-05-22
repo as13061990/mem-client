@@ -21,7 +21,6 @@ class Actions {
       window.location.reload()
     })
     const res = await this.sendRequest('getData', {});
-    console.log(State.isDev())
     if (res.error) {
       console.log('error', res)
       State.setPopout(<ScreenSpinner state='error' aria-label='Ошибка' />, popouts.LOADING);
