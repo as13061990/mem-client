@@ -21,12 +21,18 @@ class Actions {
       State.setPopout(<ScreenSpinner state='error' aria-label='Ошибка' />, popouts.LOADING);
       window.location.reload()
     })
+
+    Analytics.init({
+      server: process.env.REACT_APP_ANALYTICS_SERVER,
+      token: process.env.REACT_APP_ANALYTICS_TOKEN,
+      id: User.getUser().id
+    });
     const res = await this.sendRequest('getData', {});
+
     if (res.error) {
       console.log('error', res)
       State.setPopout(<ScreenSpinner state='error' aria-label='Ошибка' />, popouts.LOADING);
     } else {
-      State.setActivePanel(routes.LOADING);
       User.setNickname(res.data.user.name);
       User.setUseNickname(res.data.user.nickname);
       User.setNotify(res.data.user.notify);
@@ -35,7 +41,7 @@ class Actions {
       User.setMemes(res.data.user.memes);
       State.setStories(res.data.stories)
       State.setTimer(res.data.time);
-      State.setActivePanel(res.data.user.member ? routes.HOME : routes.INTROFIRST);
+      State.setActivePanel(routes.INTROFIRST);
       State.setHistory([res.data.user.member ? routes.HOME : routes.INTROFIRST])
       State.setAdmin(res.data.admin);
       State.setPopout(null);
@@ -43,11 +49,6 @@ class Actions {
       State.startInterstitialADTimer()
 
       State.amplitude = new Amplitude()
-      Analytics.init({
-        server: 'https://test3.skorit.ru',
-        token: process.env.REACT_APP_ANALYTICS_TOKEN,
-        id: User.getUser().id
-      });
 
       this.subscribes();
       this.notifyToSubscribe(res.data.subscribeOffer, res.data.user.subscribe)
@@ -140,7 +141,7 @@ class Actions {
           setTimeout(() => {
             State.setPopout(null)
             bridge.send('VKWebAppShowNativeAds', { ad_format: EAdsFormats.INTERSTITIAL })
-              .then(() => { State.amplitude.track('interstitial')})
+              .then(() => { State.amplitude.track('interstitial') })
               .catch(error => {
                 console.log(error);
               });

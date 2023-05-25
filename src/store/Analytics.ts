@@ -39,7 +39,7 @@ class Analytics {
   private _localID: string
   private _id: number
   
-  public init({ token, server, id, source, platform }: initialization): void {
+  public async init({ token, server, id, source, platform }: initialization): Promise<void> {
     this._token = token
     this._server = server
     const data: initData = {
@@ -47,7 +47,7 @@ class Analytics {
       source,
       platform
     }
-    this._request('init', data).then((res: response): void => {
+    await this._request('init', data).then((res: response): void => {
       if (res.error === false) {
         this._init = true
         this._id = res.data.id
