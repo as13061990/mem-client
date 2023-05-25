@@ -7,6 +7,7 @@ import {
 } from "@vkontakte/icons";
 import {
   ActionSheet,
+  ActionSheetDefaultIosCloseItem,
   ActionSheetItem,
   Alert,
   Text
@@ -45,7 +46,11 @@ const toStories = (meme: Imeme): void => {
 
 const share = (ref: React.MutableRefObject<HTMLDivElement>, data: Imeme): JSX.Element => {
   return (
-    <ActionSheet toggleRef={ref} onClose={() => State.setPopout(null)}>
+    <ActionSheet
+      toggleRef={ref}
+      onClose={() => State.setPopout(null)}
+      iosCloseItem={<ActionSheetDefaultIosCloseItem />}
+    >
       <ActionSheetItem onClick={() => toWall(data)} autoclose before={<Icon28ShareOutline />}>
         Поделиться на стене
       </ActionSheetItem>

@@ -3,6 +3,7 @@ import bridge from '@vkontakte/vk-bridge';
 import '../css/intro.css';
 import State from '../store/State';
 import { routes } from '../types/enums';
+import Analytics from '../store/Analytics';
 
 export const IntroSecond = ({ id }: IpanelProps) => {
   return (
@@ -24,8 +25,9 @@ export const IntroSecond = ({ id }: IpanelProps) => {
           <Button size='m' onClick={() => {
             bridge.send('VKWebAppAllowNotifications', {}).then(res => {
               if (res.result) {
-                State.setActivePanel(routes.HOME)
-                State.setHistory([routes.HOME])
+                State.setActivePanel(routes.HOME);
+                State.setHistory([routes.HOME]);
+                Analytics.track('tutorial', 'subscribe');
               }
             });
           }}
@@ -35,8 +37,12 @@ export const IntroSecond = ({ id }: IpanelProps) => {
           <Button
             size='m'
             mode="tertiary"
-            style={{display: 'block', margin: '10px auto 0 auto'}}
-            onClick={() => { State.setActivePanel(routes.HOME); State.setHistory([routes.HOME]) }}
+            style={{ display: 'block', margin: '10px auto 0 auto' }}
+            onClick={() => {
+              State.setActivePanel(routes.HOME);
+              State.setHistory([routes.HOME]);
+              Analytics.track('tutorial', 'subscribe');
+            }}
           >
             Пропустить
           </Button>

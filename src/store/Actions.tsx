@@ -5,6 +5,7 @@ import { Alert, ScreenSpinner } from '@vkontakte/vkui';
 import { popouts, reports, routes } from '../types/enums';
 import axios from 'axios';
 import Amplitude from './Amplitude';
+import Analytics from './Analytics';
 
 const OFFER_SUBSCRIBE_DELAY: number = 30000
 const INTERSTITIAL_DELAY: number = 1000
@@ -40,7 +41,14 @@ class Actions {
       State.setPopout(null);
       State.setInterstitial(res.data.interstitial)
       State.startInterstitialADTimer()
+
       State.amplitude = new Amplitude()
+      Analytics.init({
+        server: 'https://test3.skorit.ru',
+        token: process.env.REACT_APP_ANALYTICS_TOKEN,
+        id: User.getUser().id
+      });
+
       this.subscribes();
       this.notifyToSubscribe(res.data.subscribeOffer, res.data.user.subscribe)
 
