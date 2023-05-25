@@ -22,7 +22,7 @@ class Actions {
       window.location.reload()
     })
 
-    Analytics.init({
+    await Analytics.init({
       server: process.env.REACT_APP_ANALYTICS_SERVER,
       token: process.env.REACT_APP_ANALYTICS_TOKEN,
       id: User.getUser().id
@@ -41,7 +41,7 @@ class Actions {
       User.setMemes(res.data.user.memes);
       State.setStories(res.data.stories)
       State.setTimer(res.data.time);
-      State.setActivePanel(routes.INTROFIRST);
+      State.setActivePanel(res.data.user.member ? routes.HOME : routes.INTROFIRST);
       State.setHistory([res.data.user.member ? routes.HOME : routes.INTROFIRST])
       State.setAdmin(res.data.admin);
       State.setPopout(null);
