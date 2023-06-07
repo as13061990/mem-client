@@ -4,6 +4,7 @@ import State from '../store/State';
 import { routes } from '../types/enums';
 import { useEffect } from 'react';
 import Analytics from '../store/Analytics';
+import bridge from '@vkontakte/vk-bridge';
 
 export const IntroFirst = ({ id }: IpanelProps) => {
   useEffect(() => {

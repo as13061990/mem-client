@@ -13,6 +13,7 @@ class User {
   private _subscribe: boolean = false;
   private _memes: number = 0;
   private _ban: boolean = false
+  private _member: boolean = false
   
   public getUser(): UserInfo {
     return this._user;
@@ -68,6 +69,14 @@ class User {
 
   public getBan(): boolean {
     return this._ban;
+  }
+
+  public setMember(member: boolean): void {
+    this._member = member;
+  }
+
+  public getMember(): boolean {
+    return this._member;
   }
 }
 

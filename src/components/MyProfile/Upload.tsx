@@ -8,6 +8,7 @@ import {
   Text,
   Spinner,
   Alert,
+  Link,
 } from '@vkontakte/vkui';
 import {
   Icon24Camera,
@@ -21,6 +22,8 @@ import { popouts, upload } from '../../types/enums';
 import axios from 'axios';
 import User from '../../store/User';
 import Actions from '../../store/Actions';
+import guideFirst from '../../images/guideFirst';
+import guideSecond from '../../images/guideSecond';
 
 const AlertFile = () => {
   return (<Alert
@@ -71,7 +74,7 @@ const inputFile = (): JSX.Element => {
         <Text weight='2'>Осталось жетонов: {User.getMemes()}</Text>
         {State.getReward() && <Button mode='secondary' style={{ marginLeft: '4px' }} before={<Icon16Add />} onClick={() => showRewarded()}></Button>}
       </div>
-      <div style={{ textAlign: 'center', marginTop: '10px', marginBottom: '25px' }}>
+      <div style={{ textAlign: 'center', marginTop: '10px', marginBottom: '5px' }}>
         <File
           before={<Icon24Camera role='presentation' />}
           size='l'
@@ -189,9 +192,35 @@ export default observer((): JSX.Element => {
         state === upload.ERROR ? error() :
           state === upload.INPUT && User.getMemes() === 0 ? ad() :
             inputFile();
+
+  const onClick = (): void => {
+    //@ts-ignore
+    bridge.send('VKWebAppShowSlidesSheet', {
+      slides: [
+        {
+          media: {
+            blob: `data:image/png;base64, ${guideFirst}`,
+            type: 'image'
+          },
+          title: 'Профиль',
+          subtitle: 'Каждый день тебе доступно три бесплатных жетона на загрузку мемов'
+        }, {
+          media: {
+            blob: `data:image/png;base64, ${guideSecond}`,
+            type: 'image'
+          },
+          title: 'Загрузка мема',
+          subtitle: 'Откройте галерею и выберете свой мем. Картинка должна быть размером не более 2mb, jpg или png формата'
+        }
+      ]
+    })
+  }
+
+
   return (
     <Group header={<Header mode='secondary'>Загрузить свой мем</Header>}>
       <FormItem style={{ overflow: 'hidden' }}>{jsx}</FormItem>
+      <Link style={{width: '100%', textAlign: 'center'}} onClick={onClick}>Как это работает?</Link>
     </Group>
   );
 });

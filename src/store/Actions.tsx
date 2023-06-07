@@ -39,6 +39,7 @@ class Actions {
       User.setSubscribe(res.data.user.subscribe);
       User.setBan(res.data.user.ban_comments);
       User.setMemes(res.data.user.memes);
+      User.setMember(res.data.user.member)
       State.setStories(res.data.stories)
       State.setTimer(res.data.time);
       State.setActivePanel(res.data.user.member ? routes.HOME : routes.INTROFIRST);
