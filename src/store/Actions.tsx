@@ -55,8 +55,11 @@ class Actions {
       this.notifyToSubscribe(res.data.subscribeOffer, res.data.user.subscribe)
 
       State.setReward(res.data.rewarded);
-      await bridge.send('VKWebAppCheckNativeAds', { ad_format: EAdsFormats.REWARD })
+
+      try {
+        await bridge.send('VKWebAppCheckNativeAds', { ad_format: EAdsFormats.REWARD })
         .then((data) => {
+          console.log('bridge THEN', data.result)
           if (data.result) {
             const rewarded = data.result && res.data.rewarded;
             State.setReward(rewarded);
@@ -64,7 +67,15 @@ class Actions {
             State.setReward(false);
           }
         })
-        .catch((error) => { console.log(error); State.setReward(false); })
+        .catch((error) => {
+          console.log('bridge CATCH')
+          console.log(error);
+          State.setReward(false);
+        })
+      } catch (e) {
+        console.log('try CATCH')
+        console.log(e)
+      }
     }
   }
 
