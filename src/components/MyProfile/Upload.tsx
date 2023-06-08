@@ -138,7 +138,7 @@ const ad = (): JSX.Element => {
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <Text weight='2' style={{ textAlign: 'center' }}>До ежедневного начисления осталось {timer()}</Text>
       </div>
-      {State.getReward() && <>
+      {(State.getReward() || (State.getPlatform() === 'mobile_iphone' || State.getPlatform() === 'mobile_ipad' || State.getPlatform() === 'mobile_iphone_messenger')) && <>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Text weight='3' style={{ textAlign: 'center' }}>Вы можете получить жетон за рекламу</Text>
         </div>
