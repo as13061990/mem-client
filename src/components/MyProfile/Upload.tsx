@@ -67,12 +67,16 @@ const buttons = (): JSX.Element => {
   );
 }
 
+const checkIOS = (): boolean => {
+  return State.getPlatform() === 'mobile_iphone' || State.getPlatform() === 'mobile_ipad' || State.getPlatform() === 'mobile_iphone_messenger'
+}
+
 const inputFile = (): JSX.Element => {
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
         <Text weight='2'>Осталось жетонов: {User.getMemes()}</Text>
-        {State.getReward() && <Button mode='secondary' style={{ marginLeft: '4px' }} before={<Icon16Add />} onClick={() => showRewarded()}></Button>}
+        {(State.getReward() || checkIOS()) && <Button mode='secondary' style={{ marginLeft: '4px' }} before={<Icon16Add />} onClick={() => showRewarded()}></Button>}
       </div>
       <div style={{ textAlign: 'center', marginTop: '10px', marginBottom: '5px' }}>
         <File
@@ -138,7 +142,7 @@ const ad = (): JSX.Element => {
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <Text weight='2' style={{ textAlign: 'center' }}>До ежедневного начисления осталось {timer()}</Text>
       </div>
-      {(State.getReward() || (State.getPlatform() === 'mobile_iphone' || State.getPlatform() === 'mobile_ipad' || State.getPlatform() === 'mobile_iphone_messenger')) && <>
+      {(State.getReward() || checkIOS()) && <>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Text weight='3' style={{ textAlign: 'center' }}>Вы можете получить жетон за рекламу</Text>
         </div>
