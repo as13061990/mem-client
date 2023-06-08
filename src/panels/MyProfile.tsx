@@ -20,6 +20,7 @@ import User from '../store/User';
 export const MyProfile = observer(({ id }: IpanelProps) => {
 	useEffect(() => {
 		Session.clearMemesNotif()
+		State.setRewardedButton(true)
 		if (!User.getMember()) {
 			User.setMember(true)
 			//@ts-ignore

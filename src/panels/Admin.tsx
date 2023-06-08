@@ -16,7 +16,7 @@ export default observer(({ id }: IpanelProps) => {
 			<FixedLayout vertical='top'>
 				<PanelHeader
 					before={<PanelHeaderBack onClick={() => window.history.back()} />}
-				>v0.0.32 Модерация</PanelHeader>
+				>v0.0.34 Модерация</PanelHeader>
 				<CategoriesAdmin />
 			</FixedLayout>
 			{State.getPlatform() === 'mobile_iphone' ? <div style={{ width: '100%', height: '62px' }}></div> : null}

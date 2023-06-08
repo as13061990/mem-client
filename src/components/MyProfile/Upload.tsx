@@ -67,16 +67,12 @@ const buttons = (): JSX.Element => {
   );
 }
 
-const checkIOS = (): boolean => {
-  return State.getPlatform() === 'mobile_iphone' || State.getPlatform() === 'mobile_ipad' || State.getPlatform() === 'mobile_iphone_messenger'
-}
-
 const inputFile = (): JSX.Element => {
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
         <Text weight='2'>Осталось жетонов: {User.getMemes()}</Text>
-        {(State.getReward() || checkIOS()) && <Button mode='secondary' style={{ marginLeft: '4px' }} before={<Icon16Add />} onClick={() => showRewarded()}></Button>}
+        {State.getRewardedButton() && <Button mode='secondary' style={{ marginLeft: '4px' }} before={<Icon16Add />} onClick={() => showRewarded()}></Button>}
       </div>
       <div style={{ textAlign: 'center', marginTop: '10px', marginBottom: '5px' }}>
         <File
@@ -142,7 +138,7 @@ const ad = (): JSX.Element => {
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <Text weight='2' style={{ textAlign: 'center' }}>До ежедневного начисления осталось {timer()}</Text>
       </div>
-      {(State.getReward() || checkIOS()) && <>
+      {State.getRewardedButton() && <>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Text weight='3' style={{ textAlign: 'center' }}>Вы можете получить жетон за рекламу</Text>
         </div>
@@ -174,18 +170,49 @@ const timer = (): string => {
   return hours + ':' + (minutes.toString().length === 1 ? '0' + minutes : minutes) + ':' + (seconds.toString().length === 1 ? '0' + seconds : seconds);
 }
 
+const AlertAds = (): void => {
+  State.setRewardedButton(false)
+  State.setPopout(
+    <Alert
+      actions={[{
+        title: 'Понятно',
+        autoclose: true,
+        mode: 'cancel'
+      }]}
+      onClose={() => State.setPopout(null)}
+    >
+      <p>Реклама для просмотра не найдена</p>
+    </Alert>, popouts.ALERT
+  )
+}
+
 const showRewarded = (): void => {
-  bridge.send('VKWebAppShowNativeAds', { ad_format: EAdsFormats.REWARD }).then(data => {
-    if (data.result) {
-      State.amplitude.track('reward')
-      const hash = md5(User.getNickname() + '_' + User.getUser().id + '_' + User.getMemes());
-      Actions.sendRequest('rewardedMeme', { hash }).then(res => {
-        !res.error && User.setMemes(User.getMemes() + 1);
-      });
-    }
-  }).catch(error => {
-    console.log(error);
-  });
+  try {
+    bridge.send('VKWebAppCheckNativeAds', { ad_format: EAdsFormats.REWARD })
+      .then((data) => {
+        if (data.result) {
+          State.setRewardedButton(true)
+          bridge.send('VKWebAppShowNativeAds', { ad_format: EAdsFormats.REWARD }).then(data => {
+            if (data.result) {
+              State.amplitude.track('reward')
+              const hash = md5(User.getNickname() + '_' + User.getUser().id + '_' + User.getMemes());
+              Actions.sendRequest('rewardedMeme', { hash }).then(res => {
+                !res.error && User.setMemes(User.getMemes() + 1);
+              });
+            }
+          })
+        } else {
+          AlertAds()
+        }
+      })
+      .catch((error) => {
+        AlertAds()
+      })
+  } catch (e) {
+    AlertAds()
+  }
+
+
 }
 
 export default observer((): JSX.Element => {
@@ -224,7 +251,7 @@ export default observer((): JSX.Element => {
   return (
     <Group header={<Header mode='secondary'>Загрузить свой мем</Header>}>
       <FormItem style={{ overflow: 'hidden' }}>{jsx}</FormItem>
-      <Link style={{width: '100%', textAlign: 'center'}} onClick={onClick}>Как это работает?</Link>
+      <Link style={{ width: '100%', textAlign: 'center' }} onClick={onClick}>Как это работает?</Link>
     </Group>
   );
 });

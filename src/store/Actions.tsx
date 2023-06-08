@@ -56,26 +56,7 @@ class Actions {
 
       State.setReward(res.data.rewarded);
 
-      try {
-        await bridge.send('VKWebAppCheckNativeAds', { ad_format: EAdsFormats.REWARD })
-        .then((data) => {
-          console.log('bridge THEN', data.result)
-          if (data.result) {
-            const rewarded = data.result && res.data.rewarded;
-            State.setReward(rewarded);
-          } else {
-            State.setReward(false);
-          }
-        })
-        .catch((error) => {
-          console.log('bridge CATCH')
-          console.log(error);
-          State.setReward(false);
-        })
-      } catch (e) {
-        console.log('try CATCH')
-        console.log(e)
-      }
+
     }
   }
 

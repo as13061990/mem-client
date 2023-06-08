@@ -48,7 +48,17 @@ class State {
   private _usersStrikes: IuserStrikes[] = []
   private _activeSubscribesAlert: boolean = false
   private _devUsersID: number[] = [276669821, 191781124]
+  private _rewardedButton: boolean = true
   public amplitude: Amplitude = null
+
+
+  public getRewardedButton(): boolean {
+    return this._rewardedButton
+  }
+
+  public setRewardedButton(active: boolean): void {
+     this._rewardedButton = active
+  }
 
   public goBack(): void {
     if (this._historyPopouts.length !== 0) {
