@@ -6,6 +6,7 @@ enum routes {
   RATING = 'rating',
   MYPROFILE = 'myprofile',
   USERPROFILE = 'userprofile',
+  USERMEMES = 'usermemes',
   ADMIN = 'admin',
   RULES = 'rules'
 }
@@ -34,7 +35,8 @@ enum memes {
   TOP_WEEK = 3,
   TOP_DAY = 4,
   FAVORITE = 5,
-  MY = 6
+  MY = 6,
+  USER = 7,
 }
 enum ratings {
   TOP_ALL = 1,

@@ -10,3 +10,7 @@
 .profile-info-item-basis {
   flex-basis: 25%;
 }
+
+.profile-info-item-meme {
+  cursor: pointer;
+}

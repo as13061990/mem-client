@@ -8,8 +8,17 @@ import Memes from '../components/Memes/Memes';
 import CategoriesMenu from '../components/Memes/CategoriesMenu';
 import { observer } from 'mobx-react-lite';
 import State from '../store/State';
+import { useEffect } from "react";
+import { memes } from '../types/enums';
 
 export const Home = observer(({ id }: IpanelProps): JSX.Element => {
+	
+	useEffect(() => {
+		if (State.getCategory() === memes.USER) {
+			State.setCategory(memes.TIME)
+		}
+	}, [])
+
 	return (
 		<Panel id={id}>
 			<FixedLayout vertical='top'>

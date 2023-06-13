@@ -3,10 +3,16 @@ import { Div, Text, usePlatform } from "@vkontakte/vkui";
 import { observer } from "mobx-react-lite";
 import '../../css/profile.css'
 import State from "../../store/State";
+import { memes, routes } from "../../types/enums";
 
 export const UserInfo = observer(({ color }: { color: string }) => {
   const platform = usePlatform()
 
+  const onClickMeme = () => {
+    State.goToPage(routes.USERMEMES);
+    State.setCategory(memes.USER)
+  }
+  
   return (
     <Div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '10px' }}>
       <div className='profile-info-item profile-info-item-basis' >
@@ -24,7 +30,7 @@ export const UserInfo = observer(({ color }: { color: string }) => {
         <Icon56CommentsOutline fill={color} style={{ transform: 'scale(0.8)' }} />
         <Text weight='3'>{State.getUserProfile()?.comments}</Text>
       </div>
-      <div className='profile-info-item profile-info-item-basis'>
+      <div className='profile-info-item profile-info-item-basis profile-info-item-meme' onClick={onClickMeme}>
         <Text weight='2' style={{ fontSize: platform !== 'vkcom' ? '13px' : '16px' }}>Мемы</Text>
         <Icon56DownloadOutline fill={color} style={{ transform: 'scale(0.8)' }} />
         <Text weight='3'>{State.getUserProfile()?.memes}</Text>

@@ -15,6 +15,7 @@ import bridge from '@vkontakte/vk-bridge';
 import { Rules } from './panels/Rules';
 import { IntroSecond } from './panels/IntroSecond';
 import { UserProfile } from './panels/UserProfile';
+import { UserMemes } from './panels/UserMemes';
 
 export const ViewCustom = observer(() => {
   const isFirst = State.getHistory().length === 1;
@@ -47,6 +48,7 @@ export const ViewCustom = observer(() => {
       <UserProfile id={routes.USERPROFILE} />
       <Admin id={routes.ADMIN} />
       <Rules id={routes.RULES} />
+      <UserMemes id={routes.USERMEMES}/>
     </View>
   )
 });
