@@ -22,11 +22,6 @@ class Actions {
       window.location.reload()
     })
 
-    await Analytics.init({
-      server: process.env.REACT_APP_ANALYTICS_SERVER,
-      token: process.env.REACT_APP_ANALYTICS_TOKEN,
-      id: User.getUser().id
-    });
     const res = await this.sendRequest('getData', {});
 
     if (res.error) {
@@ -48,8 +43,6 @@ class Actions {
       State.setPopout(null);
       State.setInterstitial(res.data.interstitial)
       State.startInterstitialADTimer()
-
-      State.amplitude = new Amplitude()
 
       this.subscribes();
       this.notifyToSubscribe(res.data.subscribeOffer, res.data.user.subscribe)
