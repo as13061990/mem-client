@@ -2,7 +2,7 @@ import bridge, { EAdsFormats } from '@vkontakte/vk-bridge';
 import State from './State';
 import User from './User';
 import { Alert, ScreenSpinner } from '@vkontakte/vkui';
-import { popouts, reports, routes } from '../types/enums';
+import { memes, popouts, reports, routes } from '../types/enums';
 import axios from 'axios';
 import Amplitude from './Amplitude';
 import Analytics from './Analytics';
@@ -35,10 +35,34 @@ class Actions {
       User.setBan(res.data.user.ban_comments);
       User.setMemes(res.data.user.memes);
       User.setMember(res.data.user.member)
+
+
       State.setStories(res.data.stories)
       State.setTimer(res.data.time);
-      State.setActivePanel(res.data.user.member ? routes.HOME : routes.INTROFIRST);
-      State.setHistory([res.data.user.member ? routes.HOME : routes.INTROFIRST])
+      if (res.data.user.member) {
+        State.setActivePanel(routes.HOME);
+        State.setHistory([routes.HOME])
+        if (State.getLauchParamsData().vk_ref = 'third_party_profile_buttons') {
+          //@ts-ignore
+          if (State.getLauchParamsData()?.vk_profile_id === State.getLauchParamsData().vk_user_id) {
+            State.setActivePanel(routes.HOME);
+            State.setHistory([routes.HOME])
+            State.setCategory(memes.MY)
+          } else {
+            //@ts-ignore
+            await this.getDataUserProfile(State.getLauchParamsData()?.vk_profile_id)
+            if (State.getUserProfile().id) {
+              State.setActivePanel(routes.USERMEMES);
+              State.setCategory(memes.USER)
+              State.setHistory([routes.HOME, routes.USERPROFILE, routes.USERMEMES])
+              State.getHistory().forEach(panel=> window.history.pushState({ panel: panel }, panel))
+            }
+          }
+        }
+      } else {
+        State.setActivePanel(routes.INTROFIRST);
+        State.setHistory([routes.INTROFIRST])
+      }
       State.setAdmin(res.data.admin);
       State.setPopout(null);
       State.setInterstitial(res.data.interstitial)
@@ -48,6 +72,7 @@ class Actions {
       this.notifyToSubscribe(res.data.subscribeOffer, res.data.user.subscribe)
 
       State.setReward(res.data.rewarded);
+      console.log(JSON.parse(JSON.stringify((State.getHistory()))))
 
 
     }

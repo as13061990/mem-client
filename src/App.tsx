@@ -18,13 +18,13 @@ const App = (): JSX.Element => {
   const platformText = usePlatform()
 
   useEffect(() => {
-    bridge.send("VKWebAppGetLaunchParams").then(res=>State.setPlatform(res.vk_platform));
+    bridge.send("VKWebAppGetLaunchParams").then(res => { State.setPlatform(res.vk_platform); State.setLauchParamsData(res) });
     bridge.send("VKWebAppSetViewSettings", {
       status_bar_style: "dark",
       action_bar_color: "#ffffff",
     });
     Actions.getData();
-    window.addEventListener('popstate', () => {State.goBack();});
+    window.addEventListener('popstate', () => { State.goBack(); });
     return () => {
       window.removeEventListener('popstate', () => State.goBack());
     }
@@ -36,9 +36,9 @@ const App = (): JSX.Element => {
         <AppRoot>
           <Observer render={() => (
             <>
-              <SplitLayout popout={State.getPopout()} modal={<Modals/>}>
+              <SplitLayout popout={State.getPopout()} modal={<Modals />}>
                 <SplitCol>
-                  <ViewCustom/>
+                  <ViewCustom />
                 </SplitCol>
               </SplitLayout>
             </>

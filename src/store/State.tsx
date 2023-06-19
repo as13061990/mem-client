@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { ScreenSpinner } from '@vkontakte/vkui';
 import { admins, load, memes, modals, popouts, ratings, routes, upload } from '../types/enums';
-import bridge from '@vkontakte/vk-bridge';
+import bridge, { GetLaunchParamsResponse } from '@vkontakte/vk-bridge';
 import Actions from './Actions';
 import Amplitude from './Amplitude';
 import User from './User';
@@ -49,8 +49,17 @@ class State {
   private _activeSubscribesAlert: boolean = false
   private _devUsersID: number[] = [276669821, 191781124]
   private _rewardedButton: boolean = true
+  private _lauchParamsData: string = null
   public amplitude: Amplitude = null
 
+
+  public getLauchParamsData(): GetLaunchParamsResponse {
+    return JSON.parse(this._lauchParamsData)
+  }
+
+  public setLauchParamsData(lauchParamsData: GetLaunchParamsResponse): void {
+     this._lauchParamsData =  JSON.stringify(lauchParamsData)
+  }
 
   public getRewardedButton(): boolean {
     return this._rewardedButton
