@@ -42,7 +42,8 @@ class Actions {
       if (res.data.user.member) {
         State.setActivePanel(routes.HOME);
         State.setHistory([routes.HOME])
-        if (State.getLauchParamsData().vk_ref = 'third_party_profile_buttons') {
+        // State.setLauchParamsData({...State.getLauchParamsData(), vk_ref: 'third_party_profile_buttons', vk_profile_id: 276669821, vk_user_id: 276669821})
+        if (State.getLauchParamsData().vk_ref === 'third_party_profile_buttons') {
           //@ts-ignore
           if (State.getLauchParamsData()?.vk_profile_id === State.getLauchParamsData().vk_user_id) {
             State.setActivePanel(routes.HOME);
