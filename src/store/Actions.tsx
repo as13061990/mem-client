@@ -39,19 +39,25 @@ class Actions {
 
       State.setStories(res.data.stories)
       State.setTimer(res.data.time);
+
+      const search: string = window.location.search
+      const params = new URLSearchParams(search)
+
       if (res.data.user.member) {
         State.setActivePanel(routes.HOME);
         State.setHistory([routes.HOME])
+        //@ts-ignore
         // State.setLauchParamsData({...State.getLauchParamsData(), vk_ref: 'third_party_profile_buttons', vk_profile_id: 276669821, vk_user_id: 276669821})
-        if (State.getLauchParamsData().vk_ref === 'third_party_profile_buttons') {
+        if (State.getLauchParamsData().vk_ref === 'third_party_profile_buttons' || params.get('vk_ref') === 'third_party_profile_buttons' ) {
           //@ts-ignore
-          if (State.getLauchParamsData()?.vk_profile_id === State.getLauchParamsData().vk_user_id) {
+          if (State.getLauchParamsData()?.vk_profile_id === State.getLauchParamsData().vk_user_id || params.get('vk_profile_id') === params.get('vk_user_id') ) {
             State.setActivePanel(routes.HOME);
             State.setHistory([routes.HOME])
             State.setCategory(memes.MY)
           } else {
             //@ts-ignore
-            await this.getDataUserProfile(State.getLauchParamsData()?.vk_profile_id)
+            const id = State.getLauchParamsData()?.vk_profile_id ? State.getLauchParamsData()?.vk_profile_id : params.get('vk_profile_id')
+            await this.getDataUserProfile(id)
             if (State.getUserProfile().id) {
               State.setActivePanel(routes.USERMEMES);
               State.setCategory(memes.USER)
