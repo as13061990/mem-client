@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Spinner, Text } from '@vkontakte/vkui';
 import Actions from '../../store/Actions';
-import { load, routes } from '../../types/enums';
+import { load, memes, routes } from '../../types/enums';
 import { observer } from 'mobx-react-lite';
 import State from '../../store/State';
 import '../../css/memes.css';
@@ -58,7 +58,18 @@ const loadMemes = (): void => {
     if (State.getActivePanel() !== routes.ADMIN && type !== State.getCategory()) return;
     State.setMemesIteration(State.getMemesIteration() + 1);
     const loading = res.data.more ? load.LAZY : load.END;
-    State.addMemes(res.data.memes);
+
+    if (State.getCategory() === memes.USER) {
+      const hasSimilarObjects = State.getMemes().some(obj1 => {
+        return res.data.memes.some(obj2 => {
+          return obj1.id === obj2.id
+        });
+      });
+      if (!hasSimilarObjects) State.addMemes(res.data.memes);
+    } else {
+      State.addMemes(res.data.memes);
+    }
+
     State.setLoadMemes(loading);
   });
 }
